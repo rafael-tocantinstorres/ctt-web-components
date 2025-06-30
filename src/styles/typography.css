@@ -1,0 +1,280 @@
+/**
+ * CTT Design System - Typography Utility Classes
+ * Typography utility classes that developers can use in their applications
+ * 
+ * Usage:
+ * <h1 class="ctt-title-xl">Large Title</h1>
+ * <p class="ctt-body-m">Medium body text</p>
+ * <span class="ctt-label-s">Small label</span>
+ */
+
+/* ==========================================================================
+   BODY TYPOGRAPHY UTILITIES
+   ========================================================================== */
+
+.ctt-body-s {
+  font-family: var(--ctt-base-font-family-body) !important;
+  font-weight: var(--ctt-base-font-weight-body) !important;
+  font-size: var(--ctt-base-font-size-body-s) !important;
+  line-height: var(--ctt-core-line-height-l) !important;
+}
+
+.ctt-body-m {
+  font-family: var(--ctt-base-font-family-body) !important;
+  font-weight: var(--ctt-base-font-weight-body) !important;
+  font-size: var(--ctt-base-font-size-body-m) !important;
+  line-height: var(--ctt-core-line-height-l) !important;
+}
+
+.ctt-body-l {
+  font-family: var(--ctt-base-font-family-body) !important;
+  font-weight: var(--ctt-base-font-weight-body) !important;
+  font-size: var(--ctt-base-font-size-body-l) !important;
+  line-height: var(--ctt-core-line-height-l) !important;
+}
+
+/* ==========================================================================
+   TITLE TYPOGRAPHY UTILITIES
+   ========================================================================== */
+
+.ctt-title-s {
+  font-family: var(--ctt-base-font-family-title) !important;
+  font-weight: var(--ctt-base-font-weight-title-s-m) !important;
+  font-size: var(--ctt-base-font-size-title-s) !important;
+  line-height: var(--ctt-core-line-height-s) !important;
+}
+
+.ctt-title-m {
+  font-family: var(--ctt-base-font-family-title) !important;
+  font-weight: var(--ctt-base-font-weight-title-s-m) !important;
+  font-size: var(--ctt-base-font-size-title-m) !important;
+  line-height: var(--ctt-core-line-height-s) !important;
+}
+
+.ctt-title-l {
+  font-family: var(--ctt-base-font-family-title) !important;
+  font-weight: var(--ctt-base-font-weight-title-l-xl) !important;
+  font-size: var(--ctt-base-font-size-title-l) !important;
+  line-height: var(--ctt-core-line-height-s) !important;
+}
+
+.ctt-title-xl {
+  font-family: var(--ctt-base-font-family-title) !important;
+  font-weight: var(--ctt-base-font-weight-title-l-xl) !important;
+  font-size: var(--ctt-base-font-size-title-xl) !important;
+  line-height: var(--ctt-core-line-height-s) !important;
+}
+
+/* ==========================================================================
+   DISPLAY TYPOGRAPHY UTILITIES
+   ========================================================================== */
+
+.ctt-display-s {
+  font-family: var(--ctt-base-font-family-display) !important;
+  font-weight: var(--ctt-base-font-weight-display) !important;
+  font-size: var(--ctt-base-font-size-display-s) !important;
+  line-height: var(--ctt-core-line-height-s) !important;
+}
+
+.ctt-display-m {
+  font-family: var(--ctt-base-font-family-display) !important;
+  font-weight: var(--ctt-base-font-weight-display) !important;
+  font-size: var(--ctt-base-font-size-display-m) !important;
+  line-height: var(--ctt-core-line-height-s) !important;
+}
+
+.ctt-display-l {
+  font-family: var(--ctt-base-font-family-display) !important;
+  font-weight: var(--ctt-base-font-weight-display) !important;
+  font-size: var(--ctt-base-font-size-display-l) !important;
+  line-height: var(--ctt-core-line-height-s) !important;
+}
+
+/* ==========================================================================
+   LABEL TYPOGRAPHY UTILITIES
+   ========================================================================== */
+
+.ctt-label-s {
+  font-family: var(--ctt-base-font-family-label) !important;
+  font-weight: var(--ctt-base-font-weight-label) !important;
+  font-size: var(--ctt-base-font-size-label-s) !important;
+  line-height: var(--ctt-core-line-height-xs) !important;
+}
+
+.ctt-label-m {
+  font-family: var(--ctt-base-font-family-label) !important;
+  font-weight: var(--ctt-base-font-weight-label) !important;
+  font-size: var(--ctt-base-font-size-label-m) !important;
+  line-height: var(--ctt-core-line-height-xs) !important;
+}
+
+.ctt-label-l {
+  font-family: var(--ctt-base-font-family-label) !important;
+  font-weight: var(--ctt-base-font-weight-label) !important;
+  font-size: var(--ctt-base-font-size-label-l) !important;
+  line-height: var(--ctt-core-line-height-xs) !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE TYPOGRAPHY UTILITIES
+   ========================================================================== */
+
+/* Responsive Title Classes - Desktop */
+@media (min-width: 1024px) {
+  .ctt-title-desktop-s {
+    font-family: var(--ctt-base-font-family-title) !important;
+    font-weight: var(--ctt-base-font-weight-title-s-m) !important;
+    font-size: var(--ctt-base-font-size-title-s) !important;
+    line-height: var(--ctt-core-line-height-s) !important;
+  }
+
+  .ctt-title-desktop-m {
+    font-family: var(--ctt-base-font-family-title) !important;
+    font-weight: var(--ctt-base-font-weight-title-s-m) !important;
+    font-size: var(--ctt-base-font-size-title-m) !important;
+    line-height: var(--ctt-core-line-height-s) !important;
+  }
+
+  .ctt-title-desktop-l {
+    font-family: var(--ctt-base-font-family-title) !important;
+    font-weight: var(--ctt-base-font-weight-title-l-xl) !important;
+    font-size: var(--ctt-base-font-size-title-l) !important;
+    line-height: var(--ctt-core-line-height-s) !important;
+  }
+
+  .ctt-title-desktop-xl {
+    font-family: var(--ctt-base-font-family-title) !important;
+    font-weight: var(--ctt-base-font-weight-title-l-xl) !important;
+    font-size: var(--ctt-base-font-size-title-xl) !important;
+    line-height: var(--ctt-core-line-height-s) !important;
+  }
+
+  .ctt-display-desktop-s {
+    font-family: var(--ctt-base-font-family-display) !important;
+    font-weight: var(--ctt-base-font-weight-display) !important;
+    font-size: var(--ctt-base-font-size-display-s) !important;
+    line-height: var(--ctt-core-line-height-s) !important;
+  }
+
+  .ctt-display-desktop-m {
+    font-family: var(--ctt-base-font-family-display) !important;
+    font-weight: var(--ctt-base-font-weight-display) !important;
+    font-size: var(--ctt-base-font-size-display-m) !important;
+    line-height: var(--ctt-core-line-height-s) !important;
+  }
+
+  .ctt-display-desktop-l {
+    font-family: var(--ctt-base-font-family-display) !important;
+    font-weight: var(--ctt-base-font-weight-display) !important;
+    font-size: var(--ctt-base-font-size-display-l) !important;
+    line-height: var(--ctt-core-line-height-s) !important;
+  }
+}
+
+/* Responsive Title Classes - Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .ctt-title-tablet-s {
+    font-family: var(--ctt-base-font-family-title) !important;
+    font-weight: var(--ctt-base-font-weight-title-s-m) !important;
+    font-size: var(--ctt-base-font-size-title-s) !important;
+    line-height: var(--ctt-core-line-height-s) !important;
+  }
+
+  .ctt-title-tablet-m {
+    font-family: var(--ctt-base-font-family-title) !important;
+    font-weight: var(--ctt-base-font-weight-title-s-m) !important;
+    font-size: var(--ctt-base-font-size-title-m) !important;
+    line-height: var(--ctt-core-line-height-s) !important;
+  }
+
+  .ctt-title-tablet-l {
+    font-family: var(--ctt-base-font-family-title) !important;
+    font-weight: var(--ctt-base-font-weight-title-l-xl) !important;
+    font-size: var(--ctt-base-font-size-title-l) !important;
+    line-height: var(--ctt-core-line-height-s) !important;
+  }
+
+  .ctt-display-tablet-s {
+    font-family: var(--ctt-base-font-family-display) !important;
+    font-weight: var(--ctt-base-font-weight-display) !important;
+    font-size: var(--ctt-base-font-size-display-s) !important;
+    line-height: var(--ctt-core-line-height-s) !important;
+  }
+
+  .ctt-display-tablet-m {
+    font-family: var(--ctt-base-font-family-display) !important;
+    font-weight: var(--ctt-base-font-weight-display) !important;
+    font-size: var(--ctt-base-font-size-display-m) !important;
+    line-height: var(--ctt-core-line-height-s) !important;
+  }
+}
+
+/* Responsive Title Classes - Mobile */
+@media (max-width: 767px) {
+  .ctt-title-mobile-s {
+    font-family: var(--ctt-base-font-family-title) !important;
+    font-weight: var(--ctt-base-font-weight-title-s-m) !important;
+    font-size: var(--ctt-base-font-size-title-s) !important;
+    line-height: var(--ctt-core-line-height-s) !important;
+  }
+
+  .ctt-title-mobile-m {
+    font-family: var(--ctt-base-font-family-title) !important;
+    font-weight: var(--ctt-base-font-weight-title-s-m) !important;
+    font-size: var(--ctt-base-font-size-title-m) !important;
+    line-height: var(--ctt-core-line-height-s) !important;
+  }
+
+  .ctt-display-mobile-s {
+    font-family: var(--ctt-base-font-family-display) !important;
+    font-weight: var(--ctt-base-font-weight-display) !important;
+    font-size: var(--ctt-base-font-size-display-s) !important;
+    line-height: var(--ctt-core-line-height-s) !important;
+  }
+}
+
+/* ==========================================================================
+   FONT WEIGHT UTILITIES
+   ========================================================================== */
+
+.ctt-font-thin { font-weight: var(--ctt-core-font-weight-250) !important; }
+.ctt-font-light { font-weight: var(--ctt-core-font-weight-300) !important; }
+.ctt-font-normal { font-weight: var(--ctt-core-font-weight-400) !important; }
+.ctt-font-medium { font-weight: var(--ctt-core-font-weight-500) !important; }
+.ctt-font-bold { font-weight: var(--ctt-core-font-weight-700) !important; }
+.ctt-font-black { font-weight: var(--ctt-core-font-weight-900) !important; }
+
+/* ==========================================================================
+   LINE HEIGHT UTILITIES
+   ========================================================================== */
+
+.ctt-leading-tight { line-height: var(--ctt-core-line-height-xs) !important; }
+.ctt-leading-normal { line-height: var(--ctt-core-line-height-s) !important; }
+.ctt-leading-relaxed { line-height: var(--ctt-core-line-height-m) !important; }
+.ctt-leading-loose { line-height: var(--ctt-core-line-height-l) !important; }
+
+/* ==========================================================================
+   TEXT ALIGNMENT UTILITIES
+   ========================================================================== */
+
+.ctt-text-left { text-align: left !important; }
+.ctt-text-center { text-align: center !important; }
+.ctt-text-right { text-align: right !important; }
+.ctt-text-justify { text-align: justify !important; }
+
+/* ==========================================================================
+   TEXT DECORATION UTILITIES
+   ========================================================================== */
+
+.ctt-underline { text-decoration: underline !important; }
+.ctt-no-underline { text-decoration: none !important; }
+.ctt-line-through { text-decoration: line-through !important; }
+
+/* ==========================================================================
+   TEXT TRANSFORM UTILITIES
+   ========================================================================== */
+
+.ctt-uppercase { text-transform: uppercase !important; }
+.ctt-lowercase { text-transform: lowercase !important; }
+.ctt-capitalize { text-transform: capitalize !important; }
+.ctt-normal-case { text-transform: none !important; }

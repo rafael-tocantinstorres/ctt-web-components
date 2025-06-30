@@ -1,0 +1,307 @@
+/**
+ * CTT Design System - Color Utility Classes
+ * Utility classes for colors that developers can use in their applications
+ * 
+ * Usage:
+ * <div class="ctt-bg-primary ctt-text-white">Primary background</div>
+ * <p class="ctt-text-secondary">Secondary text</p>
+ */
+
+/* ==========================================================================
+   BACKGROUND COLOR UTILITIES
+   ========================================================================== */
+
+/* Primary Colors */
+.ctt-bg-primary { background-color: var(--ctt-core-color-primary-main) !important; }
+.ctt-bg-primary-light { background-color: var(--ctt-core-color-primary-light) !important; }
+.ctt-bg-primary-dark { background-color: var(--ctt-core-color-primary-dark) !important; }
+
+/* Secondary Colors */
+.ctt-bg-secondary { background-color: var(--ctt-core-color-secondary-main) !important; }
+.ctt-bg-secondary-light { background-color: var(--ctt-core-color-secondary-light) !important; }
+.ctt-bg-secondary-dark { background-color: var(--ctt-core-color-secondary-dark) !important; }
+
+/* Neutral Colors */
+.ctt-bg-white { background-color: var(--ctt-core-color-neutral-100) !important; }
+.ctt-bg-neutral-100 { background-color: var(--ctt-core-color-neutral-100) !important; }
+.ctt-bg-neutral-200 { background-color: var(--ctt-core-color-neutral-200) !important; }
+.ctt-bg-neutral-300 { background-color: var(--ctt-core-color-neutral-300) !important; }
+.ctt-bg-neutral-400 { background-color: var(--ctt-core-color-neutral-400) !important; }
+.ctt-bg-neutral-500 { background-color: var(--ctt-core-color-neutral-500) !important; }
+.ctt-bg-neutral-600 { background-color: var(--ctt-core-color-neutral-600) !important; }
+.ctt-bg-neutral-700 { background-color: var(--ctt-core-color-neutral-700) !important; }
+.ctt-bg-neutral-800 { background-color: var(--ctt-core-color-neutral-800) !important; }
+.ctt-bg-neutral-900 { background-color: var(--ctt-core-color-neutral-900) !important; }
+.ctt-bg-black { background-color: var(--ctt-core-color-neutral-900) !important; }
+
+/* Brand Colors - Primary Scale */
+.ctt-bg-brand-primary-100 { background-color: var(--ctt-brand-primary-100) !important; }
+.ctt-bg-brand-primary-200 { background-color: var(--ctt-brand-primary-200) !important; }
+.ctt-bg-brand-primary-300 { background-color: var(--ctt-brand-primary-300) !important; }
+.ctt-bg-brand-primary-400 { background-color: var(--ctt-brand-primary-400) !important; }
+.ctt-bg-brand-primary-500 { background-color: var(--ctt-brand-primary-500) !important; }
+.ctt-bg-brand-primary-600 { background-color: var(--ctt-brand-primary-600) !important; }
+.ctt-bg-brand-primary-700 { background-color: var(--ctt-brand-primary-700) !important; }
+
+/* Brand Colors - Secondary Scale */
+.ctt-bg-brand-secondary-100 { background-color: var(--ctt-brand-secondary-100) !important; }
+.ctt-bg-brand-secondary-200 { background-color: var(--ctt-brand-secondary-200) !important; }
+.ctt-bg-brand-secondary-300 { background-color: var(--ctt-brand-secondary-300) !important; }
+.ctt-bg-brand-secondary-400 { background-color: var(--ctt-brand-secondary-400) !important; }
+.ctt-bg-brand-secondary-500 { background-color: var(--ctt-brand-secondary-500) !important; }
+
+/* Brand Colors - Teal Scale */
+.ctt-bg-brand-teal-100 { background-color: var(--ctt-brand-teal-100) !important; }
+.ctt-bg-brand-teal-200 { background-color: var(--ctt-brand-teal-200) !important; }
+.ctt-bg-brand-teal-300 { background-color: var(--ctt-brand-teal-300) !important; }
+.ctt-bg-brand-teal-400 { background-color: var(--ctt-brand-teal-400) !important; }
+.ctt-bg-brand-teal-500 { background-color: var(--ctt-brand-teal-500) !important; }
+.ctt-bg-brand-teal-600 { background-color: var(--ctt-brand-teal-600) !important; }
+
+/* Brand Colors - Green Scale */
+.ctt-bg-brand-green-100 { background-color: var(--ctt-brand-green-100) !important; }
+.ctt-bg-brand-green-200 { background-color: var(--ctt-brand-green-200) !important; }
+.ctt-bg-brand-green-300 { background-color: var(--ctt-brand-green-300) !important; }
+.ctt-bg-brand-green-400 { background-color: var(--ctt-brand-green-400) !important; }
+.ctt-bg-brand-green-500 { background-color: var(--ctt-brand-green-500) !important; }
+.ctt-bg-brand-green-600 { background-color: var(--ctt-brand-green-600) !important; }
+
+/* Brand Colors - Yellow Scale */
+.ctt-bg-brand-yellow-100 { background-color: var(--ctt-brand-yellow-100) !important; }
+.ctt-bg-brand-yellow-200 { background-color: var(--ctt-brand-yellow-200) !important; }
+.ctt-bg-brand-yellow-300 { background-color: var(--ctt-brand-yellow-300) !important; }
+.ctt-bg-brand-yellow-400 { background-color: var(--ctt-brand-yellow-400) !important; }
+.ctt-bg-brand-yellow-500 { background-color: var(--ctt-brand-yellow-500) !important; }
+.ctt-bg-brand-yellow-600 { background-color: var(--ctt-brand-yellow-600) !important; }
+
+/* Brand Colors - Purple Scale */
+.ctt-bg-brand-purple-100 { background-color: var(--ctt-brand-purple-100) !important; }
+.ctt-bg-brand-purple-200 { background-color: var(--ctt-brand-purple-200) !important; }
+.ctt-bg-brand-purple-300 { background-color: var(--ctt-brand-purple-300) !important; }
+.ctt-bg-brand-purple-400 { background-color: var(--ctt-brand-purple-400) !important; }
+.ctt-bg-brand-purple-500 { background-color: var(--ctt-brand-purple-500) !important; }
+.ctt-bg-brand-purple-600 { background-color: var(--ctt-brand-purple-600) !important; }
+
+/* Status Colors */
+.ctt-bg-success { background-color: var(--ctt-core-color-success-main) !important; }
+.ctt-bg-success-light { background-color: var(--ctt-core-color-success-light) !important; }
+.ctt-bg-warning { background-color: var(--ctt-core-color-warning-main) !important; }
+.ctt-bg-warning-light { background-color: var(--ctt-core-color-warning-light) !important; }
+.ctt-bg-error { background-color: var(--ctt-core-color-negative-main) !important; }
+.ctt-bg-error-light { background-color: var(--ctt-core-color-negative-light) !important; }
+.ctt-bg-info { background-color: var(--ctt-core-color-informative-main) !important; }
+.ctt-bg-info-light { background-color: var(--ctt-core-color-informative-light) !important; }
+.ctt-bg-new { background-color: var(--ctt-core-color-new-main) !important; }
+.ctt-bg-new-light { background-color: var(--ctt-core-color-new-light) !important; }
+
+/* Page Backgrounds */
+.ctt-bg-page { background-color: var(--ctt-base-color-page-bg-default) !important; }
+.ctt-bg-page-cloudy { background-color: var(--ctt-base-color-page-bg-cloudy) !important; }
+
+/* ==========================================================================
+   TEXT COLOR UTILITIES
+   ========================================================================== */
+
+/* Primary Colors */
+.ctt-text-primary { color: var(--ctt-core-color-primary-main) !important; }
+.ctt-text-primary-light { color: var(--ctt-core-color-primary-light) !important; }
+.ctt-text-primary-dark { color: var(--ctt-core-color-primary-dark) !important; }
+
+/* Secondary Colors */
+.ctt-text-secondary { color: var(--ctt-core-color-secondary-main) !important; }
+.ctt-text-secondary-light { color: var(--ctt-core-color-secondary-light) !important; }
+.ctt-text-secondary-dark { color: var(--ctt-core-color-secondary-dark) !important; }
+
+/* Neutral Colors */
+.ctt-text-white { color: var(--ctt-core-color-neutral-100) !important; }
+.ctt-text-neutral-100 { color: var(--ctt-core-color-neutral-100) !important; }
+.ctt-text-neutral-200 { color: var(--ctt-core-color-neutral-200) !important; }
+.ctt-text-neutral-300 { color: var(--ctt-core-color-neutral-300) !important; }
+.ctt-text-neutral-400 { color: var(--ctt-core-color-neutral-400) !important; }
+.ctt-text-neutral-500 { color: var(--ctt-core-color-neutral-500) !important; }
+.ctt-text-neutral-600 { color: var(--ctt-core-color-neutral-600) !important; }
+.ctt-text-neutral-700 { color: var(--ctt-core-color-neutral-700) !important; }
+.ctt-text-neutral-800 { color: var(--ctt-core-color-neutral-800) !important; }
+.ctt-text-neutral-900 { color: var(--ctt-core-color-neutral-900) !important; }
+.ctt-text-black { color: var(--ctt-core-color-neutral-900) !important; }
+
+/* Brand Colors - Primary Scale */
+.ctt-text-brand-primary-100 { color: var(--ctt-brand-primary-100) !important; }
+.ctt-text-brand-primary-200 { color: var(--ctt-brand-primary-200) !important; }
+.ctt-text-brand-primary-300 { color: var(--ctt-brand-primary-300) !important; }
+.ctt-text-brand-primary-400 { color: var(--ctt-brand-primary-400) !important; }
+.ctt-text-brand-primary-500 { color: var(--ctt-brand-primary-500) !important; }
+.ctt-text-brand-primary-600 { color: var(--ctt-brand-primary-600) !important; }
+.ctt-text-brand-primary-700 { color: var(--ctt-brand-primary-700) !important; }
+
+/* Brand Colors - Secondary Scale */
+.ctt-text-brand-secondary-100 { color: var(--ctt-brand-secondary-100) !important; }
+.ctt-text-brand-secondary-200 { color: var(--ctt-brand-secondary-200) !important; }
+.ctt-text-brand-secondary-300 { color: var(--ctt-brand-secondary-300) !important; }
+.ctt-text-brand-secondary-400 { color: var(--ctt-brand-secondary-400) !important; }
+.ctt-text-brand-secondary-500 { color: var(--ctt-brand-secondary-500) !important; }
+
+/* Brand Colors - Teal Scale */
+.ctt-text-brand-teal-100 { color: var(--ctt-brand-teal-100) !important; }
+.ctt-text-brand-teal-200 { color: var(--ctt-brand-teal-200) !important; }
+.ctt-text-brand-teal-300 { color: var(--ctt-brand-teal-300) !important; }
+.ctt-text-brand-teal-400 { color: var(--ctt-brand-teal-400) !important; }
+.ctt-text-brand-teal-500 { color: var(--ctt-brand-teal-500) !important; }
+.ctt-text-brand-teal-600 { color: var(--ctt-brand-teal-600) !important; }
+
+/* Brand Colors - Green Scale */
+.ctt-text-brand-green-100 { color: var(--ctt-brand-green-100) !important; }
+.ctt-text-brand-green-200 { color: var(--ctt-brand-green-200) !important; }
+.ctt-text-brand-green-300 { color: var(--ctt-brand-green-300) !important; }
+.ctt-text-brand-green-400 { color: var(--ctt-brand-green-400) !important; }
+.ctt-text-brand-green-500 { color: var(--ctt-brand-green-500) !important; }
+.ctt-text-brand-green-600 { color: var(--ctt-brand-green-600) !important; }
+
+/* Brand Colors - Yellow Scale */
+.ctt-text-brand-yellow-100 { color: var(--ctt-brand-yellow-100) !important; }
+.ctt-text-brand-yellow-200 { color: var(--ctt-brand-yellow-200) !important; }
+.ctt-text-brand-yellow-300 { color: var(--ctt-brand-yellow-300) !important; }
+.ctt-text-brand-yellow-400 { color: var(--ctt-brand-yellow-400) !important; }
+.ctt-text-brand-yellow-500 { color: var(--ctt-brand-yellow-500) !important; }
+.ctt-text-brand-yellow-600 { color: var(--ctt-brand-yellow-600) !important; }
+
+/* Brand Colors - Purple Scale */
+.ctt-text-brand-purple-100 { color: var(--ctt-brand-purple-100) !important; }
+.ctt-text-brand-purple-200 { color: var(--ctt-brand-purple-200) !important; }
+.ctt-text-brand-purple-300 { color: var(--ctt-brand-purple-300) !important; }
+.ctt-text-brand-purple-400 { color: var(--ctt-brand-purple-400) !important; }
+.ctt-text-brand-purple-500 { color: var(--ctt-brand-purple-500) !important; }
+.ctt-text-brand-purple-600 { color: var(--ctt-brand-purple-600) !important; }
+
+/* Status Colors */
+.ctt-text-success { color: var(--ctt-core-color-success-main) !important; }
+.ctt-text-warning { color: var(--ctt-core-color-warning-main) !important; }
+.ctt-text-error { color: var(--ctt-core-color-negative-main) !important; }
+.ctt-text-info { color: var(--ctt-core-color-informative-main) !important; }
+.ctt-text-new { color: var(--ctt-core-color-new-main) !important; }
+
+/* Semantic Text Colors */
+.ctt-text-body { color: var(--ctt-base-color-text-primary) !important; }
+.ctt-text-muted { color: var(--ctt-base-color-text-secondary) !important; }
+.ctt-text-subtle { color: var(--ctt-base-color-text-tertiary) !important; }
+.ctt-text-inverse { color: var(--ctt-base-color-text-inverse) !important; }
+.ctt-text-brand { color: var(--ctt-base-color-content-fg-brand) !important; }
+
+/* ==========================================================================
+   BORDER COLOR UTILITIES
+   ========================================================================== */
+
+/* Primary Colors */
+.ctt-border-primary { border-color: var(--ctt-core-color-primary-main) !important; }
+.ctt-border-primary-light { border-color: var(--ctt-core-color-primary-light) !important; }
+.ctt-border-primary-dark { border-color: var(--ctt-core-color-primary-dark) !important; }
+
+/* Secondary Colors */
+.ctt-border-secondary { border-color: var(--ctt-core-color-secondary-main) !important; }
+.ctt-border-secondary-light { border-color: var(--ctt-core-color-secondary-light) !important; }
+.ctt-border-secondary-dark { border-color: var(--ctt-core-color-secondary-dark) !important; }
+
+/* Neutral Colors */
+.ctt-border-neutral-100 { border-color: var(--ctt-core-color-neutral-100) !important; }
+.ctt-border-neutral-200 { border-color: var(--ctt-core-color-neutral-200) !important; }
+.ctt-border-neutral-300 { border-color: var(--ctt-core-color-neutral-300) !important; }
+.ctt-border-neutral-400 { border-color: var(--ctt-core-color-neutral-400) !important; }
+.ctt-border-neutral-500 { border-color: var(--ctt-core-color-neutral-500) !important; }
+.ctt-border-neutral-600 { border-color: var(--ctt-core-color-neutral-600) !important; }
+.ctt-border-neutral-700 { border-color: var(--ctt-core-color-neutral-700) !important; }
+.ctt-border-neutral-800 { border-color: var(--ctt-core-color-neutral-800) !important; }
+.ctt-border-neutral-900 { border-color: var(--ctt-core-color-neutral-900) !important; }
+
+/* Brand Colors - Primary Scale */
+.ctt-border-brand-primary-100 { border-color: var(--ctt-brand-primary-100) !important; }
+.ctt-border-brand-primary-200 { border-color: var(--ctt-brand-primary-200) !important; }
+.ctt-border-brand-primary-300 { border-color: var(--ctt-brand-primary-300) !important; }
+.ctt-border-brand-primary-400 { border-color: var(--ctt-brand-primary-400) !important; }
+.ctt-border-brand-primary-500 { border-color: var(--ctt-brand-primary-500) !important; }
+.ctt-border-brand-primary-600 { border-color: var(--ctt-brand-primary-600) !important; }
+.ctt-border-brand-primary-700 { border-color: var(--ctt-brand-primary-700) !important; }
+
+/* Brand Colors - Secondary Scale */
+.ctt-border-brand-secondary-100 { border-color: var(--ctt-brand-secondary-100) !important; }
+.ctt-border-brand-secondary-200 { border-color: var(--ctt-brand-secondary-200) !important; }
+.ctt-border-brand-secondary-300 { border-color: var(--ctt-brand-secondary-300) !important; }
+.ctt-border-brand-secondary-400 { border-color: var(--ctt-brand-secondary-400) !important; }
+.ctt-border-brand-secondary-500 { border-color: var(--ctt-brand-secondary-500) !important; }
+
+/* Brand Colors - Teal Scale */
+.ctt-border-brand-teal-100 { border-color: var(--ctt-brand-teal-100) !important; }
+.ctt-border-brand-teal-200 { border-color: var(--ctt-brand-teal-200) !important; }
+.ctt-border-brand-teal-300 { border-color: var(--ctt-brand-teal-300) !important; }
+.ctt-border-brand-teal-400 { border-color: var(--ctt-brand-teal-400) !important; }
+.ctt-border-brand-teal-500 { border-color: var(--ctt-brand-teal-500) !important; }
+.ctt-border-brand-teal-600 { border-color: var(--ctt-brand-teal-600) !important; }
+
+/* Brand Colors - Green Scale */
+.ctt-border-brand-green-100 { border-color: var(--ctt-brand-green-100) !important; }
+.ctt-border-brand-green-200 { border-color: var(--ctt-brand-green-200) !important; }
+.ctt-border-brand-green-300 { border-color: var(--ctt-brand-green-300) !important; }
+.ctt-border-brand-green-400 { border-color: var(--ctt-brand-green-400) !important; }
+.ctt-border-brand-green-500 { border-color: var(--ctt-brand-green-500) !important; }
+.ctt-border-brand-green-600 { border-color: var(--ctt-brand-green-600) !important; }
+
+/* Brand Colors - Yellow Scale */
+.ctt-border-brand-yellow-100 { border-color: var(--ctt-brand-yellow-100) !important; }
+.ctt-border-brand-yellow-200 { border-color: var(--ctt-brand-yellow-200) !important; }
+.ctt-border-brand-yellow-300 { border-color: var(--ctt-brand-yellow-300) !important; }
+.ctt-border-brand-yellow-400 { border-color: var(--ctt-brand-yellow-400) !important; }
+.ctt-border-brand-yellow-500 { border-color: var(--ctt-brand-yellow-500) !important; }
+.ctt-border-brand-yellow-600 { border-color: var(--ctt-brand-yellow-600) !important; }
+
+/* Brand Colors - Purple Scale */
+.ctt-border-brand-purple-100 { border-color: var(--ctt-brand-purple-100) !important; }
+.ctt-border-brand-purple-200 { border-color: var(--ctt-brand-purple-200) !important; }
+.ctt-border-brand-purple-300 { border-color: var(--ctt-brand-purple-300) !important; }
+.ctt-border-brand-purple-400 { border-color: var(--ctt-brand-purple-400) !important; }
+.ctt-border-brand-purple-500 { border-color: var(--ctt-brand-purple-500) !important; }
+.ctt-border-brand-purple-600 { border-color: var(--ctt-brand-purple-600) !important; }
+
+/* Status Colors */
+.ctt-border-success { border-color: var(--ctt-core-color-success-main) !important; }
+.ctt-border-warning { border-color: var(--ctt-core-color-warning-main) !important; }
+.ctt-border-error { border-color: var(--ctt-core-color-negative-main) !important; }
+.ctt-border-info { border-color: var(--ctt-core-color-informative-main) !important; }
+.ctt-border-new { border-color: var(--ctt-core-color-new-main) !important; }
+
+/* Semantic Border Colors */
+.ctt-border { border-color: var(--ctt-base-color-border-primary) !important; }
+.ctt-border-focus { border-color: var(--ctt-base-color-border-focus) !important; }
+
+/* ==========================================================================
+   BORDER WIDTH UTILITIES
+   ========================================================================== */
+
+.ctt-border-0 { border-width: 0 !important; }
+.ctt-border-1 { border-width: var(--ctt-core-border-width-1) !important; }
+.ctt-border-2 { border-width: var(--ctt-core-border-width-2) !important; }
+.ctt-border-3 { border-width: var(--ctt-core-border-width-3) !important; }
+
+/* Border sides */
+.ctt-border-t { border-top-width: var(--ctt-core-border-width-1) !important; border-top-style: solid !important; }
+.ctt-border-r { border-right-width: var(--ctt-core-border-width-1) !important; border-right-style: solid !important; }
+.ctt-border-b { border-bottom-width: var(--ctt-core-border-width-1) !important; border-bottom-style: solid !important; }
+.ctt-border-l { border-left-width: var(--ctt-core-border-width-1) !important; border-left-style: solid !important; }
+
+/* ==========================================================================
+   BORDER RADIUS UTILITIES
+   ========================================================================== */
+
+.ctt-rounded-none { border-radius: var(--ctt-base-border-radius-none) !important; }
+.ctt-rounded-xs { border-radius: var(--ctt-base-border-radius-xs) !important; }
+.ctt-rounded-s { border-radius: var(--ctt-base-border-radius-s) !important; }
+.ctt-rounded-m { border-radius: var(--ctt-base-border-radius-m) !important; }
+.ctt-rounded-pill { border-radius: var(--ctt-base-border-radius-pill) !important; }
+
+/* ==========================================================================
+   BOX SHADOW UTILITIES
+   ========================================================================== */
+
+.ctt-shadow-none { box-shadow: var(--ctt-base-box-shadow-container-none) !important; }
+.ctt-shadow-xs { box-shadow: var(--ctt-base-box-shadow-container-xs) !important; }
+.ctt-shadow-s { box-shadow: var(--ctt-base-box-shadow-container-s) !important; }
+.ctt-shadow-m { box-shadow: var(--ctt-base-box-shadow-container-m) !important; }
+.ctt-shadow-l { box-shadow: var(--ctt-base-box-shadow-container-l) !important; }

@@ -1,0 +1,228 @@
+/**
+ * Checkbox Component Styles
+ * 
+ * This file contains the CSS styles for the Checkbox component.
+ * It uses design tokens from the foundations layer and matches the Web Component specification.
+ * 
+ * Usage:
+ * @import './components/checkbox.css';
+ */
+
+/* ==========================================================================
+   CHECKBOX COMPONENT
+   ========================================================================== */
+
+/* Container */
+.ctt-checkbox {
+  display: block;
+  font-family: var(--ctt-base-font-family-body);
+}
+
+/* Root Label Container */
+.ctt-checkbox__root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ctt-core-dimension-50); /* 8px gap between checkbox & text */
+  cursor: pointer;
+  user-select: none;
+  line-height: var(--ctt-core-line-height-m);
+  position: relative;
+}
+
+/* Checkbox Container - wraps the input and checkmark */
+.ctt-checkbox__container {
+  position: relative;
+  display: inline-block;
+  height: 16px; /* Match control height */
+}
+
+/* Checkbox Control (Square) */
+.ctt-checkbox__control {
+  appearance: none;
+  width: var(--ctt-core-dimension-100); /* 16px */
+  height: var(--ctt-core-dimension-100);
+  border: var(--ctt-base-border-width-selectable-s) solid var(--ctt-base-color-selectable-border-default);
+  background: var(--ctt-core-color-neutral-100);
+  position: relative;
+  transition: border-color 0.15s, background-color 0.15s;
+  margin: 0;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+/* Checked State - Background */
+.ctt-checkbox__control:checked {
+  border-color: var(--ctt-core-color-primary-main);
+  background: var(--ctt-core-color-primary-main);
+}
+
+/* Checkmark Icon */
+.ctt-checkbox__checkmark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.1s ease-in-out;
+  color: var(--ctt-core-color-neutral-100);
+  pointer-events: none;
+  z-index: 1;
+  width: 12px;
+  height: 12px;
+}
+
+.ctt-checkbox__control:checked ~ .ctt-checkbox__checkmark {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Hover & Focus States */
+.ctt-checkbox__control:hover:not(:disabled) {
+  border-color: var(--ctt-base-color-selectable-fg-default);
+  background: var(--ctt-core-color-neutral-400);
+}
+
+.ctt-checkbox__control:checked:hover:not(:disabled) {
+  background: var(--ctt-core-color-primary-main);
+}
+
+.ctt-checkbox__control:focus {
+  outline: none;
+  border-color: var(--ctt-core-color-primary-main);
+  box-shadow: 0 0 0 3px rgba(var(--ctt-brand-primary-500), 0.2);
+}
+
+.ctt-checkbox__control:focus:checked {
+  background: var(--ctt-core-color-primary-main);
+}
+
+/* Label Text */
+.ctt-checkbox__label {
+  color: var(--ctt-base-color-selectable-fg-default);
+  font-size: var(--ctt-base-font-size-body-m);
+  font-weight: var(--ctt-base-font-weight-body);
+  line-height: var(--ctt-core-line-height-m);
+}
+
+/* Error State */
+.ctt-checkbox--error .ctt-checkbox__control,
+.ctt-checkbox__control--error {
+  border-color: var(--ctt-core-color-negative-main);
+  background: var(--ctt-base-color-feedback-error-bg-light);
+}
+
+/* Checked Error State - 2px border and primary checkmark */
+.ctt-checkbox--error .ctt-checkbox__control:checked {
+  border-width: 2px;
+  border-color: var(--ctt-core-color-negative-main);
+  background: var(--ctt-base-color-feedback-error-bg-light);
+}
+
+.ctt-checkbox--error .ctt-checkbox__control:checked ~ .ctt-checkbox__checkmark {
+  color: var(--ctt-core-color-primary-main);
+}
+
+.ctt-checkbox--error .ctt-checkbox__control:hover:not(:disabled) {
+  border-width: 2px;
+  border-color: var(--ctt-core-color-negative-main);
+  background: var(--ctt-base-color-feedback-error-bg-light);
+}
+
+.ctt-checkbox--error .ctt-checkbox__control:focus {
+  border-color: var(--ctt-core-color-negative-main);
+  box-shadow: 0 0 0 3px rgba(var(--ctt-brand-negative-500), 0.2);
+}
+
+/* Error Message */
+.ctt-checkbox__error {
+  display: flex;
+  align-items: center;
+  gap: var(--ctt-core-dimension-25); /* 4px */
+  margin-top: var(--ctt-core-dimension-25); /* 4px */
+  color: var(--ctt-base-color-feedback-fg-error);
+  font-size: var(--ctt-base-font-size-body-s);
+  font-weight: var(--ctt-core-font-weight-400);
+  line-height: var(--ctt-core-line-height-s);
+}
+
+.ctt-checkbox__error-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 1px; /* Align with text */
+}
+
+.ctt-checkbox__error-text {
+  flex: 1;
+}
+
+/* Disabled State */
+.ctt-checkbox--disabled .ctt-checkbox__control,
+.ctt-checkbox__control--disabled,
+.ctt-checkbox__control[disabled] {
+  border-color: var(--ctt-base-color-container-border-disabled);
+  background: var(--ctt-base-color-container-bg-disabled);
+  cursor: not-allowed;
+}
+
+.ctt-checkbox--disabled .ctt-checkbox__checkmark,
+.ctt-checkbox__control:disabled ~ .ctt-checkbox__checkmark {
+  color: var(--ctt-base-color-selectable-fg-weak);
+}
+
+.ctt-checkbox--disabled .ctt-checkbox__root,
+.ctt-checkbox__root--disabled {
+  cursor: not-allowed;
+}
+
+.ctt-checkbox--disabled .ctt-checkbox__label,
+.ctt-checkbox__label--disabled {
+  color: var(--ctt-base-color-selectable-fg-weak);
+}
+
+/* Checkbox Groups */
+.ctt-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ctt-core-dimension-75); /* 12px between checkboxes */
+}
+
+.ctt-checkbox-group--horizontal {
+  flex-direction: row;
+  gap: var(--ctt-core-dimension-150); /* 24px between horizontal checkboxes */
+  flex-wrap: wrap;
+}
+
+/* Utility Classes for Web Component Parts */
+.ctt-body-m {
+  font-family: var(--ctt-base-font-family-body) !important;
+  font-size: var(--ctt-base-font-size-body-m) !important;
+  font-weight: var(--ctt-base-font-weight-body) !important;
+  line-height: var(--ctt-core-line-height-m) !important;
+}
+
+.ctt-body-s {
+  font-family: var(--ctt-base-font-family-body) !important;
+  font-size: var(--ctt-base-font-size-body-s) !important;
+  font-weight: var(--ctt-base-font-weight-body) !important;
+  line-height: var(--ctt-core-line-height-s) !important;
+}
+
+.ctt-text-neutral-700 {
+  color: var(--ctt-base-color-selectable-fg-default) !important;
+}
+
+.ctt-text-neutral-500 {
+  color: var(--ctt-base-color-selectable-fg-weak) !important;
+}
+
+.ctt-text-error {
+  color: var(--ctt-base-color-feedback-fg-error) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ctt-checkbox-group--horizontal {
+    /* Stack horizontally on mobile if needed */
+    flex-direction: column;
+    gap: var(--ctt-core-dimension-75);
+  }
+}

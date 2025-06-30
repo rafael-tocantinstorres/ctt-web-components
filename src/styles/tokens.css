@@ -1,0 +1,399 @@
+/**
+ * CTT Design System - Design Tokens
+ * CSS Custom Properties for all design tokens
+ * Organized in layers: Brand → Core → Base → Component
+ */
+
+:root {
+  /* ==========================================================================
+     BRAND COLORS - Raw color values (Primitive tokens)
+     ========================================================================== */
+  
+  /* Brand Colors - Primary */
+  --ctt-brand-primary-100: #F9CCD3;
+  --ctt-brand-primary-200: #F299A7;
+  --ctt-brand-primary-300: #EC667C;
+  --ctt-brand-primary-400: #E53350;
+  --ctt-brand-primary-500: #DF0024;
+  --ctt-brand-primary-600: #C7001E;
+  --ctt-brand-primary-700: #B10018;
+
+  /* Brand Colors - Secondary */
+  --ctt-brand-secondary-100: #CCCCCC;
+  --ctt-brand-secondary-200: #99999D;
+  --ctt-brand-secondary-300: #666666;
+  --ctt-brand-secondary-400: #333333;
+  --ctt-brand-secondary-500: #000000;
+
+  /* Brand Colors - Teal */
+  --ctt-brand-teal-100: #CCF2F0;
+  --ctt-brand-teal-200: #99E5E1;
+  --ctt-brand-teal-300: #66D8D2;
+  --ctt-brand-teal-400: #33CBC3;
+  --ctt-brand-teal-500: #00BEB4;
+  --ctt-brand-teal-600: #009C97;
+
+  /* Brand Colors - Green */
+  --ctt-brand-green-100: #F0F6DA;
+  --ctt-brand-green-200: #E1EDB5;
+  --ctt-brand-green-300: #D2E490;
+  --ctt-brand-green-400: #C3DB6B;
+  --ctt-brand-green-500: #B4D246;
+  --ctt-brand-green-600: #A5C81F;
+
+  /* Brand Colors - Yellow */
+  --ctt-brand-yellow-100: #FFFBCC;
+  --ctt-brand-yellow-200: #FFF799;
+  --ctt-brand-yellow-300: #FFF366;
+  --ctt-brand-yellow-400: #FFEF33;
+  --ctt-brand-yellow-500: #FFEB00;
+  --ctt-brand-yellow-600: #E6D400;
+
+  /* Brand Colors - Purple */
+  --ctt-brand-purple-100: #E6D2E6;
+  --ctt-brand-purple-200: #CDA5CD;
+  --ctt-brand-purple-300: #B478B4;
+  --ctt-brand-purple-400: #9B4B9B;
+  --ctt-brand-purple-500: #821E82;
+  --ctt-brand-purple-600: #690B69;
+
+  /* ==========================================================================
+     CORE TOKENS - Semantic color assignments (System tokens)
+     ========================================================================== */
+
+  /* Core Colors - Neutral */
+  --ctt-core-color-neutral-100: #FFFFFF;
+  --ctt-core-color-neutral-200: #F7F7F7;
+  --ctt-core-color-neutral-300: #F2F2F2;
+  --ctt-core-color-neutral-400: #E9E5E5;
+  --ctt-core-color-neutral-500: var(--ctt-brand-secondary-100);
+  --ctt-core-color-neutral-600: var(--ctt-brand-secondary-200);
+  --ctt-core-color-neutral-700: var(--ctt-brand-secondary-300);
+  --ctt-core-color-neutral-800: var(--ctt-brand-secondary-400);
+  --ctt-core-color-neutral-900: var(--ctt-brand-secondary-500);
+
+  /* Core Colors - Primary */
+  --ctt-core-color-primary-light: var(--ctt-brand-primary-400);
+  --ctt-core-color-primary-main: var(--ctt-brand-primary-500);
+  --ctt-core-color-primary-dark: var(--ctt-brand-primary-600);
+
+  /* Core Colors - Secondary */
+  --ctt-core-color-secondary-light: var(--ctt-brand-secondary-300);
+  --ctt-core-color-secondary-main: var(--ctt-brand-secondary-400);
+  --ctt-core-color-secondary-dark: var(--ctt-brand-secondary-500);
+
+  /* Core Colors - tertiary */
+  --ctt-core-color-tertiary-light: var(--ctt-core-color-neutral-100);
+  --ctt-core-color-tertiary-main: var(--ctt-core-color-primary-dark);
+  --ctt-core-color-tertiary-dark: var(--ctt-brand-secondary-400);
+
+  /* Core Colors - New */
+  --ctt-core-color-new-light: var(--ctt-brand-purple-200);
+  --ctt-core-color-new-main: var(--ctt-brand-purple-400);
+
+  /* Core Colors - Informative */
+  --ctt-core-color-informative-light: var(--ctt-brand-teal-200);
+  --ctt-core-color-informative-main: var(--ctt-brand-teal-400);
+
+  /* Core Colors - Success */
+  --ctt-core-color-success-light: var(--ctt-brand-green-200);
+  --ctt-core-color-success-main: var(--ctt-brand-green-400);
+
+  /* Core Colors - Warning */
+  --ctt-core-color-warning-light: var(--ctt-brand-yellow-200);
+  --ctt-core-color-warning-main: var(--ctt-brand-yellow-400);
+
+  /* Core Colors - Negative */
+  --ctt-core-color-negative-light: var(--ctt-brand-primary-200);
+  --ctt-core-color-negative-main: var(--ctt-brand-primary-700);
+
+  /* ==========================================================================
+     CORE SIZING & SPACING SYSTEM
+     ========================================================================== */
+
+  /* Core Size Scale */
+  --ctt-core-size-scale: 1rem;
+
+  /* Core Dimensions - Base calculation */
+  --ctt-core-dimension-base: calc(var(--ctt-core-size-scale) / 100); /* 0.16px */
+  --ctt-core-dimension-0: 0px;
+  --ctt-core-dimension-25: calc(var(--ctt-core-dimension-base) * 25);   /* 4px */
+  --ctt-core-dimension-50: calc(var(--ctt-core-dimension-base) * 50);   /* 8px */
+  --ctt-core-dimension-75: calc(var(--ctt-core-dimension-base) * 75);   /* 12px */
+  --ctt-core-dimension-100: calc(var(--ctt-core-dimension-base) * 100); /* 16px */
+  --ctt-core-dimension-150: calc(var(--ctt-core-dimension-base) * 150); /* 24px */
+  --ctt-core-dimension-200: calc(var(--ctt-core-dimension-base) * 200); /* 32px */
+  --ctt-core-dimension-250: calc(var(--ctt-core-dimension-base) * 250); /* 40px */
+  --ctt-core-dimension-300: calc(var(--ctt-core-dimension-base) * 300); /* 48px */
+  --ctt-core-dimension-350: calc(var(--ctt-core-dimension-base) * 350); /* 56px */
+  --ctt-core-dimension-400: calc(var(--ctt-core-dimension-base) * 400); /* 64px */
+  --ctt-core-dimension-450: calc(var(--ctt-core-dimension-base) * 450); /* 72px */
+  --ctt-core-dimension-500: calc(var(--ctt-core-dimension-base) * 500); /* 80px */
+
+  /* ==========================================================================
+     CORE BORDER SYSTEM
+     ========================================================================== */
+
+  /* Core Border Radius - Base calculation */
+  --ctt-core-border-radius-base: calc(var(--ctt-core-size-scale) / 100);
+  --ctt-core-border-radius-0: 0px;
+  --ctt-core-border-radius-6: calc(var(--ctt-core-border-radius-base) * 6.25);  /* 1px */
+  --ctt-core-border-radius-12: calc(var(--ctt-core-border-radius-base) * 12.5); /* 2px */
+  --ctt-core-border-radius-25: calc(var(--ctt-core-border-radius-base) * 25);   /* 4px */
+  --ctt-core-border-radius-50: calc(var(--ctt-core-border-radius-base) * 50);   /* 8px */
+  --ctt-core-border-radius-100: calc(var(--ctt-core-border-radius-base) * 100); /* 16px */
+  --ctt-core-border-radius-200: calc(var(--ctt-core-border-radius-base) * 200); /* 32px */
+  --ctt-core-border-radius-pill: 1000px;
+
+  /* Core Border Width */
+  --ctt-core-border-width-0: 0px;
+  --ctt-core-border-width-1: 1px;
+  --ctt-core-border-width-2: 2px;
+  --ctt-core-border-width-3: 3px;
+  --ctt-core-border-width-4: 4px;
+  --ctt-core-border-width-5: 5px;
+  --ctt-core-border-width-6: 6px;
+
+  /* ==========================================================================
+     CORE SHADOW SYSTEM
+     ========================================================================== */
+
+  /* Core Shadow Intensity */
+  --ctt-core-intensity-box-shadow: 0.3;
+
+  /* Core Box Shadow */
+  --ctt-core-box-shadow-none: none;
+  --ctt-core-box-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, var(--ctt-core-intensity-box-shadow));
+  --ctt-core-box-shadow-s: 0 2px 4px 0 rgba(0, 0, 0, var(--ctt-core-intensity-box-shadow));
+  --ctt-core-box-shadow-m: 0 2px 8px 0 rgba(0, 0, 0, var(--ctt-core-intensity-box-shadow));
+  --ctt-core-box-shadow-l: 0 4px 16px 0 rgba(0, 0, 0, var(--ctt-core-intensity-box-shadow));
+
+  /* ==========================================================================
+     CORE TYPOGRAPHY SYSTEM
+     ========================================================================== */
+
+  /* Core Font Family */
+  --ctt-core-font-family-brand: 'ActoCTT', sans-serif;
+
+  /* Core Font Weight */
+  --ctt-core-font-weight-250: 250; /* Thin */
+  --ctt-core-font-weight-300: 300; /* Light */
+  --ctt-core-font-weight-400: 400; /* Book */
+  --ctt-core-font-weight-500: 500; /* Medium */
+  --ctt-core-font-weight-700: 700; /* Bold */
+  --ctt-core-font-weight-900: 900; /* Black */
+
+  /* Core Line Heights */
+  --ctt-core-line-height-xs: 100%; /* Tight */
+  --ctt-core-line-height-s: 110%;  /* Normal */
+  --ctt-core-line-height-m: 130%;  /* Relaxed */
+  --ctt-core-line-height-l: 150%;  /* Loose */
+
+  /* Core Font Size - Base and Scaled */
+  --ctt-core-font-size-base: var(--ctt-core-size-scale); /* 1rem */
+  --ctt-core-font-size-scaled-75: calc(var(--ctt-core-font-size-base) * 0.75);    /* 12px */
+  --ctt-core-font-size-scaled-87: calc(var(--ctt-core-font-size-base) * 0.875);   /* 14px */
+  --ctt-core-font-size-scaled-100: calc(var(--ctt-core-font-size-base) * 1);      /* 16px */
+  --ctt-core-font-size-scaled-112: calc(var(--ctt-core-font-size-base) * 1.125);  /* 18px */
+  --ctt-core-font-size-scaled-125: calc(var(--ctt-core-font-size-base) * 1.25);   /* 20px */
+  --ctt-core-font-size-scaled-162: calc(var(--ctt-core-font-size-base) * 1.625);  /* 26px */
+  --ctt-core-font-size-scaled-206: calc(var(--ctt-core-font-size-base) * 2.0625); /* 33px */
+  --ctt-core-font-size-scaled-225: calc(var(--ctt-core-font-size-base) * 2.25);   /* 36px */
+  --ctt-core-font-size-scaled-262: calc(var(--ctt-core-font-size-base) * 2.625);  /* 42px */
+  --ctt-core-font-size-scaled-300: calc(var(--ctt-core-font-size-base) * 3);      /* 48px */
+  --ctt-core-font-size-scaled-400: calc(var(--ctt-core-font-size-base) * 4);      /* 64px */
+  --ctt-core-font-size-scaled-425: calc(var(--ctt-core-font-size-base) * 4.25);   /* 68px */
+
+  /* ==========================================================================
+     BASE TOKENS - Component-level semantic tokens
+     ========================================================================== */
+
+  /* Base Font Family */
+  --ctt-base-font-family-body: var(--ctt-core-font-family-brand);
+  --ctt-base-font-family-title: var(--ctt-core-font-family-brand);
+  --ctt-base-font-family-display: var(--ctt-core-font-family-brand);
+  --ctt-base-font-family-label: var(--ctt-core-font-family-brand);
+
+  /* Base Font Weight */
+  --ctt-base-font-weight-body: var(--ctt-core-font-weight-400);
+  --ctt-base-font-weight-title-s-m: var(--ctt-core-font-weight-500);
+  --ctt-base-font-weight-title-l-xl: var(--ctt-core-font-weight-500);
+  --ctt-base-font-weight-display: var(--ctt-core-font-weight-400);
+  --ctt-base-font-weight-label: var(--ctt-core-font-weight-500);
+
+  /* Base Font Size - Body */
+  --ctt-base-font-size-body-s: var(--ctt-core-font-size-scaled-87);  /* 14px */
+  --ctt-base-font-size-body-m: var(--ctt-core-font-size-scaled-100); /* 16px */
+  --ctt-base-font-size-body-l: var(--ctt-core-font-size-scaled-112); /* 18px */
+
+  /* Base Font Size - Titles */
+  --ctt-base-font-size-title-s: var(--ctt-core-font-size-scaled-125);  /* 20px */
+  --ctt-base-font-size-title-m: var(--ctt-core-font-size-scaled-162);  /* 26px */
+  --ctt-base-font-size-title-l: var(--ctt-core-font-size-scaled-206);  /* 33px */
+  --ctt-base-font-size-title-xl: var(--ctt-core-font-size-scaled-262); /* 42px */
+
+  /* Base Font Size - Display */
+  --ctt-base-font-size-display-s: var(--ctt-core-font-size-scaled-225); /* 36px */
+  --ctt-base-font-size-display-m: var(--ctt-core-font-size-scaled-300); /* 48px */
+  --ctt-base-font-size-display-l: var(--ctt-core-font-size-scaled-425); /* 68px */
+
+  /* Base Font Size - Labels */
+  --ctt-base-font-size-label-s: var(--ctt-core-font-size-scaled-87);  /* 14px */
+  --ctt-base-font-size-label-m: var(--ctt-core-font-size-scaled-100); /* 16px */
+  --ctt-base-font-size-label-l: var(--ctt-core-font-size-scaled-112); /* 18px */
+
+  /* Base Border Radius */
+  --ctt-base-border-radius-scale: 1;
+  --ctt-base-border-radius-none: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-0));
+  --ctt-base-border-radius-xs: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-25));
+  --ctt-base-border-radius-s: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-50));
+  --ctt-base-border-radius-m: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-200));
+  --ctt-base-border-radius-pill: calc(var(--ctt-base-border-radius-scale) * var(--ctt-core-border-radius-pill));
+
+  /* Base Border Width - Selectable */
+  --ctt-base-border-width-selectable-none: var(--ctt-core-border-width-0);
+  --ctt-base-border-width-selectable-s: var(--ctt-core-border-width-1);
+  --ctt-base-border-width-selectable-m: var(--ctt-core-border-width-2);
+  --ctt-base-border-width-selectable-l: var(--ctt-core-border-width-3);
+
+  /* Base Border Width - Container */
+  --ctt-base-border-width-container-none: var(--ctt-core-border-width-0);
+  --ctt-base-border-width-container-s: var(--ctt-core-border-width-1);
+  --ctt-base-border-width-container-m: var(--ctt-core-border-width-2);
+  --ctt-base-border-width-container-l: var(--ctt-core-border-width-3);
+
+  /* Base Box Shadow - Container */
+  --ctt-base-box-shadow-container-none: var(--ctt-core-box-shadow-none);
+  --ctt-base-box-shadow-container-xs: var(--ctt-core-box-shadow-xs);
+  --ctt-base-box-shadow-container-s: var(--ctt-core-box-shadow-s);
+  --ctt-base-box-shadow-container-m: var(--ctt-core-box-shadow-m);
+  --ctt-base-box-shadow-container-l: var(--ctt-core-box-shadow-l);
+
+  /* ==========================================================================
+     BASE COLOR TOKENS - Semantic color assignments for components
+     ========================================================================== */
+
+  /* Base Color - Page */
+  --ctt-base-color-page-bg-default: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-page-bg-cloudy: var(--ctt-core-color-neutral-200);
+
+  /* Base Color - Container */
+  --ctt-base-color-container-bg-default: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-container-border-default: var(--ctt-core-color-neutral-600);
+  --ctt-base-color-container-bg-disabled: var(--ctt-core-color-neutral-300);
+  --ctt-base-color-container-border-disabled: var(--ctt-core-color-neutral-500);
+  --ctt-base-color-container-border-selected: var(--ctt-core-color-primary-dark);
+
+  /* Base Color - Selectable */
+  --ctt-base-color-selectable-bg-default: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-selectable-bg-disabled: var(--ctt-core-color-neutral-300);
+  --ctt-base-color-selectable-border-default: var(--ctt-core-color-neutral-600);
+  --ctt-base-color-selectable-border-disabled: var(--ctt-core-color-neutral-500);
+  --ctt-base-color-selectable-fg-weak: var(--ctt-core-color-neutral-700);
+  --ctt-base-color-selectable-fg-default: var(--ctt-core-color-neutral-800);
+
+  /* Base Color - Selectable Primary */
+  --ctt-base-color-selectable-primary-unselected-default-bg: var(--ctt-core-color-primary-main);
+  --ctt-base-color-selectable-primary-unselected-default-border: var(--ctt-core-color-primary-main);
+  --ctt-base-color-selectable-primary-unselected-default-fg: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-selectable-primary-unselected-hover-bg: var(--ctt-core-color-primary-dark);
+  --ctt-base-color-selectable-primary-unselected-hover-border: var(--ctt-core-color-primary-dark);
+  --ctt-base-color-selectable-primary-unselected-hover-fg: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-selectable-primary-unselected-active-bg: var(--ctt-core-color-primary-dark);
+  --ctt-base-color-selectable-primary-unselected-active-border: var(--ctt-core-color-primary-dark);
+  --ctt-base-color-selectable-primary-unselected-active-fg: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-selectable-primary-selected-default-bg: var(--ctt-core-color-primary-main);
+  --ctt-base-color-selectable-primary-selected-default-border: var(--ctt-core-color-primary-main);
+  --ctt-base-color-selectable-primary-selected-default-fg: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-selectable-primary-selected-hover-bg: var(--ctt-core-color-primary-dark);
+  --ctt-base-color-selectable-primary-selected-hover-border: var(--ctt-core-color-primary-dark);
+  --ctt-base-color-selectable-primary-selected-hover-fg: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-selectable-primary-selected-active-bg: var(--ctt-core-color-primary-dark);
+  --ctt-base-color-selectable-primary-selected-active-border: var(--ctt-core-color-primary-dark);
+  --ctt-base-color-selectable-primary-selected-active-fg: var(--ctt-core-color-neutral-100);
+
+  /* Base Color - Selectable Secondary */
+  --ctt-base-color-selectable-secondary-unselected-default-bg: var(--ctt-core-color-secondary-main);
+  --ctt-base-color-selectable-secondary-unselected-default-border: var(--ctt-core-color-secondary-main);
+  --ctt-base-color-selectable-secondary-unselected-default-fg: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-selectable-secondary-unselected-hover-bg: var(--ctt-core-color-secondary-dark);
+  --ctt-base-color-selectable-secondary-unselected-hover-border: var(--ctt-core-color-secondary-dark);
+  --ctt-base-color-selectable-secondary-unselected-hover-fg: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-selectable-secondary-unselected-active-bg: var(--ctt-core-color-secondary-main);
+  --ctt-base-color-selectable-secondary-unselected-active-border: var(--ctt-core-color-secondary-dark);
+  --ctt-base-color-selectable-secondary-unselected-active-fg: var(--ctt-core-color-neutral-100);
+
+    /* Base Color - Selectable Tertiary */
+  --ctt-base-color-selectable-tertiary-unselected-default-bg: var(--ctt-core-color-tertiary-light);
+  --ctt-base-color-selectable-tertiary-unselected-default-border: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-default-fg: var(--ctt-core-color-tertiary-dark);
+  --ctt-base-color-selectable-tertiary-unselected-hover-bg: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-hover-border: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-hover-fg: var(--ctt-core-color-tertiary-light);
+  --ctt-base-color-selectable-tertiary-unselected-active-bg: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-active-border: var(--ctt-core-color-tertiary-main);
+  --ctt-base-color-selectable-tertiary-unselected-active-fg: var(--ctt-core-color-tertiary-light);
+
+  /* Base Color - Feedback */
+  --ctt-base-color-feedback-fg-default: var(--ctt-core-color-neutral-800);
+  --ctt-base-color-feedback-fg-clear: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-feedback-fg-error: var(--ctt-core-color-negative-main);
+
+  /* Base Color - Feedback Info */
+  --ctt-base-color-feedback-info-bg-main: var(--ctt-core-color-informative-main);
+  --ctt-base-color-feedback-info-bg-light: var(--ctt-core-color-informative-light);
+
+  /* Base Color - Feedback Warning */
+  --ctt-base-color-feedback-warning-bg-main: var(--ctt-core-color-warning-main);
+  --ctt-base-color-feedback-warning-bg-light: var(--ctt-core-color-warning-light);
+
+  /* Base Color - Feedback Error */
+  --ctt-base-color-feedback-error-bg-main: var(--ctt-core-color-negative-main);
+  --ctt-base-color-feedback-error-bg-light: var(--ctt-core-color-negative-light);
+
+  /* Base Color - Feedback Success */
+  --ctt-base-color-feedback-success-bg-main: var(--ctt-core-color-success-main);
+  --ctt-base-color-feedback-success-bg-light: var(--ctt-core-color-success-light);
+
+  /* Base Color - Content */
+  --ctt-base-color-content-fg-main: var(--ctt-core-color-neutral-800);
+  --ctt-base-color-content-fg-weak: var(--ctt-core-color-neutral-700);
+  --ctt-base-color-content-fg-clear: var(--ctt-core-color-neutral-100);
+  --ctt-base-color-content-fg-strong: var(--ctt-core-color-neutral-900);
+  --ctt-base-color-content-fg-brand: var(--ctt-core-color-primary-main);
+  --ctt-base-color-content-fg-brand-dark: var(--ctt-core-color-primary-dark);
+
+  /* ==========================================================================
+     LEGACY COMPATIBILITY - Aliases for existing components
+     ========================================================================== */
+
+  /* Legacy color aliases for backward compatibility */
+  --ctt-colors-core-primary-500: var(--ctt-core-color-primary-main);
+  --ctt-colors-core-primary-600: var(--ctt-core-color-primary-dark);
+  --ctt-colors-core-primary-700: var(--ctt-core-color-primary-dark);
+  --ctt-colors-core-primary-50: var(--ctt-brand-primary-100);
+  
+  --ctt-colors-core-success-500: var(--ctt-core-color-success-main);
+  --ctt-colors-core-success-600: var(--ctt-brand-green-600);
+  
+  --ctt-colors-core-warning-500: var(--ctt-core-color-warning-main);
+  --ctt-colors-core-warning-600: var(--ctt-brand-yellow-600);
+  
+  --ctt-colors-core-error-500: var(--ctt-core-color-negative-main);
+  --ctt-colors-core-error-600: var(--ctt-brand-primary-600);
+
+  --ctt-colors-base-neutral-white: var(--ctt-core-color-neutral-100);
+  --ctt-colors-base-text-primary: var(--ctt-base-color-content-fg-main);
+  --ctt-colors-base-background-secondary: var(--ctt-core-color-neutral-200);
+  --ctt-colors-base-background-tertiary: var(--ctt-core-color-neutral-300);
+  --ctt-colors-base-border-focus: var(--ctt-core-color-primary-main);
+  --ctt-colors-base-shadow-md: rgba(0, 0, 0, 0.15);
+
+  /* Legacy typography aliases */
+  --ctt-typography-font-families-primary: var(--ctt-core-font-family-brand);
+  --ctt-typography-font-weights-bold: var(--ctt-core-font-weight-700);
+  --ctt-typography-line-heights-none: var(--ctt-core-line-height-xs);
+  --ctt-typography-font-sizes-xs: var(--ctt-core-font-size-scaled-75);
+  --ctt-typography-font-sizes-sm: var(--ctt-core-font-size-scaled-87);
+  --ctt-typography-font-sizes-base: var(--ctt-core-font-size-scaled-100);
+}

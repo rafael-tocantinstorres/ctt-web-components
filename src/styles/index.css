@@ -1,0 +1,105 @@
+/**
+ * Main Stylesheet
+ * This file imports all the design system styles in the correct order.
+ */
+
+/* Import design tokens first */
+@import './tokens.css';
+
+/* Import typography system */
+@import './typography.css';
+
+/* Import Colors */
+@import './colors.css';
+
+/* Import Spacing */
+@import './spacing.css';
+
+/* Import Fonts */
+@import './fonts.css';
+
+/* Base styles and resets */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: var(--ctt-base-color-page-bg-default);
+  color: var(--ctt-base-color-content-fg-main);
+  font-family: var(--ctt-base-font-family-body);
+  transition: background-color 0.2s ease;
+}
+
+/* Focus management */
+*:focus {
+  outline: 2px solid var(--ctt-core-color-primary-main);
+  outline-offset: 2px;
+}
+
+/* Remove default focus styles for mouse users */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Ensure focus-visible works */
+*:focus-visible {
+  outline: 2px solid var(--ctt-core-color-primary-main);
+  outline-offset: 2px;
+}
+
+/* Image defaults */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Button defaults */
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+}
+
+/* Form element defaults */
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Link defaults */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* List defaults */
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Heading defaults */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font: inherit;
+}
+
+/* Paragraph defaults */
+p {
+  margin: 0;
+}

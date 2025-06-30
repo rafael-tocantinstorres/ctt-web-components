@@ -1,0 +1,120 @@
+/**
+ * ToggleSwitch Component Styles
+ * 
+ * This file contains the CSS styles for the ToggleSwitch component.
+ * It uses design tokens from the foundations layer.
+ * 
+ * Usage:
+ * @import './components/toggle-switch.css';
+ */
+
+/* ==========================================================================
+   TOGGLESWITCH COMPONENT
+   ========================================================================== */
+
+.ctt-toggle-switch {
+  display: inline-block;
+  font-family: inherit;
+}
+
+.ctt-toggle-switch__root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ctt-core-dimension-50);                        /* 8px */
+  cursor: pointer;
+  user-select: none;
+}
+
+.ctt-toggle-switch__control {
+  position: absolute;
+  opacity: 0;
+  width: 0; 
+  height: 0;
+}
+
+.ctt-toggle-switch__thumb {
+  display: block;
+  position: relative;
+  width: var(--ctt-core-dimension-300);                      /* 64px */
+  height: var(--ctt-core-dimension-150);                     /* 32px */
+  background: var(--ctt-base-color-selectable-bg-default);   /* neutral-100 */
+  border: var(--ctt-base-border-width-selectable-s) solid var(--ctt-base-color-selectable-border-default); /* neutral-600 */
+  border-radius: var(--ctt-base-border-radius-pill);          /* pill */
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.ctt-toggle-switch__thumb::after {
+  content: "";
+  position: absolute;
+  top: 50%; 
+  left: var(--ctt-core-dimension-25);                        /* 4px inset */
+  width: var(--ctt-core-dimension-100);                      /* 24px */
+  height: var(--ctt-core-dimension-100);
+  background: var(--ctt-base-color-selectable-fg-default);    /* neutral-800 */
+  border-radius: 50%;
+  transform: translateY(-50%);
+  transition: left 0.15s, background 0.15s;
+}
+
+/* —— DEFAULT SELECTED —— */
+.ctt-toggle-switch__control:checked + .ctt-toggle-switch__thumb {
+  background: var(--ctt-base-color-selectable-primary-selected-default-bg);   /* primary-main */
+  border-color: var(--ctt-base-color-selectable-primary-selected-default-border);
+}
+
+.ctt-toggle-switch__control:checked + .ctt-toggle-switch__thumb::after {
+  left: calc(100% - var(--ctt-core-dimension-25) - var(--ctt-core-dimension-100)); /* rightmost inset */
+  background: var(--ctt-base-color-selectable-primary-selected-default-fg);        /* neutral-100 */
+}
+
+/* —— HOVER STATES —— */
+.ctt-toggle-switch__root:not([data-disabled]) .ctt-toggle-switch__thumb:hover {
+  background: var(--ctt-core-color-neutral-300);       /* unselected hover */
+  border-color: var(--ctt-core-color-neutral-700);
+}
+
+.ctt-toggle-switch__root:not([data-disabled]) .ctt-toggle-switch__control:checked + .ctt-toggle-switch__thumb:hover {
+  background: var(--ctt-core-color-primary-dark);       /* selected hover */
+  border-color: var(--ctt-core-color-primary-dark);
+}
+
+/* —— DISABLED STATES —— */
+.ctt-toggle-switch__root[data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.ctt-toggle-switch__root[data-disabled] .ctt-toggle-switch__thumb {
+  background: var(--ctt-base-color-selectable-bg-disabled);    /* neutral-300 */
+  border-color: var(--ctt-base-color-selectable-border-disabled);
+}
+
+.ctt-toggle-switch__root[data-disabled] .ctt-toggle-switch__control:checked + .ctt-toggle-switch__thumb {
+  background: var(--ctt-base-color-selectable-bg-disabled); /* fallback or use primary-light */
+  border-color: var(--ctt-base-color-selectable-border-disabled);
+}
+
+.ctt-toggle-switch__root[data-disabled] .ctt-toggle-switch__thumb::after {
+  background: var(--ctt-core-color-neutral-600);                 /* thumb disabled */
+}
+
+/* —— LABEL TEXT —— */
+.ctt-toggle-switch__label {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ctt-core-color-neutral-700);                      /* 16px / neutral-700 */
+}
+
+/* —— DISABLED MODIFIER —— */
+.ctt-toggle-switch--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ctt-toggle-switch__root {
+    /* Mobile-specific adjustments */
+    gap: var(--ctt-core-dimension-25);  /* Reduce gap on mobile */
+  }
+}
