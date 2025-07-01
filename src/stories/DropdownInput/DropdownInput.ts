@@ -400,8 +400,6 @@ export const DropdownInput = <T = DropdownOption>(props: DropdownInputProps<T>):
         const optionValue = getOptionValue(option);
         let newValue;
         
-        console.log('Option clicked, multiple:', multiple, 'isOpen before:', isOpen);
-        
         if (multiple) {
           const currentArray = Array.isArray(currentValue) ? currentValue : [];
           if (currentArray.includes(optionValue)) {
@@ -410,20 +408,16 @@ export const DropdownInput = <T = DropdownOption>(props: DropdownInputProps<T>):
             newValue = [...currentArray, optionValue];
           }
           // Keep dropdown open for multiple selection
-          console.log('Multiple selection, keeping dropdown open');
         } else {
           newValue = optionValue;
           // Close dropdown for single selection
           isOpen = false;
-          console.log('Single selection, closing dropdown');
         }
         
         currentValue = newValue;
         if (onChange) onChange(newValue);
         renderOptions();
         updateDisplay();
-        
-        console.log('isOpen after update:', isOpen);
         
         // Reset flag after a short delay
         setTimeout(() => {
@@ -454,12 +448,10 @@ export const DropdownInput = <T = DropdownOption>(props: DropdownInputProps<T>):
   const handleOutsideClick = (e: Event) => {
     // Don't close if we're currently clicking an option
     if (isOptionClicking) {
-      console.log('Option click in progress, ignoring outside click');
       return;
     }
     
     if (!container.contains(e.target as Node)) {
-      console.log('Outside click detected, closing dropdown');
       isOpen = false;
       updateDisplay();
     }
