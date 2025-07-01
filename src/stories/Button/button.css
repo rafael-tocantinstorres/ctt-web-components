@@ -7,34 +7,6 @@
  * <a href="#" class="ctt-button ctt-button--secondary ctt-button--small">Link Button</a>
  */
 
-/* Button-specific CSS Custom Properties */
-:root {
-  /* Button Spacing - Using core dimension tokens */
-  --ctt-button-padding-small: var(--ctt-core-dimension-50) var(--ctt-core-dimension-100);   /* 8px 16px */
-  --ctt-button-padding-medium: var(--ctt-core-dimension-50) var(--ctt-core-dimension-100);  /* 8px 16px */
-  --ctt-button-padding-large: var(--ctt-core-dimension-50) var(--ctt-core-dimension-150);  /* 16px 24px */
-
-  /* Button Height */
-  --ctt-button-height-small: var(--ctt-core-dimension-200);   /* 32px */
-  --ctt-button-height-medium: var(--ctt-core-dimension-300);  /* 40px */
-  --ctt-button-height-large: var(--ctt-core-dimension-400);  /* 64px */
-
-  
-  /* Button Border Radius Options */
-  --ctt-button-border-radius-pill: var(--ctt-base-border-radius-pill);
-  --ctt-button-border-radius-small: var(--ctt-base-border-radius-s);
-  --ctt-button-border-radius-extra-small: var(--ctt-base-border-radius-xs);
-  
-  /* Button Transitions */
-  --ctt-button-transition: all 0.2s ease-in-out;
-  
-  /* Button Transform */
-  --ctt-button-hover-transform: translateY(-1px);
-  
-  /* Button Icon Spacing */
-  --ctt-button-icon-gap: var(--ctt-core-dimension-50); /* 8px */
-}
-
 /* ==========================================================================
    BASE BUTTON STYLES
    ========================================================================== */
