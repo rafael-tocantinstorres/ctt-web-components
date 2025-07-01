@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { fn } from 'storybook/test';
+import { html } from 'lit';
 
-import type { DropdownInputProps } from './DropdownInput';
-import { DropdownInput } from './DropdownInput';
+import './DropdownInput';
+import type { DropdownInput } from './DropdownInput';
 
 // Sample options for stories
 const sampleOptions = [
@@ -53,10 +54,26 @@ const countries = [
 const meta = {
   title: 'Components/DropdownInput',
   tags: ['autodocs'],
-  render: (args) => {
-    const element = DropdownInput(args);
-    return element;
-  },
+  render: (args) => html`<ctt-dropdown-input
+    label=${args.label}
+    name=${args.name}
+    placeholder=${args.placeholder}
+    .options=${args.options}
+    .value=${args.value}
+    ?multiple=${args.multiple}
+    ?disabled=${args.disabled}
+    ?required=${args.required}
+    error-text=${args.errorText}
+    size=${args.size}
+    ?has-description=${args.hasDescription}
+    label-key=${args.labelKey}
+    value-key=${args.valueKey}
+    description-key=${args.descriptionKey}
+    disabled-key=${args.disabledKey}
+    @change=${fn()}
+    @focus=${fn()}
+    @blur=${fn()}
+  ></ctt-dropdown-input>`,
   parameters: {
     layout: 'padded',
     docs: {
@@ -98,7 +115,7 @@ const meta = {
       control: 'boolean',
       description: 'Whether the dropdown is required',
     },
-    error: {
+    errorText: {
       control: 'text',
       description: 'Error message to display',
     },
@@ -106,10 +123,6 @@ const meta = {
       control: { type: 'select' },
       options: ['small', 'medium', 'large'],
       description: 'Size variant',
-    },
-    id: {
-      control: 'text',
-      description: 'The id attribute for the dropdown',
     },
     hasDescription: {
       control: 'boolean',
@@ -132,15 +145,11 @@ const meta = {
       description: 'Property name to use for the option disabled state (for custom option objects)',
     },
   },
-  args: {
-    onChange: fn(),
-    onFocus: fn(),
-    onBlur: fn(),
-  },
-} satisfies Meta<DropdownInputProps>;
+  args: {},
+} satisfies Meta<DropdownInput>;
 
 export default meta;
-type Story = StoryObj<DropdownInputProps>;
+type Story = StoryObj<DropdownInput>;
 
 // Default story
 export const Default: Story = {
@@ -270,7 +279,7 @@ export const WithError: Story = {
     label: 'Select a fruit',
     placeholder: 'Choose your favorite fruit',
     options: sampleOptions,
-    error: 'Please select a valid option',
+    errorText: 'Please select a valid option',
     value: 'invalid',
   },
 };

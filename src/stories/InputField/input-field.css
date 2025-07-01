@@ -15,15 +15,6 @@
 
    /** :!Important Check ::placeholder styles that are missing **/
 
-   /* ==========================================================================
-   INPUTFIELD VARIABLES
-   ========================================================================== */
-   :root {
-     --ctt-input-height-s: var(--ctt-core-dimension-200); /* 32px */
-     --ctt-input-height-m: var(--ctt-core-dimension-250); /* 40px */
-     --ctt-input-height-l: var(--ctt-core-dimension-300); /* 48px */
-   }
-
 /* ==========================================================================
    INPUTFIELD COMPONENT
    ========================================================================== */

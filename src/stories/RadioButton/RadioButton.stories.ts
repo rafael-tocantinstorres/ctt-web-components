@@ -2,14 +2,22 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { fn } from 'storybook/test';
 import { html } from 'lit';
 
-import type { RadioButtonProps } from './RadioButton';
-import { RadioButton } from './RadioButton';
+import './RadioButton';
+import type { RadioButton } from './RadioButton';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
   title: 'Components/RadioButton',
   tags: ['autodocs'],
-  render: (args) => RadioButton(args),
+  render: (args) => html`<ctt-radio-button
+    label=${args.label}
+    name=${args.name}
+    value=${args.value}
+    ?checked=${args.checked}
+    ?disabled=${args.disabled}
+    error-text=${args.errorText}
+    @change=${fn()}
+  ></ctt-radio-button>`,
   argTypes: {
     label: {
       control: 'text',
@@ -35,22 +43,12 @@ const meta = {
       control: 'text',
       description: 'Error message to display',
     },
-    id: {
-      control: 'text',
-      description: 'The id attribute for the radio button',
-    },
-    className: {
-      control: 'text',
-      description: 'Custom CSS class',
-    },
   },
-  args: {
-    onChange: fn(),
-  },
-} satisfies Meta<RadioButtonProps>;
+  args: {},
+} satisfies Meta<RadioButton>;
 
 export default meta;
-type Story = StoryObj<RadioButtonProps>;
+type Story = StoryObj<RadioButton>;
 
 // Default story
 export const Default: Story = {
@@ -115,28 +113,28 @@ export const RadioButtonGroup: Story = {
   render: () => html`
     <div class="ctt-radio-group">
       <h3 style="margin: 0 0 16px 0; font-size: 16px; font-weight: 600;">Choose your favorite color:</h3>
-      ${RadioButton({ 
-        label: 'Red', 
-        name: 'color', 
-        value: 'red',
-        checked: true
-      })}
-      ${RadioButton({ 
-        label: 'Blue', 
-        name: 'color', 
-        value: 'blue'
-      })}
-      ${RadioButton({ 
-        label: 'Green', 
-        name: 'color', 
-        value: 'green'
-      })}
-      ${RadioButton({ 
-        label: 'Yellow (Disabled)', 
-        name: 'color', 
-        value: 'yellow',
-        disabled: true
-      })}
+      <ctt-radio-button 
+        label="Red" 
+        name="color" 
+        value="red"
+        checked
+      ></ctt-radio-button>
+      <ctt-radio-button 
+        label="Blue" 
+        name="color" 
+        value="blue"
+      ></ctt-radio-button>
+      <ctt-radio-button 
+        label="Green" 
+        name="color" 
+        value="green"
+      ></ctt-radio-button>
+      <ctt-radio-button 
+        label="Yellow (Disabled)" 
+        name="color" 
+        value="yellow"
+        disabled
+      ></ctt-radio-button>
     </div>
   `,
 };
@@ -146,22 +144,22 @@ export const HorizontalGroup: Story = {
   render: () => html`
     <div class="ctt-radio-group ctt-radio-group--horizontal">
       <h3 style="margin: 0 0 16px 0; font-size: 16px; font-weight: 600;">Size:</h3>
-      ${RadioButton({ 
-        label: 'Small', 
-        name: 'size', 
-        value: 'small'
-      })}
-      ${RadioButton({ 
-        label: 'Medium', 
-        name: 'size', 
-        value: 'medium',
-        checked: true
-      })}
-      ${RadioButton({ 
-        label: 'Large', 
-        name: 'size', 
-        value: 'large'
-      })}
+      <ctt-radio-button 
+        label="Small" 
+        name="size" 
+        value="small"
+      ></ctt-radio-button>
+      <ctt-radio-button 
+        label="Medium" 
+        name="size" 
+        value="medium"
+        checked
+      ></ctt-radio-button>
+      <ctt-radio-button 
+        label="Large" 
+        name="size" 
+        value="large"
+      ></ctt-radio-button>
     </div>
   `,
 };
@@ -173,55 +171,55 @@ export const AllStates: Story = {
       <div>
         <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 600;">Normal States:</h3>
         <div class="ctt-radio-group">
-          ${RadioButton({ 
-            label: 'Unchecked', 
-            name: 'normal', 
-            value: 'unchecked'
-          })}
-          ${RadioButton({ 
-            label: 'Checked', 
-            name: 'normal', 
-            value: 'checked',
-            checked: true
-          })}
+          <ctt-radio-button 
+            label="Unchecked" 
+            name="normal" 
+            value="unchecked"
+          ></ctt-radio-button>
+          <ctt-radio-button 
+            label="Checked" 
+            name="normal" 
+            value="checked"
+            checked
+          ></ctt-radio-button>
         </div>
       </div>
       
       <div>
         <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 600;">Disabled States:</h3>
         <div class="ctt-radio-group">
-          ${RadioButton({ 
-            label: 'Disabled Unchecked', 
-            name: 'disabled', 
-            value: 'disabled-unchecked',
-            disabled: true
-          })}
-          ${RadioButton({ 
-            label: 'Disabled Checked', 
-            name: 'disabled', 
-            value: 'disabled-checked',
-            disabled: true,
-            checked: true
-          })}
+          <ctt-radio-button 
+            label="Disabled Unchecked" 
+            name="disabled" 
+            value="disabled-unchecked"
+            disabled
+          ></ctt-radio-button>
+          <ctt-radio-button 
+            label="Disabled Checked" 
+            name="disabled" 
+            value="disabled-checked"
+            disabled
+            checked
+          ></ctt-radio-button>
         </div>
       </div>
       
       <div>
         <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 600;">Error States:</h3>
         <div class="ctt-radio-group">
-          ${RadioButton({ 
-            label: 'Error Unchecked', 
-            name: 'error', 
-            value: 'error-unchecked',
-            errorText: 'This field is required'
-          })}
-          ${RadioButton({ 
-            label: 'Error Checked', 
-            name: 'error-checked', 
-            value: 'error-checked',
-            checked: true,
-            errorText: 'This selection is invalid'
-          })}
+          <ctt-radio-button 
+            label="Error Unchecked" 
+            name="error" 
+            value="error-unchecked"
+            error-text="This field is required"
+          ></ctt-radio-button>
+          <ctt-radio-button 
+            label="Error Checked" 
+            name="error-checked" 
+            value="error-checked"
+            checked
+            error-text="This selection is invalid"
+          ></ctt-radio-button>
         </div>
       </div>
     </div>
