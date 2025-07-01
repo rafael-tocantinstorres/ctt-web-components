@@ -20,7 +20,7 @@
 
 /* Root Label Container */
 .ctt-checkbox__root {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: var(--ctt-core-dimension-50); /* 8px gap between checkbox & text */
   cursor: pointer;

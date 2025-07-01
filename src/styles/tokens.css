@@ -424,4 +424,11 @@
   
   /* Button Icon Spacing */
   --ctt-button-icon-gap: var(--ctt-core-dimension-50); /* 8px */
+
+  /* =======================================================================
+     INPUT TOKENS - Component-specific tokens
+     ========================================================================== */
+     --ctt-input-height-s: var(--ctt-core-dimension-200); /* 32px */
+     --ctt-input-height-m: var(--ctt-core-dimension-250); /* 40px */
+     --ctt-input-height-l: var(--ctt-core-dimension-300); /* 48px */
 }

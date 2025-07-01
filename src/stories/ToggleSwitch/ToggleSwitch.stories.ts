@@ -2,14 +2,30 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { fn } from 'storybook/test';
 import { html } from 'lit';
 
-import type { ToggleSwitchProps } from './ToggleSwitch';
+import './ToggleSwitch';
 import { ToggleSwitch } from './ToggleSwitch';
 
+// Define a type for the story's args that includes the component's properties and actions
+interface ToggleSwitchStoryArgs extends Partial<ToggleSwitch> {
+  onToggleChange?: () => void;
+}
+
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
-const meta = {
+const meta: Meta<ToggleSwitchStoryArgs> = {
   title: 'Components/ToggleSwitch',
+  component: 'ctt-toggle-switch',
   tags: ['autodocs'],
-  render: (args) => ToggleSwitch(args),
+  render: (args) => html`
+    <ctt-toggle-switch
+      ?checked=${args.checked}
+      ?disabled=${args.disabled}
+      .label=${args.label}
+      ?show-label=${args.showLabel}
+      .aria-label=${args.ariaLabel}
+      .aria-labelledby=${args.ariaLabelledby}
+      @toggle-change=${args.onToggleChange}
+    ></ctt-toggle-switch>
+  `,
   argTypes: {
     checked: {
       control: 'boolean',
@@ -35,22 +51,17 @@ const meta = {
       control: 'text',
       description: 'IDs of elements that describe this toggle switch',
     },
-    id: {
-      control: 'text',
-      description: 'The id attribute for the toggle switch',
-    },
-    className: {
-      control: 'text',
-      description: 'Custom CSS class',
+    onToggleChange: {
+      action: 'toggle-change',
     },
   },
   args: {
-    onChange: fn(),
+    onToggleChange: fn(),
   },
-} satisfies Meta<ToggleSwitchProps>;
+};
 
 export default meta;
-type Story = StoryObj<ToggleSwitchProps>;
+type Story = StoryObj<ToggleSwitchStoryArgs>;
 
 // Default story
 export const Default: Story = {
@@ -105,22 +116,21 @@ export const DisabledChecked: Story = {
   },
 };
 
-// With custom ID
-export const WithCustomId: Story = {
-  args: {
-    label: 'Custom ID toggle',
-    id: 'custom-toggle-id',
-    checked: false,
-  },
-};
-
-// With custom class
-export const WithCustomClass: Story = {
-  args: {
-    label: 'Custom styled toggle',
-    className: 'my-custom-toggle',
-    checked: true,
-  },
+// Interactive toggle - shows event handling
+export const Interactive: Story = {
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
+      <p style="margin: 0; font-size: 14px; color: #666;">
+        Toggle the switch below and check the browser console for events:
+      </p>
+      <ctt-toggle-switch
+        label="Interactive toggle"
+        @toggle-change=${(e: CustomEvent) => {
+          console.log('Toggle changed:', e.detail);
+        }}
+      ></ctt-toggle-switch>
+    </div>
+  `,
 };
 
 // With aria-labelledby - references external describing element
@@ -130,11 +140,11 @@ export const WithAriaLabelledby: Story = {
       <div id="toggle-description" style="font-size: 14px; color: #666;">
         Enable email notifications for important updates and security alerts
       </div>
-      ${ToggleSwitch({ 
-        showLabel: false,
-        ariaLabelledby: 'toggle-description',
-        checked: false 
-      })}
+      <ctt-toggle-switch
+        show-label="false"
+        aria-labelledby="toggle-description"
+        checked="false"
+      ></ctt-toggle-switch>
     </div>
   `,
 };
@@ -145,54 +155,50 @@ export const AllStates: Story = {
     <div style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;">
       <h3>Basic Toggle Switches</h3>
       <div style="display: flex; flex-direction: column; gap: 16px;">
-        ${ToggleSwitch({ 
-          label: 'Unchecked toggle', 
-          checked: false 
-        })}
-        ${ToggleSwitch({ 
-          label: 'Checked toggle', 
-          checked: true 
-        })}
+        <ctt-toggle-switch
+          label="Unchecked toggle"
+        ></ctt-toggle-switch>
+        <ctt-toggle-switch
+          label="Checked toggle"
+          checked
+        ></ctt-toggle-switch>
       </div>
       
       <h3>Disabled States</h3>
       <div style="display: flex; flex-direction: column; gap: 16px;">
-        ${ToggleSwitch({ 
-          label: 'Disabled unchecked', 
-          disabled: true,
-          checked: false 
-        })}
-        ${ToggleSwitch({ 
-          label: 'Disabled checked', 
-          disabled: true,
-          checked: true 
-        })}
+        <ctt-toggle-switch
+          label="Disabled unchecked"
+          disabled
+        ></ctt-toggle-switch>
+        <ctt-toggle-switch
+          label="Disabled checked"
+          disabled
+          checked
+        ></ctt-toggle-switch>
       </div>
       
       <h3>With Accessible Labels (No Visible Text)</h3>
       <div style="display: flex; flex-direction: column; gap: 16px;">
-        ${ToggleSwitch({ 
-          showLabel: false,
-          ariaLabel: 'Enable feature A',
-          checked: false 
-        })}
-        ${ToggleSwitch({ 
-          showLabel: false,
-          ariaLabel: 'Enable feature B',
-          checked: true 
-        })}
+        <ctt-toggle-switch
+          show-label="false"
+          aria-label="Enable feature A"
+        ></ctt-toggle-switch>
+        <ctt-toggle-switch
+          show-label="false"
+          aria-label="Enable feature B"
+          checked
+        ></ctt-toggle-switch>
       </div>
       
       <h3>Long Labels</h3>
       <div style="display: flex; flex-direction: column; gap: 16px;">
-        ${ToggleSwitch({ 
-          label: 'Enable advanced notifications with detailed settings and custom preferences', 
-          checked: false 
-        })}
-        ${ToggleSwitch({ 
-          label: 'Allow background data synchronization when the application is not in use', 
-          checked: true 
-        })}
+        <ctt-toggle-switch
+          label="Enable advanced notifications with detailed settings and custom preferences"
+        ></ctt-toggle-switch>
+        <ctt-toggle-switch
+          label="Allow background data synchronization when the application is not in use"
+          checked
+        ></ctt-toggle-switch>
       </div>
     </div>
   `,

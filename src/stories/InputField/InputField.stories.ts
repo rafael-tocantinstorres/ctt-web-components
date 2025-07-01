@@ -1,15 +1,50 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { fn } from 'storybook/test';
-import { html } from 'lit';
+import { html, nothing } from 'lit';
 
-import type { InputFieldProps } from './InputField';
-import { InputField } from './InputField';
+import './InputField';
+import '../Button/Button';
+
+type InputFieldProps = {
+  label?: string;
+  value?: string;
+  name?: string;
+  type?: 'text' | 'email' | 'password' | 'tel' | 'url' | 'search' | 'number';
+  placeholder?: string;
+  error?: string | null;
+  disabled?: boolean;
+  required?: boolean;
+  size?: 'small' | 'medium' | 'large';
+  id?: string;
+  ariaDescribedBy?: string | null;
+  onInput?: (value: string) => void;
+  onChange?: (value: string) => void;
+  onFocus?: (event: Event) => void;
+  onBlur?: (event: Event) => void;
+};
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
   title: 'Components/InputField',
   tags: ['autodocs'],
-  render: (args) => InputField(args),
+  
+  render: (args) => html`<ctt-input-field
+    label=${args.label || ''}
+    value=${args.value || ''}
+    name=${args.name || ''}
+    type=${args.type || 'text'}
+    placeholder=${args.placeholder || ''}
+    error=${args.error || nothing}
+    ?disabled=${args.disabled}
+    ?required=${args.required}
+    size=${args.size || 'medium'}
+    id=${args.id || ''}
+    ariaDescribedBy=${args.ariaDescribedBy || nothing}
+    @input=${(e: CustomEvent) => args.onInput?.(e.detail)}
+    @change=${(e: CustomEvent) => args.onChange?.(e.detail)}
+    @focus=${(e: CustomEvent) => args.onFocus?.(e.detail)}
+    @blur=${(e: CustomEvent) => args.onBlur?.(e.detail)}
+  ></ctt-input-field>`,
   argTypes: {
     label: {
       control: 'text',
@@ -79,142 +114,105 @@ export const Default: Story = {
   },
 };
 
-// Size variants
-export const Small: Story = {
-  args: {
-    label: 'Small Input',
-    placeholder: 'Small size input',
-    size: 'small',
-    name: 'small-input',
-  },
+// Grouped stories for different categories
+
+export const Sizes: Story = {
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;">
+      <h3 style="margin: 0; font-size: 18px; font-weight: 600;">Input Field Sizes</h3>
+      
+      <ctt-input-field
+        label="Small Input"
+        placeholder="Small size"
+        name="small"
+        size="small">
+      </ctt-input-field>
+      
+      <ctt-input-field
+        label="Medium Input"
+        placeholder="Medium size (default)"
+        name="medium"
+        size="medium">
+      </ctt-input-field>
+      
+      <ctt-input-field
+        label="Large Input"
+        placeholder="Large size"
+        name="large"
+        size="large">
+      </ctt-input-field>
+    </div>
+  `,
 };
 
-export const Medium: Story = {
-  args: {
-    label: 'Medium Input',
-    placeholder: 'Medium size input',
-    size: 'medium',
-    name: 'medium-input',
-  },
+export const Types: Story = {
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;">
+      <h3 style="margin: 0; font-size: 18px; font-weight: 600;">Input Field Types</h3>
+      
+      <ctt-input-field
+        label="Text Input"
+        type="text"
+        placeholder="Enter your full name"
+        name="fullname">
+      </ctt-input-field>
+      
+      <ctt-input-field
+        label="Email Input"
+        type="email"
+        placeholder="Enter your email"
+        name="email">
+      </ctt-input-field>
+      
+      <ctt-input-field
+        label="Password Input"
+        type="password"
+        placeholder="Enter your password"
+        name="password">
+      </ctt-input-field>
+      
+      <ctt-input-field
+        label="Phone Input"
+        type="tel"
+        placeholder="Enter your phone number"
+        name="phone">
+      </ctt-input-field>
+      
+      <ctt-input-field
+        label="Number Input"
+        type="number"
+        placeholder="Enter your age"
+        name="age">
+      </ctt-input-field>
+    </div>
+  `,
 };
 
-export const Large: Story = {
-  args: {
-    label: 'Large Input',
-    placeholder: 'Large size input',
-    size: 'large',
-    name: 'large-input',
-  },
+export const States: Story = {
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;">
+      <h3 style="margin: 0; font-size: 18px; font-weight: 600;">Input Field States</h3>
+      
+      <ctt-input-field label="Empty Input" placeholder="Enter text..." name="empty"></ctt-input-field>
+      <ctt-input-field label="With Value" value="Sample text" name="filled"></ctt-input-field>
+      <ctt-input-field label="Required Field" placeholder="Required..." name="required" ?required=${true}></ctt-input-field>
+      <ctt-input-field label="Disabled Empty" placeholder="Disabled..." name="disabled-empty" ?disabled=${true}></ctt-input-field>
+      <ctt-input-field label="Disabled with Value" value="Cannot edit" name="disabled-filled" ?disabled=${true}></ctt-input-field>
+    </div>
+  `,
 };
 
-// Input types
-export const TextInput: Story = {
-  args: {
-    label: 'Full Name',
-    type: 'text',
-    placeholder: 'Enter your full name',
-    name: 'fullname',
-  },
+export const ErrorStates: Story = {
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;">
+      <h3 style="margin: 0; font-size: 18px; font-weight: 600;">Input Field Error States</h3>
+      
+      <ctt-input-field label="Required Error" placeholder="Required..." name="error-required" ?required=${true} error="This field is required"></ctt-input-field>
+      <ctt-input-field label="Validation Error" value="invalid@" name="error-validation" type="email" error="Please enter a valid email address"></ctt-input-field>
+    </div>
+  `,
 };
 
-export const EmailInput: Story = {
-  args: {
-    label: 'Email Address',
-    type: 'email',
-    placeholder: 'Enter your email',
-    name: 'email',
-  },
-};
-
-export const PasswordInput: Story = {
-  args: {
-    label: 'Password',
-    type: 'password',
-    placeholder: 'Enter your password',
-    name: 'password',
-  },
-};
-
-export const PhoneInput: Story = {
-  args: {
-    label: 'Phone Number',
-    type: 'tel',
-    placeholder: 'Enter your phone number',
-    name: 'phone',
-  },
-};
-
-export const NumberInput: Story = {
-  args: {
-    label: 'Age',
-    type: 'number',
-    placeholder: 'Enter your age',
-    name: 'age',
-  },
-};
-
-// States
-export const WithValue: Story = {
-  args: {
-    label: 'Username',
-    value: 'johndoe',
-    placeholder: 'Enter username',
-    name: 'username',
-  },
-};
-
-export const Required: Story = {
-  args: {
-    label: 'Email Address',
-    placeholder: 'Enter your email',
-    name: 'email',
-    type: 'email',
-    required: true,
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    label: 'Disabled Input',
-    placeholder: 'This input is disabled',
-    name: 'disabled',
-    disabled: true,
-  },
-};
-
-export const DisabledWithValue: Story = {
-  args: {
-    label: 'Account ID',
-    value: 'USER-12345',
-    name: 'account-id',
-    disabled: true,
-  },
-};
-
-// Error states
-export const WithError: Story = {
-  args: {
-    label: 'Email Address',
-    value: 'invalid-email',
-    placeholder: 'Enter your email',
-    name: 'email',
-    type: 'email',
-    error: 'Please enter a valid email address',
-  },
-};
-
-export const RequiredWithError: Story = {
-  args: {
-    label: 'Password',
-    placeholder: 'Enter your password',
-    name: 'password',
-    type: 'password',
-    required: true,
-    error: 'Password is required',
-  },
-};
-
-// Without label
 export const WithoutLabel: Story = {
   args: {
     placeholder: 'Search...',
@@ -223,120 +221,70 @@ export const WithoutLabel: Story = {
   },
 };
 
-// Custom attributes
-export const WithCustomId: Story = {
-  args: {
-    label: 'Custom Input',
-    placeholder: 'Input with custom ID',
-    name: 'custom',
-    id: 'my-custom-input-id',
-  },
+export const CustomAttributes: Story = {
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;">
+      <h3 style="margin: 0; font-size: 18px; font-weight: 600;">Input Field Custom Attributes</h3>
+      
+      <ctt-input-field
+        label="Custom Input"
+        placeholder="Input with custom ID"
+        name="custom"
+        id="my-custom-input-id">
+      </ctt-input-field>
+      
+      <ctt-input-field
+        label="Special Input"
+        placeholder="Input with custom aria-describedby"
+        name="special"
+        ariaDescribedBy="custom-help-text">
+      </ctt-input-field>
+    </div>
+  `,
 };
 
-export const WithAriaDescribedBy: Story = {
-  args: {
-    label: 'Special Input',
-    placeholder: 'Input with custom aria-describedby',
-    name: 'special',
-    ariaDescribedBy: 'custom-help-text',
-  },
-};
-
-// Form example
 export const FormExample: Story = {
   render: () => html`
     <form style="max-width: 400px; display: flex; flex-direction: column; gap: 16px;">
       <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 600;">Contact Form</h3>
       
-      ${InputField({ 
-        label: 'Full Name', 
-        placeholder: 'Enter your full name',
-        name: 'fullname',
-        type: 'text',
-        required: true
-      })}
+      <ctt-input-field
+        label="Full Name"
+        placeholder="Enter your full name"
+        name="fullname"
+        type="text"
+        ?required=${true}>
+      </ctt-input-field>
       
-      ${InputField({ 
-        label: 'Email Address', 
-        placeholder: 'Enter your email',
-        name: 'email',
-        type: 'email',
-        required: true
-      })}
+      <ctt-input-field
+        label="Email Address"
+        placeholder="Enter your email"
+        name="email"
+        type="email"
+        ?required=${true}>
+      </ctt-input-field>
       
-      ${InputField({ 
-        label: 'Phone Number', 
-        placeholder: 'Enter your phone number',
-        name: 'phone',
-        type: 'tel'
-      })}
+      <ctt-input-field
+        label="Phone Number"
+        placeholder="Enter your phone number"
+        name="phone"
+        type="tel">
+      </ctt-input-field>
       
-      ${InputField({ 
-        label: 'Company', 
-        placeholder: 'Enter your company name',
-        name: 'company',
-        type: 'text'
-      })}
+      <ctt-input-field
+        label="Company"
+        placeholder="Enter your company name"
+        name="company"
+        type="text">
+      </ctt-input-field>
       
-      <button type="submit" style="margin-top: 8px; padding: 12px 24px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
-        Submit
-      </button>
+      <ctt-button
+        variant="primary"
+        borderRadius="extraSmall"
+        type="submit"
+        label="Submit"
+        size="medium"> 
+      </ctt-button>  
     </form>
-  `,
-};
-
-// All sizes showcase
-export const AllSizes: Story = {
-  render: () => html`
-    <div style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;">
-      <h3 style="margin: 0; font-size: 18px; font-weight: 600;">Input Field Sizes</h3>
-      
-      ${InputField({
-        label: 'Small Input',
-        placeholder: 'Small size',
-        name: 'small',
-        size: 'small'
-      })}
-      
-      ${InputField({
-        label: 'Medium Input',
-        placeholder: 'Medium size (default)',
-        name: 'medium',
-        size: 'medium'
-      })}
-      
-      ${InputField({
-        label: 'Large Input',
-        placeholder: 'Large size',
-        name: 'large',
-        size: 'large'
-      })}
-    </div>
-  `,
-};
-
-// All states showcase
-export const AllStates: Story = {
-  render: () => html`
-    <div style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;">
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <h4 style="margin: 0; font-size: 16px; font-weight: 600;">Normal States:</h4>
-        ${InputField({ label: 'Empty Input', placeholder: 'Enter text...', name: 'empty' })}
-        ${InputField({ label: 'With Value', value: 'Sample text', name: 'filled' })}
-        ${InputField({ label: 'Required Field', placeholder: 'Required...', name: 'required', required: true })}
-      </div>
-      
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <h4 style="margin: 0; font-size: 16px; font-weight: 600;">Disabled States:</h4>
-        ${InputField({ label: 'Disabled Empty', placeholder: 'Disabled...', name: 'disabled-empty', disabled: true })}
-        ${InputField({ label: 'Disabled with Value', value: 'Cannot edit', name: 'disabled-filled', disabled: true })}
-      </div>
-      
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <h4 style="margin: 0; font-size: 16px; font-weight: 600;">Error States:</h4>
-        ${InputField({ label: 'Required Error', placeholder: 'Required...', name: 'error-required', required: true, error: 'This field is required' })}
-        ${InputField({ label: 'Validation Error', value: 'invalid@', name: 'error-validation', type: 'email', error: 'Please enter a valid email address' })}
-      </div>
-    </div>
   `,
 };
