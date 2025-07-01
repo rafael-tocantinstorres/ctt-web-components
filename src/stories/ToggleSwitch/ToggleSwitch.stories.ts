@@ -23,6 +23,8 @@ const meta: Meta<ToggleSwitchStoryArgs> = {
       ?show-label=${args.showLabel}
       .aria-label=${args.ariaLabel}
       .aria-labelledby=${args.ariaLabelledby}
+      .role=${args.role}
+      .name=${args.name}
       @toggle-change=${args.onToggleChange}
     ></ctt-toggle-switch>
   `,
@@ -50,6 +52,14 @@ const meta: Meta<ToggleSwitchStoryArgs> = {
     ariaLabelledby: {
       control: 'text',
       description: 'IDs of elements that describe this toggle switch',
+    },
+    role: {
+      control: 'text',
+      description: 'The role attribute for the input element',
+    },
+    name: {
+      control: 'text',
+      description: 'Name attribute for the input element',
     },
     onToggleChange: {
       action: 'toggle-change',

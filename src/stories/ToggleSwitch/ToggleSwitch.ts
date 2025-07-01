@@ -41,14 +41,31 @@ export class ToggleSwitch extends LitElement {
   /**
    * Accessible label for screen readers when visual label is not provided
    */
-  @property({ attribute: 'aria-label' })
+  @property({ attribute: 'aria-label', reflect: false })
   ariaLabel = '';
 
   /**
    * IDs of elements that describe this toggle switch
    */
-  @property({ attribute: 'aria-labelledby' })
+  @property({ attribute: 'aria-labelledby', reflect: false })
   ariaLabelledby = '';
+
+  /**
+   * The name attribute for the input element
+   */
+  @property()
+  name = '';
+
+   /**
+   * The role attribute for the input element
+   */
+  @property()
+  role = '';
+
+  /**
+   * Private randomized ID for the input element
+   */
+  private _inputId = `ctt-toggle-switch-${Math.random().toString(36).substr(2, 9)}`;
 
   connectedCallback() {
     super.connectedCallback();
@@ -57,50 +74,45 @@ export class ToggleSwitch extends LitElement {
 
   render() {
     const hasVisibleLabel = this.showLabel && this.label && this.label.trim() !== '';
+    const hasAriaLabel = this.ariaLabel && this.ariaLabel.trim() !== '';
+    const hasAriaLabelledby = this.ariaLabelledby && this.ariaLabelledby.trim() !== '';
+    
+    // Determine the label text for accessibility
+    const labelText = hasAriaLabel ? this.ariaLabel : 
+                     hasVisibleLabel ? this.label : 
+                     this.label && this.label.trim() !== '' ? this.label : 
+                     'Toggle switch';
     
     return html`
-      ${hasVisibleLabel ? html`
-        <label 
-          part="root" 
-          class="ctt-toggle-switch__root"
-          ?data-disabled=${this.disabled}
-        >
-          <input
-            part="control"
-            class="ctt-toggle-switch__control"
-            type="checkbox"
-            ?checked=${this.checked}
-            ?disabled=${this.disabled}
-            @change=${this._handleChange}
-            aria-labelledby=${this.ariaLabelledby || undefined}
-          />
-          <span part="thumb" class="ctt-toggle-switch__thumb"></span>
+      <label 
+        part="root" 
+        class="ctt-toggle-switch__root"
+        ?data-disabled=${this.disabled}
+        for=${this._inputId}
+        aria-label=${hasAriaLabel ? undefined : labelText}
+        aria-labelledby=${hasAriaLabelledby ? this.ariaLabelledby : undefined}
+      >
+        <input
+          part="control"
+          class="ctt-toggle-switch__control"
+          type="checkbox"
+          ?checked=${this.checked}
+          ?disabled=${this.disabled}
+          @change=${this._handleChange}
+          id=${this._inputId}
+          name=${this.name || undefined}
+          role=${this.role || 'switch'}
+        />
+        <span part="thumb" class="ctt-toggle-switch__thumb"></span>
+        ${hasVisibleLabel ? html`
           <span 
             part="label" 
             class="ctt-toggle-switch__label"
           >
             ${this.label}
           </span>
-        </label>
-      ` : html`
-        <div 
-          part="root" 
-          class="ctt-toggle-switch__root"
-          ?data-disabled=${this.disabled}
-        >
-          <input
-            part="control"
-            class="ctt-toggle-switch__control"
-            type="checkbox"
-            ?checked=${this.checked}
-            ?disabled=${this.disabled}
-            @change=${this._handleChange}
-            aria-label=${this.ariaLabel || undefined}
-            aria-labelledby=${this.ariaLabelledby || undefined}
-          />
-          <span part="thumb" class="ctt-toggle-switch__thumb"></span>
-        </div>
-      `}
+        ` : ''}
+      </label>
     `;
   }
 
@@ -121,15 +133,15 @@ export class ToggleSwitch extends LitElement {
   }
 
   private _checkAccessibilityWarnings() {
-    // Determine if we have accessible labeling
-    const hasVisibleLabel = this.showLabel && this.label && this.label.trim() !== '';
+    // Check if user provided custom accessibility attributes
     const hasAriaLabel = this.ariaLabel && this.ariaLabel.trim() !== '';
     const hasAriaLabelledby = this.ariaLabelledby && this.ariaLabelledby.trim() !== '';
+    const hasVisibleLabel = this.showLabel && this.label && this.label.trim() !== '';
     
-    // Warn if no accessible label is provided (in development)
+    // Info message when using fallback (in development)
     if (import.meta.env?.DEV) {
-      if (!hasVisibleLabel && !hasAriaLabel && !hasAriaLabelledby) {
-        console.warn('ToggleSwitch component: No accessible label provided. Please provide either a visible "label" with "show-label", "aria-label", or "aria-labelledby" attribute.');
+      if (!hasAriaLabel && !hasAriaLabelledby && !hasVisibleLabel) {
+        console.info('ToggleSwitch component: Using fallback aria-label "Toggle switch". Consider providing a more descriptive "aria-label" or "aria-labelledby" attribute.');
       }
     }
   }

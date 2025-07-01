@@ -133,6 +133,7 @@ export class CttInputField extends LitElement {
           ?required=${this.required}
           aria-invalid=${this.hasError ? 'true' : 'false'}
           aria-describedby=${this.ariaDescribedByValue}
+          aria-label=${this.label ? this.labelId : nothing}
           aria-labelledby=${this.label ? this.labelId : nothing}
           @input=${this.onInput}
           @change=${this.onChange}
