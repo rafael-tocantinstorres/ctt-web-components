@@ -7,25 +7,20 @@ describe('RadioButton', () => {
     expect(result).toBeDefined();
   });
 
-  it('should render with custom children', () => {
-    const result = RadioButton({ children: 'Test Content' });
-    expect(result.strings[0]).toContain('Test Content');
+  it('should render with custom label', () => {
+    const result = RadioButton({ label: 'Test Label' });
+    expect(result.strings[0]).toContain('Test Label');
   });
 
-  it('should apply size classes correctly', () => {
-    const smallResult = RadioButton({ size: 'small' });
-    expect(smallResult.strings[0]).toContain('ctt-radio-button--small');
-
-    const largeResult = RadioButton({ size: 'large' });
-    expect(largeResult.strings[0]).toContain('ctt-radio-button--large');
+  it('should handle checked state', () => {
+    const result = RadioButton({ checked: true });
+    expect(result.strings[0]).toContain('checked');
   });
 
-  it('should apply variant classes correctly', () => {
-    const primaryResult = RadioButton({ variant: 'primary' });
-    expect(primaryResult.strings[0]).toContain('ctt-radio-button--primary');
-
-    const secondaryResult = RadioButton({ variant: 'secondary' });
-    expect(secondaryResult.strings[0]).toContain('ctt-radio-button--secondary');
+  it('should handle error state', () => {
+    const result = RadioButton({ errorText: 'Error message' });
+    expect(result.strings[0]).toContain('ctt-radio-button--error');
+    expect(result.strings[0]).toContain('Error message');
   });
 
   it('should handle disabled state', () => {

@@ -7,25 +7,20 @@ describe('Checkbox', () => {
     expect(result).toBeDefined();
   });
 
-  it('should render with custom children', () => {
-    const result = Checkbox({ children: 'Test Content' });
-    expect(result.strings[0]).toContain('Test Content');
+  it('should render with custom label', () => {
+    const result = Checkbox({ label: 'Test Label' });
+    expect(result.strings[0]).toContain('Test Label');
   });
 
-  it('should apply size classes correctly', () => {
-    const smallResult = Checkbox({ size: 'small' });
-    expect(smallResult.strings[0]).toContain('ctt-checkbox--small');
-
-    const largeResult = Checkbox({ size: 'large' });
-    expect(largeResult.strings[0]).toContain('ctt-checkbox--large');
+  it('should handle checked state', () => {
+    const result = Checkbox({ checked: true });
+    expect(result.strings[0]).toContain('checked');
   });
 
-  it('should apply variant classes correctly', () => {
-    const primaryResult = Checkbox({ variant: 'primary' });
-    expect(primaryResult.strings[0]).toContain('ctt-checkbox--primary');
-
-    const secondaryResult = Checkbox({ variant: 'secondary' });
-    expect(secondaryResult.strings[0]).toContain('ctt-checkbox--secondary');
+  it('should handle error state', () => {
+    const result = Checkbox({ errorText: 'Error message' });
+    expect(result.strings[0]).toContain('ctt-checkbox--error');
+    expect(result.strings[0]).toContain('Error message');
   });
 
   it('should handle disabled state', () => {

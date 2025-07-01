@@ -7,9 +7,9 @@ describe('InputField', () => {
     expect(result).toBeDefined();
   });
 
-  it('should render with custom children', () => {
-    const result = InputField({ children: 'Test Content' });
-    expect(result.strings[0]).toContain('Test Content');
+  it('should render with custom label', () => {
+    const result = InputField({ label: 'Test Label' });
+    expect(result.strings[0]).toContain('Test Label');
   });
 
   it('should apply size classes correctly', () => {
@@ -20,12 +20,10 @@ describe('InputField', () => {
     expect(largeResult.strings[0]).toContain('ctt-input-field--large');
   });
 
-  it('should apply variant classes correctly', () => {
-    const primaryResult = InputField({ variant: 'primary' });
-    expect(primaryResult.strings[0]).toContain('ctt-input-field--primary');
-
-    const secondaryResult = InputField({ variant: 'secondary' });
-    expect(secondaryResult.strings[0]).toContain('ctt-input-field--secondary');
+  it('should handle error state', () => {
+    const result = InputField({ error: 'Error message' });
+    expect(result.strings[0]).toContain('ctt-input-field--error');
+    expect(result.strings[0]).toContain('Error message');
   });
 
   it('should handle disabled state', () => {
@@ -33,8 +31,8 @@ describe('InputField', () => {
     expect(result.strings[0]).toContain('ctt-input-field--disabled');
   });
 
-  it('should apply custom className', () => {
-    const result = InputField({ className: 'custom-class' });
-    expect(result.strings[0]).toContain('custom-class');
+  it('should handle required state', () => {
+    const result = InputField({ required: true, label: 'Required Field' });
+    expect(result.strings[0]).toContain('*');
   });
 });
