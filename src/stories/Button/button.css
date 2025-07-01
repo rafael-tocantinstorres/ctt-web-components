@@ -148,7 +148,7 @@
 
 /* Success Button */
 .ctt-button--success {
-  background-color: var(--ctt-base-color-feedback-success-bg-main);
+  background-color: var(--ctt-brand-green-600);
   color: var(--ctt-base-color-feedback-fg-clear);
 }
 

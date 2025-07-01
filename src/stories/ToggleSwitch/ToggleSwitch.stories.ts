@@ -27,6 +27,14 @@ const meta = {
       control: 'boolean',
       description: 'Whether to show the label',
     },
+    ariaLabel: {
+      control: 'text',
+      description: 'Accessible label for screen readers when visual label is not provided',
+    },
+    ariaLabelledby: {
+      control: 'text',
+      description: 'IDs of elements that describe this toggle switch',
+    },
     id: {
       control: 'text',
       description: 'The id attribute for the toggle switch',
@@ -60,19 +68,21 @@ export const Checked: Story = {
   },
 };
 
-// Without label
-export const WithoutLabel: Story = {
+// Without visible label - uses aria-label for accessibility
+export const WithAriaLabel: Story = {
   args: {
     showLabel: false,
+    ariaLabel: 'Enable notifications',
     checked: false,
   },
 };
 
-// With label but hidden
+// With label but hidden - still accessible through the visible label when wrapped
 export const HiddenLabel: Story = {
   args: {
     label: 'Hidden label',
     showLabel: false,
+    ariaLabel: 'Toggle this setting',
     checked: true,
   },
 };
@@ -113,6 +123,22 @@ export const WithCustomClass: Story = {
   },
 };
 
+// With aria-labelledby - references external describing element
+export const WithAriaLabelledby: Story = {
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 12px; max-width: 400px;">
+      <div id="toggle-description" style="font-size: 14px; color: #666;">
+        Enable email notifications for important updates and security alerts
+      </div>
+      ${ToggleSwitch({ 
+        showLabel: false,
+        ariaLabelledby: 'toggle-description',
+        checked: false 
+      })}
+    </div>
+  `,
+};
+
 // All states showcase
 export const AllStates: Story = {
   render: () => html`
@@ -143,14 +169,16 @@ export const AllStates: Story = {
         })}
       </div>
       
-      <h3>Without Labels</h3>
+      <h3>With Accessible Labels (No Visible Text)</h3>
       <div style="display: flex; flex-direction: column; gap: 16px;">
         ${ToggleSwitch({ 
           showLabel: false,
+          ariaLabel: 'Enable feature A',
           checked: false 
         })}
         ${ToggleSwitch({ 
           showLabel: false,
+          ariaLabel: 'Enable feature B',
           checked: true 
         })}
       </div>

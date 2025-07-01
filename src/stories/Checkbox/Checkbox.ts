@@ -39,6 +39,14 @@ export interface CheckboxProps {
    * Custom CSS class
    */
   className?: string;
+  /**
+   * Accessible label for screen readers when visual label is not provided
+   */
+  ariaLabel?: string;
+  /**
+   * IDs of elements that describe this checkbox
+   */
+  ariaLabelledby?: string;
 }
 
 /**
@@ -53,12 +61,26 @@ export const Checkbox = ({
   errorText = '',
   onChange,
   id,
-  className = ''
+  className = '',
+  ariaLabel,
+  ariaLabelledby
 }: CheckboxProps) => {
   
   // Generate unique error ID if error text exists
   const checkboxId = id || `ctt-checkbox-${Math.random().toString(36).substr(2, 9)}`;
   const errorId = errorText ? `${checkboxId}-error` : undefined;
+  
+  // Determine if we have accessible labeling
+  const hasVisibleLabel = label && label.trim() !== '';
+  const hasAriaLabel = ariaLabel && ariaLabel.trim() !== '';
+  const hasAriaLabelledby = ariaLabelledby && ariaLabelledby.trim() !== '';
+  
+  // Warn if no accessible label is provided (in development)
+  if (import.meta.env?.DEV) {
+    if (!hasVisibleLabel && !hasAriaLabel && !hasAriaLabelledby) {
+      console.warn('Checkbox component: No accessible label provided. Please provide either a "label", "ariaLabel", or "ariaLabelledby" prop.');
+    }
+  }
 
   // Build CSS classes
   const classes = [
@@ -120,25 +142,55 @@ export const Checkbox = ({
     </svg>
   `;
 
+  // Build aria attributes for the input
+  const inputAriaAttributes = {
+    'aria-invalid': errorText ? 'true' : 'false',
+    'aria-describedby': errorId,
+    'aria-label': hasVisibleLabel ? undefined : ariaLabel,
+    'aria-labelledby': ariaLabelledby
+  };
+
   return html`
     <div class=${classes} id=${checkboxId}>
-      <label class="ctt-checkbox__root">
-        <div class="ctt-checkbox__container">
-          <input
-            class="ctt-checkbox__control"
-            type="checkbox"
-            name=${name}
-            value=${value}
-            .checked=${checked}
-            ?disabled=${disabled}
-            @change=${handleChange}
-            aria-invalid=${errorText ? 'true' : 'false'}
-            aria-describedby=${errorId}
-          />
-          ${checkmarkIcon}
+      ${hasVisibleLabel ? html`
+        <label class="ctt-checkbox__root">
+          <div class="ctt-checkbox__container">
+            <input
+              class="ctt-checkbox__control"
+              type="checkbox"
+              name=${name}
+              value=${value}
+              .checked=${checked}
+              ?disabled=${disabled}
+              @change=${handleChange}
+              aria-invalid=${inputAriaAttributes['aria-invalid']}
+              aria-describedby=${inputAriaAttributes['aria-describedby']}
+              aria-labelledby=${inputAriaAttributes['aria-labelledby']}
+            />
+            ${checkmarkIcon}
+          </div>
+          <span class="ctt-checkbox__label">${label}</span>
+        </label>
+      ` : html`
+        <div class="ctt-checkbox__root">
+          <div class="ctt-checkbox__container">
+            <input
+              class="ctt-checkbox__control"
+              type="checkbox"
+              name=${name}
+              value=${value}
+              .checked=${checked}
+              ?disabled=${disabled}
+              @change=${handleChange}
+              aria-invalid=${inputAriaAttributes['aria-invalid']}
+              aria-describedby=${inputAriaAttributes['aria-describedby']}
+              aria-label=${inputAriaAttributes['aria-label']}
+              aria-labelledby=${inputAriaAttributes['aria-labelledby']}
+            />
+            ${checkmarkIcon}
+          </div>
         </div>
-        <span class="ctt-checkbox__label">${label}</span>
-      </label>
+      `}
       ${errorText ? html`
         <div 
           class="ctt-checkbox__error" 

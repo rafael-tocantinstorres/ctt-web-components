@@ -43,6 +43,14 @@ const meta = {
       control: 'text',
       description: 'Custom CSS class',
     },
+    ariaLabel: {
+      control: 'text',
+      description: 'Accessible label for screen readers when visual label is not provided',
+    },
+    ariaLabelledby: {
+      control: 'text',
+      description: 'IDs of elements that describe this checkbox',
+    },
   },
   args: {
     onChange: fn(),
@@ -188,4 +196,14 @@ export const AllStates: Story = {
       </div>
     </div>
   `,
+};
+
+// Test case for accessibility - no visible label but with aria-label
+export const NoVisibleLabel: Story = {
+  args: {
+    name: 'no-visible-label',
+    value: 'no-visible-label-value',
+    ariaLabel: 'Accessible checkbox without visible label',
+    // label is intentionally omitted but ariaLabel is provided
+  },
 };

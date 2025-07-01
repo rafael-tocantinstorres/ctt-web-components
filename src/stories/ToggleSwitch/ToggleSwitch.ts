@@ -31,6 +31,14 @@ export interface ToggleSwitchProps {
    * Custom CSS class
    */
   className?: string;
+  /**
+   * Accessible label for screen readers when visual label is not provided
+   */
+  ariaLabel?: string;
+  /**
+   * IDs of elements that describe this toggle switch
+   */
+  ariaLabelledby?: string;
 }
 
 /**
@@ -43,11 +51,25 @@ export const ToggleSwitch = ({
   showLabel = true,
   onChange,
   id,
-  className = ''
+  className = '',
+  ariaLabel,
+  ariaLabelledby
 }: ToggleSwitchProps) => {
   
   // Generate unique ID
   const ToggleSwitchId = id || `ctt-toggle-switch-${Math.random().toString(36).substr(2, 9)}`;
+  
+  // Determine if we have accessible labeling
+  const hasVisibleLabel = showLabel && label && label.trim() !== '';
+  const hasAriaLabel = ariaLabel && ariaLabel.trim() !== '';
+  const hasAriaLabelledby = ariaLabelledby && ariaLabelledby.trim() !== '';
+  
+  // Warn if no accessible label is provided (in development)
+  if (import.meta.env?.DEV) {
+    if (!hasVisibleLabel && !hasAriaLabel && !hasAriaLabelledby) {
+      console.warn('ToggleSwitch component: No accessible label provided. Please provide either a visible "label" with "showLabel: true", "ariaLabel", or "ariaLabelledby" prop.');
+    }
+  }
   
   // Handle change event
   const handleChange = (event: Event) => {
@@ -68,29 +90,48 @@ export const ToggleSwitch = ({
 
   return html`
     <div class=${classes} id=${ToggleSwitchId} ...=${props}>
-      <label 
-        part="root" 
-        class="ctt-toggle-switch__root"
-        ?data-disabled=${disabled}
-      >
-        <input
-          part="control"
-          class="ctt-toggle-switch__control"
-          type="checkbox"
-          ?checked=${checked}
-          ?disabled=${disabled}
-          @change=${handleChange}
-        />
-        <span part="thumb" class="ctt-toggle-switch__thumb"></span>
-        ${showLabel && label ? html`
+      ${hasVisibleLabel ? html`
+        <label 
+          part="root" 
+          class="ctt-toggle-switch__root"
+          ?data-disabled=${disabled}
+        >
+          <input
+            part="control"
+            class="ctt-toggle-switch__control"
+            type="checkbox"
+            ?checked=${checked}
+            ?disabled=${disabled}
+            @change=${handleChange}
+            aria-labelledby=${ariaLabelledby}
+          />
+          <span part="thumb" class="ctt-toggle-switch__thumb"></span>
           <span 
             part="label" 
             class="ctt-toggle-switch__label"
           >
             ${label}
           </span>
-        ` : ''}
-      </label>
+        </label>
+      ` : html`
+        <div 
+          part="root" 
+          class="ctt-toggle-switch__root"
+          ?data-disabled=${disabled}
+        >
+          <input
+            part="control"
+            class="ctt-toggle-switch__control"
+            type="checkbox"
+            ?checked=${checked}
+            ?disabled=${disabled}
+            @change=${handleChange}
+            aria-label=${hasVisibleLabel ? undefined : ariaLabel}
+            aria-labelledby=${ariaLabelledby}
+          />
+          <span part="thumb" class="ctt-toggle-switch__thumb"></span>
+        </div>
+      `}
     </div>
   `;
 };

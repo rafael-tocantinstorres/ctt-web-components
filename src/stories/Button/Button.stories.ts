@@ -13,7 +13,7 @@ const meta = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'secondary', 'tertiary', 'ghost', 'success', 'warning', 'error'],
+      options: ['primary', 'secondary', 'tertiary', 'ghost'],
     },
     size: {
       control: { type: 'select' },
@@ -59,27 +59,6 @@ export const Ghost: Story = {
   args: {
     variant: 'ghost',
     label: 'Ghost Button',
-  },
-};
-
-export const Success: Story = {
-  args: {
-    variant: 'success',
-    label: 'Success Button',
-  },
-};
-
-export const Warning: Story = {
-  args: {
-    variant: 'warning',
-    label: 'Warning Button',
-  },
-};
-
-export const Error: Story = {
-  args: {
-    variant: 'error',
-    label: 'Error Button',
   },
 };
 
