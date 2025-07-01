@@ -16,7 +16,7 @@ const meta = {
     ?checked=${args.checked}
     ?disabled=${args.disabled}
     error-text=${args.errorText}
-    @change=${args.onChange}
+    @change=${fn()}
   ></ctt-radio-button>`,
   argTypes: {
     label: {
@@ -44,9 +44,7 @@ const meta = {
       description: 'Error message to display',
     },
   },
-  args: {
-    onChange: fn(),
-  },
+  args: {},
 } satisfies Meta<RadioButton>;
 
 export default meta;

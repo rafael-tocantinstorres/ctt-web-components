@@ -30,7 +30,23 @@ export class RadioButton extends LitElement {
    * Whether the radio button is checked
    */
   @property({ type: Boolean })
-  checked = false;
+  get checked() {
+    return this._checked;
+  }
+
+  set checked(value: boolean) {
+    const oldValue = this._checked;
+    this._checked = value;
+    
+    // If this radio button is being checked and has a name, uncheck others in the group
+    if (value && !oldValue && this.name) {
+      this._uncheckOtherRadiosInGroup();
+    }
+    
+    this.requestUpdate('checked', oldValue);
+  }
+
+  private _checked = false;
 
   /**
    * Whether the radio button is disabled
@@ -66,7 +82,7 @@ export class RadioButton extends LitElement {
             value=${this.value}
             .checked=${this.checked}
             ?disabled=${this.disabled}
-            @change=${this._handleChange}
+            @click=${this._handleClick}
             aria-invalid=${this.errorText ? 'true' : 'false'}
             aria-describedby=${errorId}
           />
@@ -87,15 +103,60 @@ export class RadioButton extends LitElement {
     `;
   }
 
-  private _handleChange(event: Event) {
+  private _handleClick(event: Event) {
+    const target = event.target as HTMLInputElement;
+    
+    // If clicking on an already checked radio button, prevent unchecking
+    if (this.checked) {
+      event.preventDefault();
+      return;
+    }
+    
+    // If this radio button has a name (group), uncheck others first
+    if (this.name) {
+      this._uncheckOtherRadiosInGroup();
+    }
+    
+    // Update this component's checked state
+    this.checked = true;
+    
     this.dispatchEvent(new CustomEvent('change', {
       detail: { 
-        checked: (event.target as HTMLInputElement).checked,
+        checked: this.checked,
         value: this.value,
         name: this.name
       },
       bubbles: true
     }));
+  }
+
+  private _uncheckOtherRadiosInGroup() {
+    // Find all radio buttons in the same group and uncheck them
+    const allRadioButtons = document.querySelectorAll(`ctt-radio-button[name="${this.name}"]`) as NodeListOf<RadioButton>;
+    
+    allRadioButtons.forEach(radio => {
+      if (radio !== this && radio._checked) {
+        const oldValue = radio._checked;
+        radio._checked = false;
+        radio.requestUpdate('checked', oldValue);
+        
+        // Also update the internal input element
+        const input = radio.shadowRoot?.querySelector('input[type="radio"]') as HTMLInputElement;
+        if (input) {
+          input.checked = false;
+        }
+        
+        // Trigger a change event for the unchecked radio button
+        radio.dispatchEvent(new CustomEvent('change', {
+          detail: { 
+            checked: false,
+            value: radio.value,
+            name: radio.name
+          },
+          bubbles: true
+        }));
+      }
+    });
   }
 
   private get _errorIcon() {

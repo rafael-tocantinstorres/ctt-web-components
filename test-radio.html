@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Button Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-group { margin: 20px 0; }
+        h3 { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Radio Button Group Test</h1>
+    
+    <div class="test-group">
+        <h3>Color Selection (should allow only one):</h3>
+        <ctt-radio-button label="Red" name="color" value="red"></ctt-radio-button>
+        <ctt-radio-button label="Blue" name="color" value="blue"></ctt-radio-button>
+        <ctt-radio-button label="Green" name="color" value="green"></ctt-radio-button>
+    </div>
+    
+    <div class="test-group">
+        <h3>Size Selection (should allow only one):</h3>
+        <ctt-radio-button label="Small" name="size" value="small"></ctt-radio-button>
+        <ctt-radio-button label="Medium" name="size" value="medium" checked></ctt-radio-button>
+        <ctt-radio-button label="Large" name="size" value="large"></ctt-radio-button>
+    </div>
+    
+    <div class="test-group">
+        <h3>Different Group (independent):</h3>
+        <ctt-radio-button label="Option A" name="other" value="a"></ctt-radio-button>
+        <ctt-radio-button label="Option B" name="other" value="b"></ctt-radio-button>
+    </div>
+
+    <script type="module">
+        import './src/stories/RadioButton/RadioButton.js';
+        
+        document.addEventListener('change', (e) => {
+            if (e.target.tagName === 'CTT-RADIO-BUTTON') {
+                console.log('Radio changed:', {
+                    name: e.detail.name,
+                    value: e.detail.value,
+                    checked: e.detail.checked
+                });
+            }
+        });
+        
+        // Test programmatic setting
+        setTimeout(() => {
+            console.log('Testing programmatic selection...');
+            const greenRadio = document.querySelector('ctt-radio-button[value="green"]');
+            if (greenRadio) {
+                greenRadio.checked = true;
+            }
+        }, 2000);
+    </script>
+</body>
+</html>
