@@ -413,24 +413,23 @@ export const PracticalExamples: Story = {
         <p class="ctt-body-m" style="color: #666; margin-bottom: 16px;">Common toolbar buttons with contextual tooltips</p>
         <div class="ctt-flex ctt-gap-2 ctt-p-3" style="background: #f9fafb; border-radius: 8px; border: 1px solid #e5e7eb;">
           <ctt-tooltip text="Create new document" position="top" arrowPosition="start">
-            <button class="icon-button">📄</button>
-            <ctt-button 
+            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="📄" borderRadius="extraSmall"></ctt-button>
           </ctt-tooltip>
 
           <ctt-tooltip text="Save current changes" position="top" arrowPosition="middle">
-            <button class="icon-button">💾</button>
+            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="💾" borderRadius="extraSmall"></ctt-button>
           </ctt-tooltip>
 
           <ctt-tooltip text="Copy to clipboard" position="top" arrowPosition="middle">
-            <button class="icon-button">📋</button>
+            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="📋" borderRadius="extraSmall"></ctt-button>
           </ctt-tooltip>
 
           <ctt-tooltip text="Share with team" position="top" arrowPosition="middle">
-            <button class="icon-button">🔗</button>
+            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="🔗" borderRadius="extraSmall"></ctt-button>
           </ctt-tooltip>
 
           <ctt-tooltip text="Delete permanently" position="top" arrowPosition="end">
-            <button class="icon-button">🗑️</button>
+            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="🗑️" borderRadius="extraSmall"></ctt-button>
           </ctt-tooltip>
         </div>
       </div>
@@ -440,19 +439,19 @@ export const PracticalExamples: Story = {
         <p class="ctt-body-m" style="color: #666; margin-bottom: 16px;">Demonstrating different tooltip positions with various arrow alignments</p>
         <div class="ctt-flex ctt-gap-6 ctt-items-center ctt-flex-wrap">
           <ctt-tooltip text="Left tooltip, arrow at start" position="left" arrowPosition="start">
-            <button class="icon-button">⬅️</button>
+            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="⬅️" borderRadius="extraSmall"></ctt-button>
           </ctt-tooltip>
 
           <ctt-tooltip text="Top tooltip, arrow at end" position="top" arrowPosition="end">
-            <button class="icon-button">⬆️</button>
+            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="⬆️" borderRadius="extraSmall"></ctt-button>
           </ctt-tooltip>
 
           <ctt-tooltip text="Right tooltip, arrow at start" position="right" arrowPosition="start">
-            <button class="icon-button">➡️</button>
+            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="➡️" borderRadius="extraSmall"></ctt-button>
           </ctt-tooltip>
 
           <ctt-tooltip text="Bottom tooltip, arrow at end" position="bottom" arrowPosition="end">
-            <button class="icon-button">⬇️</button>
+            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="⬇️" borderRadius="extraSmall"></ctt-button>
           </ctt-tooltip>
         </div>
       </div>

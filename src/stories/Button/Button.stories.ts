@@ -459,7 +459,7 @@ export const ClickEventHandlers: Story = {
         <div style="padding: 1.5rem; border: 1px solid #dee2e6; border-radius: 8px;">
           <h4 style="margin: 0 0 1rem 0; color: #495057;">Custom Event Data</h4>
           <ctt-button
-            variant="success"
+            variant="primary"
             label="Send Data"
             @click=${() => {
               const customData = {
@@ -476,7 +476,7 @@ export const ClickEventHandlers: Story = {
         <div style="padding: 1.5rem; border: 1px solid #dee2e6; border-radius: 8px;">
           <h4 style="margin: 0 0 1rem 0; color: #495057;">Error Handling</h4>
           <ctt-button
-            variant="error"
+            variant="primary"
             label="Handle Error"
             .iconLeft=${true}
             .iconLeftElement=${'⚠️'}
