@@ -367,7 +367,7 @@ export const ClickEvents: Story = {
           ></ctt-button>
           
           <ctt-button
-            variant="warning"
+            variant="secondary"
             label="Reset Counter"
             @click=${() => {
               clickCount = 0;
