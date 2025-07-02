@@ -431,4 +431,36 @@
      --ctt-input-height-s: var(--ctt-core-dimension-200); /* 32px */
      --ctt-input-height-m: var(--ctt-core-dimension-250); /* 40px */
      --ctt-input-height-l: var(--ctt-core-dimension-300); /* 48px */
+
+
+  /* =======================================================================
+     TOOLTIP TOKENS - For backward compatibility with existing components
+     ========================================================================== */
+     /* Tooltip Colors */
+ /* Design System Colors */
+  --color-neutral-900: #111827;
+  
+  /* Design System Spacing */
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 20px;
+  
+  /* Design System Typography */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-family-sans: var(--ctt-core-font-family-brand);
+  --line-height-normal: 1.5;
+  
+  /* Design System Effects */
+  --radius-md: 8px;
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+  --duration-fast: 150ms;
+  --easing-ease-out: ease-out;
+  --z-index-tooltip: 1000;
+  
+  /* Tooltip-specific tokens */
+  --color-bg-tooltip: var(--color-neutral-900);
+  --color-text-tooltip: white;
 }

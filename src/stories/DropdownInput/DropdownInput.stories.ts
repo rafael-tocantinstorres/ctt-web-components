@@ -81,7 +81,21 @@ const meta = {
         component: 'A flexible dropdown input component that supports single and multiple selections, custom option objects, and various display modes.',
       },
     },
+    viewport: {
+      defaultViewport: 'tablet',
+    },
+    // Add custom styling to give more height to story containers
+    backgrounds: {
+      default: 'light',
+    },
   },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 300px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
   argTypes: {
     label: {
       control: 'text',
@@ -185,6 +199,13 @@ export const WithDescriptions: Story = {
     options: sampleOptionsWithDescriptions,
     hasDescription: true,
   },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 350px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };
 
 // Multiple selection
@@ -203,6 +224,13 @@ export const MultipleSelection: Story = {
       },
     },
   },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 350px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };
 
 // Property mapping - Users
@@ -224,6 +252,13 @@ export const PropertyMappingUsers: Story = {
       },
     },
   },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 350px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };
 
 // Property mapping - Products
@@ -238,6 +273,13 @@ export const PropertyMappingProducts: Story = {
     disabledKey: 'unavailable' as any,
     hasDescription: true,
   },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 350px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };
 
 // Property mapping - Multiple selection
@@ -261,6 +303,13 @@ export const PropertyMappingMultiple: Story = {
       },
     },
   },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 400px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };
 
 // Required field
@@ -356,6 +405,13 @@ export const CountrySelector: Story = {
     options: countries,
     hasDescription: true,
   },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 400px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };
 
 // Search functionality showcase
@@ -366,6 +422,13 @@ export const SearchableDropdown: Story = {
     options: [...sampleOptions, ...countries],
     hasDescription: true,
   },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 450px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };
 
 // Multiple selection with pre-selected values

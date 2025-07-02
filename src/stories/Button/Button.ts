@@ -7,7 +7,7 @@ export class CttButton extends LitElement {
   static styles = css([styles] as any);
 
   @property({ type: String })
-  variant: 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'success' | 'warning' | 'error' = 'primary';
+  variant: 'primary' | 'secondary' | 'tertiary' | 'ghost' = 'primary';
 
   @property({ type: String })
   size: 'small' | 'medium' | 'large' = 'medium';
@@ -27,6 +27,12 @@ export class CttButton extends LitElement {
   @property({ type: String })
   iconRightElement = '';
 
+  @property({ type: Boolean })
+  iconOnly = false;
+
+  @property({ type: String })
+  icon = '';
+
   @property({ type: String })
   borderRadius: 'pill' | 'small' | 'extraSmall' = 'pill';
 
@@ -36,8 +42,15 @@ export class CttButton extends LitElement {
   @property({ type: String })
   ariaLabel = '';
 
-  private _onClick() {
-    this.dispatchEvent(new CustomEvent('click'));
+  private _onClick(event: Event) {
+    // Prevent the native click event from bubbling up to avoid double firing
+    event.stopPropagation();
+    
+    // Dispatch our custom click event that can be caught by parent components
+    this.dispatchEvent(new CustomEvent('click', {
+      bubbles: true,
+      composed: true
+    }));
   }
 
   render() {
@@ -57,20 +70,30 @@ export class CttButton extends LitElement {
       'ctt-button',
       `ctt-button--${sizeClass}`,
       `ctt-button--${this.variant}`,
-      `ctt-button--${borderRadiusClass}`
-    ].join(' ');
+      `ctt-button--${borderRadiusClass}`,
+      this.iconOnly && 'ctt-button--icon-only'
+    ].filter(Boolean).join(' ');
 
     const renderContent = () => {
       const parts = [];
       
+      // Handle icon-only buttons
+      if (this.iconOnly && this.icon) {
+        parts.push(html`<span class="ctt-button__icon ctt-button__icon--only">${this.icon}</span>`);
+        return parts;
+      }
+      
+      // Handle left icon
       if (this.iconLeft && this.iconLeftElement) {
         parts.push(html`<span class="ctt-button__icon ctt-button__icon--left">${this.iconLeftElement}</span>`);
       }
       
-      if (this.label) {
+      // Handle label
+      if (this.label && !this.iconOnly) {
         parts.push(html`<span class="ctt-button__label">${this.label}</span>`);
       }
       
+      // Handle right icon
       if (this.iconRight && this.iconRightElement) {
         parts.push(html`<span class="ctt-button__icon ctt-button__icon--right">${this.iconRightElement}</span>`);
       }
@@ -79,14 +102,15 @@ export class CttButton extends LitElement {
     };
 
     const accessibleName = this.ariaLabel || this.label;
-    const hasVisibleLabel = this.label && this.label.trim().length > 0;
+    const hasVisibleLabel = this.label && this.label.trim().length > 0 && !this.iconOnly;
+    const needsAriaLabel = this.iconOnly || (!hasVisibleLabel && accessibleName);
 
     return html`
       <button
         type="button"
         class=${classes}
         ?disabled=${this.disabled}
-        aria-label=${!hasVisibleLabel && accessibleName ? accessibleName : ''}
+        aria-label=${needsAriaLabel && accessibleName ? accessibleName : ''}
         @click=${this._onClick}
       >
         ${renderContent()}

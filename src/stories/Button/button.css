@@ -235,6 +235,27 @@
 }
 
 /* Icon-only buttons */
+.ctt-button--icon-only {
+  width: var(--ctt-button-height-medium);
+  padding: 0;
+  aspect-ratio: 1;
+}
+
+.ctt-button--icon-only.ctt-button--small {
+  width: var(--ctt-button-height-small);
+}
+
+.ctt-button--icon-only.ctt-button--large {
+  width: var(--ctt-button-height-large);
+}
+
+.ctt-button__icon--only {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .ctt-button:not(:has(.ctt-button__label)) .ctt-button__icon,
 .ctt-button:empty .ctt-button__icon {
   margin: 0;

@@ -15,6 +15,9 @@
 /* Import Spacing */
 @import './spacing.css';
 
+/* Import Layout */
+@import './layout.css';
+
 /* Import Fonts */
 @import './fonts.css';
 

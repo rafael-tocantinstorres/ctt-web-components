@@ -1,9 +1,9 @@
 .ctt-toaster-alert {
   display: flex;
-  align-items: center;
+  align-items: start;
   padding: var(--ctt-core-dimension-100);
   border-radius: var(--ctt-base-border-radius-s);
-  color: var(--ctt-base-color-content-fg-strong);
+  color: var(--ctt-base-color-selectable-fg-default);
   font-family: var(--ctt-base-font-family-body);
 }
 
@@ -37,10 +37,12 @@
 
 .headline {
   font-weight: var(--ctt-base-font-weight-title-s-m);
+  line-height: var(--ctt-core-line-height-l);
+  font-size: var(--ctt-base-font-size-label-m);
 }
 
 .message {
-  font-size: var(--ctt-base-font-size-body-s);
+  font-size: var(--ctt-base-font-size-label-s);
 }
 
 .close-button {
