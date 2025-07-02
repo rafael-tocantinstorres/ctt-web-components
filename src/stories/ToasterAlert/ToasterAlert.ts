@@ -14,6 +14,9 @@ export class CttToasterAlert extends LitElement {
   static styles = css([styles] as any);
 
   @property({ type: String })
+  type: 'toaster' | 'alert' = 'alert';
+
+  @property({ type: String })
   variant: 'info' | 'warning' | 'error' | 'success' = 'info';
 
   @property({ type: String })
@@ -28,18 +31,25 @@ export class CttToasterAlert extends LitElement {
   @property({ type: Boolean })
   visible = false;
 
+  @property({ type: String })
+  position: 'top' | 'bottom' = 'top';
+
   showToaster(params: {
+    type?: 'toaster' | 'alert';
     variant?: 'info' | 'warning' | 'error' | 'success';
     headline?: string;
     message?: string;
     dismissable?: boolean;
     duration?: number;
+    position?: 'top' | 'bottom';
     showFunction?: () => void;
   }) {
+    this.type = params.type || 'alert';
     this.variant = params.variant || 'info';
     this.headline = params.headline || '';
     this.message = params.message || '';
     this.dismissable = params.dismissable || false;
+    this.position = params.position || 'top';
     this.visible = true;
     params.showFunction?.();
 
@@ -76,6 +86,8 @@ export class CttToasterAlert extends LitElement {
     const classes = {
       'ctt-toaster-alert': true,
       [`ctt-toaster-alert--${this.variant}`]: true,
+      [`ctt-toaster-alert--${this.type}`]: true,
+      [`ctt-toaster-alert--${this.type}-${this.position}`]: this.type === 'toaster',
     };
 
     return html`

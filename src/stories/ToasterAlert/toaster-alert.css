@@ -5,6 +5,56 @@
   border-radius: var(--ctt-base-border-radius-s);
   color: var(--ctt-base-color-selectable-fg-default);
   font-family: var(--ctt-base-font-family-body);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Alert type - relative positioning, can be placed anywhere */
+.ctt-toaster-alert--alert {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: var(--ctt-core-dimension-100) 0;
+}
+
+/* Toaster type - absolute positioning, appears as toast notification */
+.ctt-toaster-alert--toaster {
+  position: fixed;
+  right: var(--ctt-core-dimension-200);
+  width: 320px;
+  max-width: 90vw;
+  z-index: 9999;
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Toaster positioning */
+.ctt-toaster-alert--toaster-top {
+  top: var(--ctt-core-dimension-200);
+}
+
+.ctt-toaster-alert--toaster-bottom {
+  bottom: var(--ctt-core-dimension-200);
+}
+
+/* Animation for toaster */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive design for mobile */
+@media (max-width: 480px) {
+  .ctt-toaster-alert--toaster {
+    left: var(--ctt-core-dimension-50);
+    right: var(--ctt-core-dimension-50);
+    width: auto;
+    max-width: none;
+  }
 }
 
 .ctt-toaster-alert--info {
