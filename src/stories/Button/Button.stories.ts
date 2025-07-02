@@ -1,17 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
-import { html } from 'lit';
 import { fn } from 'storybook/test';
+import { html } from 'lit';
 
 import './Button';
-import { CttButton } from './Button';
-
-// Define a type for the story's args that includes the component's properties and actions
-interface ButtonStoryArgs extends Partial<CttButton> {
-  onClick?: () => void;
-}
+import type { CttButton } from './Button';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
-const meta: Meta<ButtonStoryArgs> = {
+const meta = {
   title: 'Components/Button',
   tags: ['autodocs'],
   render: (args) => html`
@@ -28,33 +23,60 @@ const meta: Meta<ButtonStoryArgs> = {
       .borderRadius=${args.borderRadius}
       ?disabled=${args.disabled}
       .ariaLabel=${args.ariaLabel}
-      @click=${args.onClick}
+      @click=${fn()}
     ></ctt-button>
   `,
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        component: 'A flexible button component with multiple variants, sizes, and icon support for various use cases.',
+      },
+    },
+    viewport: {
+      defaultViewport: 'tablet',
+    },
+    backgrounds: {
+      default: 'light',
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 200px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
   argTypes: {
     variant: {
       control: { type: 'select' },
       options: ['primary', 'secondary', 'tertiary', 'ghost'],
+      description: 'Visual style variant of the button',
     },
     size: {
       control: { type: 'select' },
       options: ['small', 'medium', 'large'],
+      description: 'Size variant of the button',
     },
     borderRadius: {
       control: { type: 'select' },
       options: ['pill', 'small', 'extraSmall'],
+      description: 'Border radius style of the button',
     },
     label: {
-      control: { type: 'text' },
+      control: 'text',
       description: 'Button label text',
     },
-    disabled: { control: 'boolean' },
+    disabled: {
+      control: 'boolean',
+      description: 'Whether the button is disabled',
+    },
     iconLeft: { 
       control: 'boolean',
       description: 'Show icon on the left side of the button',
     },
     iconLeftElement: {
-      control: { type: 'text' },
+      control: 'text',
       description: 'Icon content for left icon (emoji, text, or HTML)',
       if: { arg: 'iconLeft', eq: true },
     },
@@ -63,7 +85,7 @@ const meta: Meta<ButtonStoryArgs> = {
       description: 'Show icon on the right side of the button',
     },
     iconRightElement: {
-      control: { type: 'text' },
+      control: 'text',
       description: 'Icon content for right icon (emoji, text, or HTML)',
       if: { arg: 'iconRight', eq: true },
     },
@@ -72,34 +94,33 @@ const meta: Meta<ButtonStoryArgs> = {
       description: 'Show only icon without label (requires ariaLabel for accessibility)',
     },
     icon: {
-      control: { type: 'text' },
+      control: 'text',
       description: 'Icon content for icon-only button (emoji, text, or HTML)',
       if: { arg: 'iconOnly', eq: true },
     },
     ariaLabel: {
-      control: { type: 'text' },
+      control: 'text',
       description: 'Accessible label for screen readers (required for icon-only buttons)',
     },
-    onClick: { action: 'click' },
   },
-  args: { onClick: fn() },
-};
+  args: {},
+} satisfies Meta<CttButton>;
 
 export default meta;
-type Story = StoryObj<ButtonStoryArgs>;
+type Story = StoryObj<CttButton>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+// Default story
 export const Default: Story = {
   args: {
     variant: 'primary',
     label: 'Button',
-    iconLeft: false,
-    iconLeftElement: '🚀',
-    iconRight: false,
-    iconRightElement: '→',
-    iconOnly: false,
-    icon: '❤️',
-    ariaLabel: 'Button action',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Basic button with primary variant.',
+      },
+    },
   },
 };
 
@@ -163,6 +184,13 @@ export const WithIcons: Story = {
     iconLeftElement: '🚀',
     iconRight: true,
     iconRightElement: '→',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Button with both left and right icons.',
+      },
+    },
   },
 };
 

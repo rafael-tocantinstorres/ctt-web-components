@@ -5,6 +5,20 @@ import { html } from 'lit';
 import './RadioButton';
 import type { RadioButton } from './RadioButton';
 
+// Sample data for stories
+const colorOptions = [
+  { label: 'Red', value: 'red' },
+  { label: 'Blue', value: 'blue' },
+  { label: 'Green', value: 'green' },
+  { label: 'Yellow', value: 'yellow' },
+];
+
+const sizeOptions = [
+  { label: 'Small', value: 'small' },
+  { label: 'Medium', value: 'medium' },
+  { label: 'Large', value: 'large' },
+];
+
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
   title: 'Components/RadioButton',
@@ -18,6 +32,27 @@ const meta = {
     error-text=${args.errorText}
     @change=${fn()}
   ></ctt-radio-button>`,
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        component: 'A radio button component that supports grouping, error states, and accessibility features.',
+      },
+    },
+    viewport: {
+      defaultViewport: 'tablet',
+    },
+    backgrounds: {
+      default: 'light',
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 200px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
   argTypes: {
     label: {
       control: 'text',
@@ -56,6 +91,13 @@ export const Default: Story = {
     label: 'Default Radio Button',
     name: 'default-group',
     value: 'default',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Basic radio button with label.',
+      },
+    },
   },
 };
 
@@ -137,6 +179,20 @@ export const RadioButtonGroup: Story = {
       ></ctt-radio-button>
     </div>
   `,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Example of grouped radio buttons with different states.',
+      },
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 250px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };
 
 // Horizontal Radio Button Group
@@ -162,6 +218,20 @@ export const HorizontalGroup: Story = {
       ></ctt-radio-button>
     </div>
   `,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Example of horizontally arranged radio buttons.',
+      },
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 250px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };
 
 // All states showcase
@@ -224,4 +294,18 @@ export const AllStates: Story = {
       </div>
     </div>
   `,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Comprehensive showcase of all radio button states including normal, disabled, and error states.',
+      },
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 500px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };

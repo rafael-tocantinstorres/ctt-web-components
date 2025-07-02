@@ -1,33 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { fn } from 'storybook/test';
-
-import './TextareaInput';
 import { html } from 'lit';
 
-// Interface for the web component properties
-interface TextareaInputArgs {
-  label: string;
-  value: string;
-  name: string;
-  placeholder: string;
-  errorText: string;
-  disabled: boolean;
-  required: boolean;
-  rows: number;
-  cols: number;
-  resize: 'none' | 'both' | 'horizontal' | 'vertical';
-  ariaDescribedBy: string;
-  onTextareaInput: (event: CustomEvent) => void;
-  onTextareaChange: (event: CustomEvent) => void;
-  onTextareaFocus: (event: CustomEvent) => void;
-  onTextareaBlur: (event: CustomEvent) => void;
-}
+import './TextareaInput';
+
+// Sample data for stories
+const resizeOptions = ['none', 'both', 'horizontal', 'vertical'] as const;
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
   title: 'Components/TextareaInput',
   tags: ['autodocs'],
-  render: (args: TextareaInputArgs) => html`
+  render: (args) => html`
     <textarea-input
       label=${args.label}
       value=${args.value}
@@ -40,12 +24,33 @@ const meta = {
       cols=${args.cols}
       resize=${args.resize}
       ariaDescribedBy=${args.ariaDescribedBy}
-      @textarea-input=${args.onTextareaInput}
-      @textarea-change=${args.onTextareaChange}
-      @textarea-focus=${args.onTextareaFocus}
-      @textarea-blur=${args.onTextareaBlur}
+      @textarea-input=${fn()}
+      @textarea-change=${fn()}
+      @textarea-focus=${fn()}
+      @textarea-blur=${fn()}
     ></textarea-input>
   `,
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        component: 'A flexible textarea input component that supports multiple rows, resize options, and validation states.',
+      },
+    },
+    viewport: {
+      defaultViewport: 'tablet',
+    },
+    backgrounds: {
+      default: 'light',
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 300px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
   argTypes: {
     label: {
       control: 'text',
@@ -93,31 +98,26 @@ const meta = {
       description: 'Custom aria-describedby attribute',
     },
   },
-  args: {
-    onTextareaInput: fn(),
-    onTextareaChange: fn(),
-    onTextareaFocus: fn(),
-    onTextareaBlur: fn(),
-  },
-} satisfies Meta<TextareaInputArgs>;
+  args: {},
+} satisfies Meta;
 
 export default meta;
-type Story = StoryObj<TextareaInputArgs>;
+type Story = StoryObj;
 
 // Default story
 export const Default: Story = {
   args: {
     label: 'Message',
     placeholder: 'Enter your message...',
-    value: '',
-    name: '',
-    errorText: '',
-    disabled: false,
-    required: false,
     rows: 4,
-    cols: 0,
     resize: 'vertical',
-    ariaDescribedBy: '',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Basic textarea input with label and placeholder.',
+      },
+    },
   },
 };
 
@@ -127,14 +127,8 @@ export const WithValue: Story = {
     label: 'Description',
     value: 'This is a sample textarea with some content already filled in.',
     placeholder: 'Enter description...',
-    name: '',
-    errorText: '',
-    disabled: false,
-    required: false,
     rows: 4,
-    cols: 0,
     resize: 'vertical',
-    ariaDescribedBy: '',
   },
 };
 
@@ -144,14 +138,8 @@ export const Required: Story = {
     label: 'Required Field',
     placeholder: 'This field is required',
     required: true,
-    value: '',
-    name: '',
-    errorText: '',
-    disabled: false,
     rows: 4,
-    cols: 0,
     resize: 'vertical',
-    ariaDescribedBy: '',
   },
 };
 
@@ -162,13 +150,8 @@ export const WithError: Story = {
     value: 'Invalid content',
     errorText: 'This field contains invalid characters',
     placeholder: 'Enter your comments...',
-    name: '',
-    disabled: false,
-    required: false,
     rows: 4,
-    cols: 0,
     resize: 'vertical',
-    ariaDescribedBy: '',
   },
 };
 
@@ -179,13 +162,8 @@ export const Disabled: Story = {
     value: 'This field is disabled',
     disabled: true,
     placeholder: 'Cannot edit this field',
-    name: '',
-    errorText: '',
-    required: false,
     rows: 4,
-    cols: 0,
     resize: 'vertical',
-    ariaDescribedBy: '',
   },
 };
 
@@ -195,14 +173,7 @@ export const CustomRows: Story = {
     label: 'Large Text Area',
     rows: 8,
     placeholder: 'This textarea has 8 rows...',
-    value: '',
-    name: '',
-    errorText: '',
-    disabled: false,
-    required: false,
-    cols: 0,
     resize: 'vertical',
-    ariaDescribedBy: '',
   },
 };
 
@@ -212,13 +183,7 @@ export const WithColumns: Story = {
     cols: 50,
     rows: 6,
     placeholder: 'This textarea has fixed columns...',
-    value: '',
-    name: '',
-    errorText: '',
-    disabled: false,
-    required: false,
     resize: 'vertical',
-    ariaDescribedBy: '',
   },
 };
 
@@ -228,14 +193,7 @@ export const ResizeNone: Story = {
     label: 'No Resize',
     resize: 'none',
     placeholder: 'This textarea cannot be resized',
-    value: '',
-    name: '',
-    errorText: '',
-    disabled: false,
-    required: false,
     rows: 4,
-    cols: 0,
-    ariaDescribedBy: '',
   },
 };
 
@@ -244,14 +202,7 @@ export const ResizeHorizontal: Story = {
     label: 'Horizontal Resize',
     resize: 'horizontal',
     placeholder: 'This textarea can only be resized horizontally',
-    value: '',
-    name: '',
-    errorText: '',
-    disabled: false,
-    required: false,
     rows: 4,
-    cols: 0,
-    ariaDescribedBy: '',
   },
 };
 
@@ -260,14 +211,7 @@ export const ResizeBoth: Story = {
     label: 'Both Resize',
     resize: 'both',
     placeholder: 'This textarea can be resized in both directions',
-    value: '',
-    name: '',
-    errorText: '',
-    disabled: false,
-    required: false,
     rows: 4,
-    cols: 0,
-    ariaDescribedBy: '',
   },
 };
 
@@ -275,16 +219,8 @@ export const ResizeBoth: Story = {
 export const NoLabel: Story = {
   args: {
     placeholder: 'Textarea without label',
-    value: '',
-    label: '',
-    name: '',
-    errorText: '',
-    disabled: false,
-    required: false,
     rows: 4,
-    cols: 0,
     resize: 'vertical',
-    ariaDescribedBy: '',
   },
 };
 
@@ -329,4 +265,18 @@ export const AllStates: Story = {
       ></textarea-input>
     </div>
   `,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Showcase of different textarea states and configurations.',
+      },
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 800px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };

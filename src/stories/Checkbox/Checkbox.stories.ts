@@ -1,11 +1,48 @@
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { fn } from 'storybook/test';
 import { html } from 'lit';
-import type { Meta, StoryObj } from '@storybook/web-components';
+
 import './Checkbox';
 
-const meta: Meta = {
+const meta = {
   title: 'Components/Checkbox',
-  component: 'ctt-checkbox',
   tags: ['autodocs'],
+  render: (args) => html`
+    <ctt-checkbox
+      .label=${args.label}
+      .name=${args.name}
+      .value=${args.value}
+      ?checked=${args.checked}
+      ?disabled=${args.disabled}
+      .errorText=${args.errorText}
+      .id=${args.id}
+      .className=${args.className}
+      .ariaLabel=${args.ariaLabel}
+      .ariaLabelledby=${args.ariaLabelledby}
+      @change=${fn()}
+    ></ctt-checkbox>
+  `,
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        component: 'A checkbox component that supports labels, error states, and accessibility features.',
+      },
+    },
+    viewport: {
+      defaultViewport: 'tablet',
+    },
+    backgrounds: {
+      default: 'light',
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 200px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
   argTypes: {
     label: {
       control: 'text',
@@ -47,82 +84,64 @@ const meta: Meta = {
       control: 'text',
       description: 'IDs of elements that describe this checkbox.',
     },
-    onChange: {
-      action: 'change',
-      description: 'Fired when the checkbox value changes.',
-    },
   },
-};
+  args: {},
+} satisfies Meta;
 
 export default meta;
-
 type Story = StoryObj;
 
-const Template = (args: any) => html`
-  <ctt-checkbox
-    .label=${args.label}
-    .name=${args.name}
-    .value=${args.value}
-    ?checked=${args.checked}
-    ?disabled=${args.disabled}
-    .errorText=${args.errorText}
-    .id=${args.id}
-    .className=${args.className}
-    .ariaLabel=${args.ariaLabel}
-    .ariaLabelledby=${args.ariaLabelledby}
-    @change=${args.onChange}
-  ></ctt-checkbox>
-`;
-
+// Default story
 export const Default: Story = {
-  render: Template,
   args: {
     label: 'Default Checkbox',
     name: 'default-checkbox',
     value: 'default',
-    checked: false,
-    disabled: false,
-    errorText: '',
     id: 'default-checkbox',
-    className: '',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Basic checkbox with label.',
+      },
+    },
   },
 };
 
 export const Checked: Story = {
-  render: Template,
   args: {
-    ...Default.args,
     label: 'Checked Checkbox',
+    name: 'checked-checkbox',
+    value: 'checked',
     checked: true,
     id: 'checked-checkbox',
   },
 };
 
 export const Disabled: Story = {
-  render: Template,
   args: {
-    ...Default.args,
     label: 'Disabled Checkbox',
+    name: 'disabled-checkbox',
+    value: 'disabled',
     disabled: true,
     id: 'disabled-checkbox',
   },
 };
 
 export const WithError: Story = {
-  render: Template,
   args: {
-    ...Default.args,
     label: 'Checkbox with Error',
+    name: 'error-checkbox',
+    value: 'error',
     errorText: 'This is an error message.',
     id: 'error-checkbox',
   },
 };
 
 export const NoLabel: Story = {
-  render: Template,
   args: {
-    ...Default.args,
-    label: '',
+    name: 'no-label-checkbox',
+    value: 'no-label',
     ariaLabel: 'Checkbox without a visible label',
     id: 'no-label-checkbox',
   },

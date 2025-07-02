@@ -1,9 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { fn } from 'storybook/test';
 import { html } from 'lit';
-import '../Button/Button';
 
 import './TooltipComponent';
+import '../Button/Button';
 import type { CttTooltip } from './TooltipComponent';
+
+// Sample data for stories
+const tooltipPositions = ['top', 'bottom', 'left', 'right'] as const;
+const arrowPositions = ['start', 'middle', 'end'] as const;
+const tooltipSizes = ['small', 'medium', 'large'] as const;
 
 const meta = {
   title: 'Components/Tooltip',
@@ -24,13 +30,12 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A flexible dropdown input component that supports single and multiple selections, custom option objects, and various display modes.',
+        component: 'A tooltip component that provides contextual information on hover or focus, with customizable positioning and styling.',
       },
     },
     viewport: {
       defaultViewport: 'tablet',
     },
-    // Add custom styling to give more height to story containers
     backgrounds: {
       default: 'light',
     },
@@ -77,14 +82,20 @@ const meta = {
 export default meta;
 type Story = StoryObj<CttTooltip>;
 
+// Default story
 export const Default: Story = {
   args: {
     text: 'This is a tooltip',
     size: 'medium',
     position: 'top',
     arrowPosition: 'middle',
-    disabled: false,
-    ariaLabel: '',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Basic tooltip with default positioning and styling.',
+      },
+    },
   },
 };
 
@@ -318,6 +329,20 @@ export const AllVariants: Story = {
       </div>
     </div>
   `,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Comprehensive showcase of all tooltip variants, sizes, positions, and arrow alignments.',
+      },
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 600px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };
 
 export const PracticalExamples: Story = {
@@ -457,6 +482,20 @@ export const PracticalExamples: Story = {
       </div>
     </div>
   `,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Practical examples of tooltips in common UI scenarios.',
+      },
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 600px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };
 
 // Advanced combinations story
@@ -528,4 +567,18 @@ export const AdvancedCombinations: Story = {
       </div>
     </div>
   `,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Advanced tooltip combinations demonstrating various configurations together.',
+      },
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 600px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };

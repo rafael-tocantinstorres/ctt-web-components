@@ -1,35 +1,111 @@
-import type { Meta, StoryObj } from '@storybook/web-components';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { fn } from 'storybook/test';
 import { html } from 'lit';
-import './ToasterAlert';
-import { CttToasterAlert } from './ToasterAlert';
 
-const meta: Meta = {
+import './ToasterAlert';
+import type { CttToasterAlert } from './ToasterAlert';
+
+// Sample data for stories
+const alertTypes = ['alert', 'toaster'] as const;
+const alertVariants = ['info', 'warning', 'error', 'success'] as const;
+const alertPositions = ['top', 'bottom'] as const;
+
+const meta = {
   title: 'Components/ToasterAlert',
-  component: 'ctt-toaster-alert',
   tags: ['autodocs'],
+  render: (args) => html`<ctt-toaster-alert
+    type=${args.type}
+    variant=${args.variant}
+    position=${args.position}
+    headline=${args.headline}
+    message=${args.message}
+    ?dismissable=${args.dismissable}
+    duration=${args.duration}
+    ?visible=${args.visible}
+    @close=${fn()}
+  ></ctt-toaster-alert>`,
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        component: 'A toaster alert component for displaying notifications and alerts with different variants and positioning options.',
+      },
+    },
+    viewport: {
+      defaultViewport: 'tablet',
+    },
+    backgrounds: {
+      default: 'light',
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 300px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
   argTypes: {
     type: {
       control: { type: 'select' },
       options: ['alert', 'toaster'],
+      description: 'Type of alert (alert or toaster)',
     },
     variant: {
       control: { type: 'select' },
       options: ['info', 'warning', 'error', 'success'],
+      description: 'Visual variant of the alert',
     },
     position: {
       control: { type: 'select' },
       options: ['top', 'bottom'],
+      description: 'Position of the alert (for toaster type)',
     },
-    headline: { control: 'text' },
-    message: { control: 'text' },
-    dismissable: { control: 'boolean' },
-    duration: { control: 'number' },
+    headline: {
+      control: 'text',
+      description: 'Headline text for the alert',
+    },
+    message: {
+      control: 'text',
+      description: 'Message text for the alert',
+    },
+    dismissable: {
+      control: 'boolean',
+      description: 'Whether the alert can be dismissed',
+    },
+    duration: {
+      control: 'number',
+      description: 'Auto-dismiss duration in milliseconds',
+    },
+    visible: {
+      control: 'boolean',
+      description: 'Whether the alert is visible',
+    },
   },
-};
+  args: {},
+} satisfies Meta<CttToasterAlert>;
 
 export default meta;
-
 type Story = StoryObj<CttToasterAlert>;
+
+// Default story
+export const Default: Story = {
+  args: {
+    type: 'alert',
+    variant: 'info',
+    headline: 'Information Alert',
+    message: 'This is an alert that can be placed anywhere in your layout.',
+    dismissable: true,
+    visible: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Basic info alert with headline and message.',
+      },
+    },
+  },
+};
 
 // Alert Type Stories
 export const AlertInfo: Story = {

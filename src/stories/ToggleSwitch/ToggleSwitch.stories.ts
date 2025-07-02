@@ -3,17 +3,19 @@ import { fn } from 'storybook/test';
 import { html } from 'lit';
 
 import './ToggleSwitch';
-import { ToggleSwitch } from './ToggleSwitch';
+import type { ToggleSwitch } from './ToggleSwitch';
 
-// Define a type for the story's args that includes the component's properties and actions
-interface ToggleSwitchStoryArgs extends Partial<ToggleSwitch> {
-  onToggleChange?: () => void;
-}
+// Sample data for stories
+const toggleFeatures = [
+  { label: 'Enable notifications', key: 'notifications' },
+  { label: 'Dark mode', key: 'darkMode' },
+  { label: 'Auto-save', key: 'autoSave' },
+  { label: 'Two-factor authentication', key: 'twoFA' },
+];
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
-const meta: Meta<ToggleSwitchStoryArgs> = {
+const meta = {
   title: 'Components/ToggleSwitch',
-  component: 'ctt-toggle-switch',
   tags: ['autodocs'],
   render: (args) => html`
     <ctt-toggle-switch
@@ -25,9 +27,30 @@ const meta: Meta<ToggleSwitchStoryArgs> = {
       .aria-labelledby=${args.ariaLabelledby}
       .role=${args.role}
       .name=${args.name}
-      @toggle-change=${args.onToggleChange}
+      @toggle-change=${fn()}
     ></ctt-toggle-switch>
   `,
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        component: 'A toggle switch component that supports accessibility features, labels, and disabled states.',
+      },
+    },
+    viewport: {
+      defaultViewport: 'tablet',
+    },
+    backgrounds: {
+      default: 'light',
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 200px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
   argTypes: {
     checked: {
       control: 'boolean',
@@ -61,23 +84,25 @@ const meta: Meta<ToggleSwitchStoryArgs> = {
       control: 'text',
       description: 'Name attribute for the input element',
     },
-    onToggleChange: {
-      action: 'toggle-change',
-    },
   },
-  args: {
-    onToggleChange: fn(),
-  },
-};
+  args: {},
+} satisfies Meta<ToggleSwitch>;
 
 export default meta;
-type Story = StoryObj<ToggleSwitchStoryArgs>;
+type Story = StoryObj<ToggleSwitch>;
 
 // Default story
 export const Default: Story = {
   args: {
     label: 'Enable notifications',
     checked: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Basic toggle switch with label.',
+      },
+    },
   },
 };
 
@@ -141,6 +166,20 @@ export const Interactive: Story = {
       ></ctt-toggle-switch>
     </div>
   `,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Interactive toggle switch that logs events to the console.',
+      },
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 250px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };
 
 // With aria-labelledby - references external describing element
@@ -157,6 +196,20 @@ export const WithAriaLabelledby: Story = {
       ></ctt-toggle-switch>
     </div>
   `,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Toggle switch with external description using aria-labelledby.',
+      },
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 250px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };
 
 // All states showcase
@@ -212,4 +265,18 @@ export const AllStates: Story = {
       </div>
     </div>
   `,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Comprehensive showcase of all toggle switch states and accessibility features.',
+      },
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 600px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };

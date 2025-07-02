@@ -5,29 +5,13 @@ import { html, nothing } from 'lit';
 import './InputField';
 import '../Button/Button';
 
-type InputFieldProps = {
-  label?: string;
-  value?: string;
-  name?: string;
-  type?: 'text' | 'email' | 'password' | 'tel' | 'url' | 'search' | 'number';
-  placeholder?: string;
-  error?: string | null;
-  disabled?: boolean;
-  required?: boolean;
-  size?: 'small' | 'medium' | 'large';
-  id?: string;
-  ariaDescribedBy?: string | null;
-  onInput?: (value: string) => void;
-  onChange?: (value: string) => void;
-  onFocus?: (event: Event) => void;
-  onBlur?: (event: Event) => void;
-};
+// Sample data for stories
+const inputTypes = ['text', 'email', 'password', 'tel', 'url', 'search', 'number'] as const;
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
   title: 'Components/InputField',
   tags: ['autodocs'],
-  
   render: (args) => html`<ctt-input-field
     label=${args.label || ''}
     value=${args.value || ''}
@@ -40,11 +24,32 @@ const meta = {
     size=${args.size || 'medium'}
     id=${args.id || ''}
     ariaDescribedBy=${args.ariaDescribedBy || nothing}
-    @input=${(e: CustomEvent) => args.onInput?.(e.detail)}
-    @change=${(e: CustomEvent) => args.onChange?.(e.detail)}
-    @focus=${(e: CustomEvent) => args.onFocus?.(e.detail)}
-    @blur=${(e: CustomEvent) => args.onBlur?.(e.detail)}
+    @input=${fn()}
+    @change=${fn()}
+    @focus=${fn()}
+    @blur=${fn()}
   ></ctt-input-field>`,
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        component: 'A flexible input field component that supports various input types, validation states, and sizes.',
+      },
+    },
+    viewport: {
+      defaultViewport: 'tablet',
+    },
+    backgrounds: {
+      default: 'light',
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 200px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
   argTypes: {
     label: {
       control: 'text',
@@ -93,16 +98,11 @@ const meta = {
       description: 'Custom aria-describedby attribute',
     },
   },
-  args: {
-    onInput: fn(),
-    onChange: fn(),
-    onFocus: fn(),
-    onBlur: fn(),
-  },
-} satisfies Meta<InputFieldProps>;
+  args: {},
+} satisfies Meta;
 
 export default meta;
-type Story = StoryObj<InputFieldProps>;
+type Story = StoryObj;
 
 // Default story
 export const Default: Story = {
@@ -111,6 +111,13 @@ export const Default: Story = {
     placeholder: 'Enter your email',
     name: 'email',
     type: 'email',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Basic input field with email type and label.',
+      },
+    },
   },
 };
 
@@ -143,6 +150,20 @@ export const Sizes: Story = {
       </ctt-input-field>
     </div>
   `,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstration of the different size variants available for input fields.',
+      },
+    },
+  },
+  decorators: [
+    (story) => html`
+      <div style="min-height: 350px; padding: 20px;">
+        ${story()}
+      </div>
+    `,
+  ],
 };
 
 export const Types: Story = {
