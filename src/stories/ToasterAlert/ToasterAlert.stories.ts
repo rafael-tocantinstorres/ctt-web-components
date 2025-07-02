@@ -8,9 +8,17 @@ const meta: Meta = {
   component: 'ctt-toaster-alert',
   tags: ['autodocs'],
   argTypes: {
+    type: {
+      control: { type: 'select' },
+      options: ['alert', 'toaster'],
+    },
     variant: {
       control: { type: 'select' },
       options: ['info', 'warning', 'error', 'success'],
+    },
+    position: {
+      control: { type: 'select' },
+      options: ['top', 'bottom'],
     },
     headline: { control: 'text' },
     message: { control: 'text' },
@@ -23,82 +31,144 @@ export default meta;
 
 type Story = StoryObj<CttToasterAlert>;
 
-export const Info: Story = {
+// Alert Type Stories
+export const AlertInfo: Story = {
   args: {
+    type: 'alert',
     variant: 'info',
-    headline: 'Headline',
-    message: 'Message description',
+    headline: 'Information Alert',
+    message: 'This is an alert that can be placed anywhere in your layout.',
     dismissable: true,
-    visible: true, // Ensure the toaster is visible by default
+    visible: true,
   },
 };
 
-export const Warning: Story = {
+export const AlertWarning: Story = {
   args: {
+    type: 'alert',
     variant: 'warning',
-    headline: 'Headline',
-    message: 'Message description',
+    headline: 'Warning Alert',
+    message: 'This is a warning alert with important information.',
     dismissable: true,
-    visible: true, // Ensure the toaster is visible by default
+    visible: true,
   },
 };
 
-export const Error: Story = {
+export const AlertError: Story = {
   args: {
+    type: 'alert',
     variant: 'error',
-    headline: 'Headline',
-    message: 'Message description',
+    headline: 'Error Alert',
+    message: 'This is an error alert indicating something went wrong.',
     dismissable: true,
-    visible: true, // Ensure the toaster is visible by default
+    visible: true,
   },
 };
 
-export const Success: Story = {
+export const AlertSuccess: Story = {
   args: {
+    type: 'alert',
     variant: 'success',
-    headline: 'Headline',
-    message: 'Message description',
+    headline: 'Success Alert',
+    message: 'This is a success alert confirming an action was completed.',
     dismissable: true,
-    visible: true, // Ensure the toaster is visible by default
+    visible: true,
   },
 };
 
-export const WithDuration: Story = {
+// Toaster Type Stories
+export const ToasterTopInfo: Story = {
+  args: {
+    type: 'toaster',
+    variant: 'info',
+    position: 'top',
+    headline: 'Top Toaster',
+    message: 'This toaster appears at the top-right of the page.',
+    dismissable: true,
+    visible: true,
+  },
+};
+
+export const ToasterBottomSuccess: Story = {
+  args: {
+    type: 'toaster',
+    variant: 'success',
+    position: 'bottom',
+    headline: 'Bottom Toaster',
+    message: 'This toaster appears at the bottom-right of the page.',
+    dismissable: true,
+    visible: true,
+  },
+};
+
+// Interactive Examples
+export const ToasterWithDuration: Story = {
   render: () => {
     const toaster = document.createElement('ctt-toaster-alert') as CttToasterAlert;
 
-    const show = () => {
+    const showTopToaster = () => {
       toaster.showToaster({
+        type: 'toaster',
         variant: 'info',
-        headline: 'Toaster Shown',
-        message: 'This toaster was shown by calling the showToaster method.',
+        position: 'top',
+        headline: 'Auto-dismiss Toaster',
+        message: 'This toaster will automatically disappear in 5 seconds.',
         dismissable: true,
-        duration: 5, // Duration in seconds
+        duration: 5,
+      });
+    };
+
+    const showBottomToaster = () => {
+      toaster.showToaster({
+        type: 'toaster',
+        variant: 'success',
+        position: 'bottom',
+        headline: 'Bottom Toaster',
+        message: 'This toaster appears at the bottom of the page.',
+        dismissable: true,
       });
     };
 
     return html`
-      <button @click=${show}>Show Toaster</button>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <button @click=${showTopToaster}>Show Top Toaster (5s duration)</button>
+        <button @click=${showBottomToaster}>Show Bottom Toaster</button>
+      </div>
       ${toaster}
     `;
   },
 };
 
-export const ShowToaster: Story = {
+export const InteractiveExample: Story = {
   render: () => {
     const toaster = document.createElement('ctt-toaster-alert') as CttToasterAlert;
 
-    const show = () => {
+    const showAlert = () => {
       toaster.showToaster({
+        type: 'alert',
+        variant: 'warning',
+        headline: 'Alert Example',
+        message: 'This is an alert that stays in place.',
+        dismissable: true,
+      });
+    };
+
+    const showToaster = () => {
+      toaster.showToaster({
+        type: 'toaster',
         variant: 'info',
-        headline: 'Toaster Shown',
-        message: 'This toaster was shown by calling the showToaster method.',
+        position: 'top',
+        headline: 'Toaster Example',
+        message: 'This is a toaster that appears fixed on the page.',
         dismissable: true,
       });
     };
 
     return html`
-      <button @click=${show}>Show Toaster</button>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+        <button @click=${showAlert}>Show Alert (inline)</button>
+        <button @click=${showToaster}>Show Toaster (fixed position)</button>
+      </div>
       ${toaster}
     `;
   },

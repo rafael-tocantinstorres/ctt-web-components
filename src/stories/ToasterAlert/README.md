@@ -1,20 +1,53 @@
 # ToasterAlert
 
-A toasteralert component for the CTT Design System.
+A flexible notification component for the CTT Design System that supports both inline alerts and floating toaster notifications.
 
 ## Usage
 
+```html
+<!-- Basic Alert (inline) -->
+<ctt-toaster-alert 
+  type="alert"
+  variant="info"
+  headline="Information"
+  message="This is an inline alert."
+  visible="true">
+</ctt-toaster-alert>
+
+<!-- Toaster (fixed position) -->
+<ctt-toaster-alert 
+  type="toaster"
+  variant="success"
+  position="top"
+  headline="Success!"
+  message="Your action was completed successfully."
+  visible="true"
+  dismissable="true">
+</ctt-toaster-alert>
+```
+
 ```typescript
-import { ToasterAlert } from '@ctt/design-system';
+// Programmatic usage
+const toaster = document.querySelector('ctt-toaster-alert');
 
-// Basic usage
-ToasterAlert({ children: 'Hello World' });
+// Show as alert
+toaster.showToaster({
+  type: 'alert',
+  variant: 'warning',
+  headline: 'Warning',
+  message: 'Please review your input.',
+  dismissable: true
+});
 
-// With variants
-ToasterAlert({ 
-  children: 'Click me',
-  variant: 'primary',
-  size: 'large'
+// Show as toaster with auto-dismiss
+toaster.showToaster({
+  type: 'toaster',
+  variant: 'success',
+  position: 'top',
+  headline: 'Saved!',
+  message: 'Your changes have been saved.',
+  dismissable: true,
+  duration: 5 // Auto-dismiss after 5 seconds
 });
 ```
 
@@ -22,25 +55,52 @@ ToasterAlert({
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `string` | `''` | The content to display inside the component |
-| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Size variant of the component |
-| `variant` | `'primary' \| 'secondary' \| 'tertiary'` | `'primary'` | Color variant of the component |
-| `disabled` | `boolean` | `false` | Whether the component is disabled |
-| `onClick` | `() => void` | `undefined` | Click handler |
-| `className` | `string` | `''` | Custom CSS class |
-| `ariaLabel` | `string` | `''` | Accessible label for screen readers |
+| `type` | `'alert' \| 'toaster'` | `'alert'` | Display type - alert (inline) or toaster (fixed position) |
+| `variant` | `'info' \| 'warning' \| 'error' \| 'success'` | `'info'` | Visual variant for different message types |
+| `position` | `'top' \| 'bottom'` | `'top'` | Position for toaster type (top-right or bottom-right) |
+| `headline` | `string` | `''` | Main title text |
+| `message` | `string` | `''` | Description or body text |
+| `dismissable` | `boolean` | `false` | Whether to show a close button |
+| `visible` | `boolean` | `false` | Whether the component is visible |
+
+## Types
+
+### Alert
+- **Position**: Relative - can be placed anywhere in your layout
+- **Width**: Responsive (100% with max-width)
+- **Use case**: Form validation, page-level messages, embedded notifications
+
+### Toaster
+- **Position**: Fixed (top-right or bottom-right)
+- **Width**: Fixed (320px, responsive on mobile)
+- **Use case**: Success confirmations, temporary notifications, system messages
+- **Animation**: Slides in from the right with fade effect
 
 ## Variants
 
-### Size
-- `small` - Compact size for tight spaces
-- `medium` - Default size for most use cases
-- `large` - Prominent size for emphasis
+- `info` - Informational messages (blue theme)
+- `warning` - Warning messages (orange theme)
+- `error` - Error messages (red theme)
+- `success` - Success messages (green theme)
 
-### Color
-- `primary` - Primary brand color
-- `secondary` - Secondary styling with border
-- `tertiary` - Minimal styling, text-only appearance
+## Methods
+
+### showToaster(params)
+
+Programmatically show the toaster/alert with the specified parameters.
+
+```typescript
+showToaster({
+  type?: 'alert' | 'toaster',        // Display type
+  variant?: 'info' | 'warning' | 'error' | 'success', // Visual variant
+  position?: 'top' | 'bottom',       // Position for toaster type
+  headline?: string,                 // Title text
+  message?: string,                  // Body text
+  dismissable?: boolean,             // Show close button
+  duration?: number,                 // Auto-dismiss duration in seconds
+  showFunction?: () => void          // Callback when shown
+})
+```
 
 ## Accessibility
 

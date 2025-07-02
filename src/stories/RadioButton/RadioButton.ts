@@ -5,6 +5,12 @@ import styles from './radio-button.css?inline';
 /**
  * RadioButton component for the CTT Design System
  */
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'ctt-radio-button': RadioButton;
+  }
+}
 @customElement('ctt-radio-button')
 export class RadioButton extends LitElement {
   static styles = css([styles] as any);
@@ -185,11 +191,5 @@ export class RadioButton extends LitElement {
         />
       </svg>
     `;
-  }
-}
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'ctt-radio-button': RadioButton;
   }
 }

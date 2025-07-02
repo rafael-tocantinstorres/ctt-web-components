@@ -240,6 +240,11 @@
   color: var(--ctt-core-color-neutral-200);
 }
 
+/* Default List Item: SELECTED + HOVER STATE */
+.ctt-dropdown__option--selected:not(.ctt-dropdown__option--checkbox):hover:not(.ctt-dropdown__option--disabled) {
+  background: var(--ctt-core-color-primary-main);
+}
+
 /* Default List Item: DISABLED STATE */
 .ctt-dropdown__option--disabled:not(.ctt-dropdown__option--checkbox) {
   cursor: not-allowed;
