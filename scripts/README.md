@@ -27,37 +27,42 @@ npm run create-component Card
 This will create:
 ```
 src/stories/Card/
-├── Card.ts           # Component logic with Lit
-├── card.css          # Component styles with CTT tokens
-├── Card.stories.ts   # Storybook stories
-├── Card.test.ts      # Vitest tests
+├── Card.ts           # Lit Web Component with TypeScript
+├── Card.css          # Component styles with CTT tokens
+├── Card.stories.ts   # Storybook stories (consistent pattern)
+├── Card.test.ts      # Vitest tests with @open-wc/testing
 └── README.md         # Component documentation
 ```
 
 #### Generated Component Features
 
-✅ **Lit-based component** with TypeScript  
+✅ **Lit Web Component** with TypeScript & decorators  
 ✅ **CTT Design System tokens** integration  
-✅ **Storybook stories** with all variants  
-✅ **Comprehensive prop interface** with JSDoc  
+✅ **Consistent Storybook stories** following established pattern  
+✅ **Custom element registration** (`@customElement`)  
+✅ **Reactive properties** with `@property` decorators  
 ✅ **CSS with accessibility** features  
-✅ **Unit tests** with Vitest  
+✅ **Comprehensive unit tests** with @open-wc/testing  
 ✅ **Component documentation**  
 ✅ **Responsive design** considerations  
 ✅ **Theme support** (size, variant props)  
+✅ **Event handling** with custom events  
+✅ **Keyboard navigation** support  
+✅ **Shadow DOM** encapsulation  
 
 #### Component Structure
 
 Each generated component includes:
 
-**TypeScript Component (`ComponentName.ts`)**
-- Lit HTML templates
-- Comprehensive prop interface
-- Event handling
-- Accessibility attributes
-- CSS class management
+**Lit Web Component (`ComponentName.ts`)**
+- Lit HTML templates with Shadow DOM
+- Custom element registration (`@customElement`)
+- Reactive properties with `@property` decorators
+- Event handling with custom events
+- Accessibility attributes and keyboard navigation
+- CSS class management and styling
 
-**CSS Styles (`component-name.css`)**
+**CSS Styles (`ComponentName.css`)**
 - CTT Design System tokens
 - Size variants (small, medium, large)
 - Color variants (primary, secondary, tertiary)
@@ -67,18 +72,23 @@ Each generated component includes:
 - Reduced motion support
 
 **Storybook Stories (`ComponentName.stories.ts`)**
-- Default story
+- Consistent pattern following DropdownInput example
+- Default story with documentation
 - All size variants
 - All color variants
 - Disabled state
-- Custom content examples
-- Combined showcase story
+- Interactive examples
+- AllVariants showcase with decorators
+- Proper argTypes with descriptions
+- Layout and parameters configuration
 
 **Unit Tests (`ComponentName.test.ts`)**
-- Basic rendering tests
-- Prop validation tests
-- Class application tests
-- State handling tests
+- @open-wc/testing framework
+- Shadow DOM testing
+- Reactive property tests
+- Event dispatching tests
+- Keyboard navigation tests
+- Accessibility tests
 
 **Documentation (`README.md`)**
 - Usage examples
@@ -104,12 +114,48 @@ Generated components automatically include:
 - **Semantic color meanings**
 - **Consistent component architecture**
 
+#### Usage Example
+
+After generating a component called `Card`, you can use it in HTML:
+
+```html
+<!-- Basic usage -->
+<ctt-card label="Hello World"></ctt-card>
+
+<!-- With variants -->
+<ctt-card 
+  label="Submit" 
+  variant="primary" 
+  size="large">
+</ctt-card>
+
+<!-- With event handling -->
+<ctt-card 
+  label="Click me" 
+  @click="handleClick">
+</ctt-card>
+```
+
+And in TypeScript:
+
+```typescript
+import './stories/Card/Card';
+
+// Component is automatically registered as 'ctt-card'
+const card = document.createElement('ctt-card');
+card.label = 'Dynamic Card';
+card.variant = 'secondary';
+card.addEventListener('click', (e) => {
+  console.log('Card clicked:', e.detail);
+});
+```
+
 #### After Generation
 
 1. **Review the generated files** and customize as needed
 2. **Run Storybook** to see your component: `npm run storybook`
 3. **Run tests** to ensure everything works: `npm test`
-4. **Update the main export** if this component should be exported from the library
+4. **Import the component** in your application
 5. **Add any specific CTT Design System tokens** your component needs
 
 #### Best Practices

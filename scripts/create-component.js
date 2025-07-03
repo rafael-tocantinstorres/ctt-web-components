@@ -4,9 +4,9 @@
  * CTT Web Components - Component Scaffolding Script
  * 
  * This script generates a new component with all necessary files:
- * - Component TypeScript file with Lit
+ * - Component TypeScript file with Lit Web Components
  * - Component CSS file with CTT design tokens
- * - Storybook stories file
+ * - Storybook stories file following consistent pattern
  * - Basic test structure
  * 
  * Usage:
@@ -54,72 +54,124 @@ if (fs.existsSync(componentDir)) {
 fs.mkdirSync(componentDir, { recursive: true });
 
 // Generate TypeScript component file
-const componentTs = `import { html } from 'lit';
+const componentTs = `import { LitElement, html, css } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 
-import './${kebabName}.css';
+import './${componentName}.css';
 
-export interface ${componentName}Props {
-  /**
-   * The content to display inside the component
-   */
-  children?: string;
+/**
+ * ${componentName} Web Component
+ * 
+ * A customizable ${componentName.toLowerCase()} component for the CTT Design System.
+ * 
+ * @element ctt-${kebabName}
+ * 
+ * @fires click - Dispatched when the component is clicked
+ * @fires change - Dispatched when the component value changes
+ * 
+ * @slot - Main content slot
+ * 
+ * @csspart component - The main component wrapper
+ * 
+ * @cssprop --ctt-${kebabName}-background - Background color
+ * @cssprop --ctt-${kebabName}-color - Text color
+ * @cssprop --ctt-${kebabName}-border - Border style
+ */
+@customElement('ctt-${kebabName}')
+export class ${componentName} extends LitElement {
+  static styles = css\`:host { display: inline-block; }\`;
+
   /**
    * Size variant of the component
    */
-  size?: 'small' | 'medium' | 'large';
+  @property({ type: String })
+  size: 'small' | 'medium' | 'large' = 'medium';
+
   /**
    * Color variant of the component
    */
-  variant?: 'primary' | 'secondary' | 'tertiary';
+  @property({ type: String })
+  variant: 'primary' | 'secondary' | 'tertiary' = 'primary';
+
   /**
    * Whether the component is disabled
    */
-  disabled?: boolean;
+  @property({ type: Boolean })
+  disabled = false;
+
   /**
-   * Click handler
+   * The text content to display
    */
-  onClick?: () => void;
-  /**
-   * Custom CSS class
-   */
-  className?: string;
+  @property({ type: String })
+  label = '';
+
   /**
    * Accessible label for screen readers
    */
-  ariaLabel?: string;
+  @property({ type: String, attribute: 'aria-label' })
+  ariaLabel = '';
+
+  /**
+   * Name attribute for form elements
+   */
+  @property({ type: String })
+  name = '';
+
+  /**
+   * Value attribute for form elements
+   */
+  @property({ type: String })
+  value = '';
+
+  private _handleClick() {
+    if (this.disabled) return;
+    
+    this.dispatchEvent(new CustomEvent('click', {
+      detail: { value: this.value },
+      bubbles: true,
+      composed: true,
+    }));
+  }
+
+  render() {
+    const classes = [
+      'ctt-${kebabName}',
+      \`ctt-\${kebabName}--\${this.size}\`,
+      \`ctt-\${kebabName}--\${this.variant}\`,
+      this.disabled && \`ctt-\${kebabName}--disabled\`,
+    ].filter(Boolean).join(' ');
+
+    return html\`
+      <div
+        part="component"
+        class=\${classes}
+        ?disabled=\${this.disabled}
+        aria-label=\${this.ariaLabel || this.label}
+        role="button"
+        tabindex=\${this.disabled ? '-1' : '0'}
+        @click=\${this._handleClick}
+        @keydown=\${this._handleKeyDown}
+      >
+        <slot>\${this.label}</slot>
+      </div>
+    \`;
+  }
+
+  private _handleKeyDown(e: KeyboardEvent) {
+    if (this.disabled) return;
+    
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      this._handleClick();
+    }
+  }
 }
 
-/**
- * ${componentName} component for the CTT Design System
- */
-export const ${componentName} = ({
-  children = '',
-  size = 'medium',
-  variant = 'primary',
-  disabled = false,
-  onClick,
-  className = '',
-  ariaLabel = ''
-}: ${componentName}Props) => {
-  const classes = [
-    'ctt-${kebabName}',
-    \`ctt-\${kebabName}--\${size}\`,
-    \`ctt-\${kebabName}--\${variant}\`,
-    disabled && \`ctt-\${kebabName}--disabled\`,
-    className
-  ].filter(Boolean).join(' ');
-
-  return html\`
-    <div
-      class=\${classes}
-      ?disabled=\${disabled}
-      aria-label=\${ariaLabel}
-      @click=\${onClick}
-    >
-      <slot>\${children}</slot>
-    </div>
-  \`;
-};
+declare global {
+  interface HTMLElementTagNameMap {
+    'ctt-${kebabName}': ${componentName};
+  }
+}
 `;
 
 // Generate CSS file
@@ -128,7 +180,7 @@ const componentCss = `/**
  * Using CTT Design System tokens
  * 
  * Usage:
- * <div class="ctt-${kebabName} ctt-${kebabName}--primary ctt-${kebabName}--medium">Content</div>
+ * <ctt-${kebabName} size="medium" variant="primary" label="Content"></ctt-${kebabName}>
  */
 
 /* ${componentName}-specific CSS Custom Properties */
@@ -224,7 +276,7 @@ const componentCss = `/**
 
 /* Disabled State */
 .ctt-${kebabName}--disabled {
-  opacity: 0.5;
+  opacity: 0.6;
   cursor: not-allowed;
   pointer-events: none;
 }
@@ -255,18 +307,61 @@ const componentCss = `/**
 }
 `;
 
-// Generate Storybook stories file
+// Generate Storybook stories file following the consistent pattern
 const storiesTs = `import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { fn } from 'storybook/test';
+import { html } from 'lit';
 
-import type { ${componentName}Props } from './${componentName}';
-import { ${componentName} } from './${componentName}';
+import './${componentName}';
+import type { ${componentName} } from './${componentName}';
+
+// Sample data for stories
+const sampleVariants = ['primary', 'secondary', 'tertiary'] as const;
+const sampleSizes = ['small', 'medium', 'large'] as const;
+const sampleLabels = [
+  'Click me',
+  'Submit',
+  'Cancel',
+  'Save changes',
+  'Get started',
+];
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
   title: 'Components/${componentName}',
   tags: ['autodocs'],
-  render: (args) => ${componentName}(args),
+  render: (args) => html\`<ctt-${kebabName}
+    size=\${args.size}
+    variant=\${args.variant}
+    ?disabled=\${args.disabled}
+    label=\${args.label}
+    name=\${args.name}
+    value=\${args.value}
+    aria-label=\${args.ariaLabel}
+    @click=\${fn()}
+    @change=\${fn()}
+  ></ctt-${kebabName}>\`,
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        component: 'A flexible ${componentName.toLowerCase()} component that supports different sizes, variants, and states.',
+      },
+    },
+    viewport: {
+      defaultViewport: 'tablet',
+    },
+    backgrounds: {
+      default: 'light',
+    },
+  },
+  decorators: [
+    (story) => html\`
+      <div style="min-height: 200px; padding: 20px;">
+        \${story()}
+      </div>
+    \`,
+  ],
   argTypes: {
     size: {
       control: { type: 'select' },
@@ -282,31 +377,42 @@ const meta = {
       control: 'boolean',
       description: 'Whether the component is disabled',
     },
-    children: {
+    label: {
       control: 'text',
-      description: 'The content to display inside the component',
+      description: 'The text content to display',
     },
-    className: {
+    name: {
       control: 'text',
-      description: 'Custom CSS class',
+      description: 'Name attribute for form elements',
+    },
+    value: {
+      control: 'text',
+      description: 'Value attribute for form elements',
     },
     ariaLabel: {
       control: 'text',
       description: 'Accessible label for screen readers',
     },
   },
-  args: {
-    onClick: fn(),
-  },
-} satisfies Meta<${componentName}Props>;
+  args: {},
+} satisfies Meta<${componentName}>;
 
 export default meta;
-type Story = StoryObj<${componentName}Props>;
+type Story = StoryObj<${componentName}>;
 
 // Default story
 export const Default: Story = {
   args: {
-    children: '${componentName} Content',
+    label: '${componentName} Component',
+    size: 'medium',
+    variant: 'primary',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Basic ${componentName.toLowerCase()} with default settings.',
+      },
+    },
   },
 };
 
@@ -314,21 +420,24 @@ export const Default: Story = {
 export const Small: Story = {
   args: {
     size: 'small',
-    children: 'Small ${componentName}',
+    label: 'Small ${componentName}',
+    variant: 'primary',
   },
 };
 
 export const Medium: Story = {
   args: {
     size: 'medium',
-    children: 'Medium ${componentName}',
+    label: 'Medium ${componentName}',
+    variant: 'primary',
   },
 };
 
 export const Large: Story = {
   args: {
     size: 'large',
-    children: 'Large ${componentName}',
+    label: 'Large ${componentName}',
+    variant: 'primary',
   },
 };
 
@@ -336,21 +445,24 @@ export const Large: Story = {
 export const Primary: Story = {
   args: {
     variant: 'primary',
-    children: 'Primary ${componentName}',
+    label: 'Primary ${componentName}',
+    size: 'medium',
   },
 };
 
 export const Secondary: Story = {
   args: {
     variant: 'secondary',
-    children: 'Secondary ${componentName}',
+    label: 'Secondary ${componentName}',
+    size: 'medium',
   },
 };
 
 export const Tertiary: Story = {
   args: {
     variant: 'tertiary',
-    children: 'Tertiary ${componentName}',
+    label: 'Tertiary ${componentName}',
+    size: 'medium',
   },
 };
 
@@ -358,84 +470,167 @@ export const Tertiary: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
-    children: 'Disabled ${componentName}',
+    label: 'Disabled ${componentName}',
+    variant: 'primary',
+    size: 'medium',
   },
 };
 
-// Custom content
-export const WithCustomContent: Story = {
+// Interactive examples
+export const Interactive: Story = {
   args: {
-    children: '🚀 Custom Content with Emoji',
+    label: 'Click me!',
     variant: 'primary',
-    size: 'large',
+    size: 'medium',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Interactive ${componentName.toLowerCase()} that responds to clicks.',
+      },
+    },
   },
 };
 
 // All variants showcase
 export const AllVariants: Story = {
-  render: () => \`
-    <div style="display: flex; flex-direction: column; gap: 16px;">
-      <div style="display: flex; gap: 8px; align-items: center;">
-        <span>Sizes:</span>
-        \${${componentName}({ size: 'small', children: 'Small' })}
-        \${${componentName}({ size: 'medium', children: 'Medium' })}
-        \${${componentName}({ size: 'large', children: 'Large' })}
+  render: () => html\`
+    <div class="ctt-flex ctt-flex-col ctt-gap-8 ctt-max-w-4xl ctt-p-6">
+      <div class="ctt-flex ctt-flex-col ctt-gap-4">
+        <h3 class="ctt-title-m">Size Variants</h3>
+        <div class="ctt-flex ctt-gap-4 ctt-items-center ctt-flex-wrap">
+          <ctt-${kebabName} size="small" variant="primary" label="Small"></ctt-${kebabName}>
+          <ctt-${kebabName} size="medium" variant="primary" label="Medium"></ctt-${kebabName}>
+          <ctt-${kebabName} size="large" variant="primary" label="Large"></ctt-${kebabName}>
+        </div>
       </div>
-      <div style="display: flex; gap: 8px; align-items: center;">
-        <span>Colors:</span>
-        \${${componentName}({ variant: 'primary', children: 'Primary' })}
-        \${${componentName}({ variant: 'secondary', children: 'Secondary' })}
-        \${${componentName}({ variant: 'tertiary', children: 'Tertiary' })}
+
+      <div class="ctt-flex ctt-flex-col ctt-gap-4">
+        <h3 class="ctt-title-m">Color Variants</h3>
+        <div class="ctt-flex ctt-gap-4 ctt-items-center ctt-flex-wrap">
+          <ctt-${kebabName} variant="primary" label="Primary"></ctt-${kebabName}>
+          <ctt-${kebabName} variant="secondary" label="Secondary"></ctt-${kebabName}>
+          <ctt-${kebabName} variant="tertiary" label="Tertiary"></ctt-${kebabName}>
+        </div>
       </div>
-      <div style="display: flex; gap: 8px; align-items: center;">
-        <span>States:</span>
-        \${${componentName}({ children: 'Normal' })}
-        \${${componentName}({ disabled: true, children: 'Disabled' })}
+
+      <div class="ctt-flex ctt-flex-col ctt-gap-4">
+        <h3 class="ctt-title-m">State Variants</h3>
+        <div class="ctt-flex ctt-gap-4 ctt-items-center ctt-flex-wrap">
+          <ctt-${kebabName} variant="primary" label="Normal"></ctt-${kebabName}>
+          <ctt-${kebabName} variant="primary" label="Disabled" disabled></ctt-${kebabName}>
+        </div>
       </div>
     </div>
   \`,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Comprehensive showcase of all ${componentName.toLowerCase()} variants and states.',
+      },
+    },
+  },
+  decorators: [
+    (story) => html\`
+      <div style="min-height: 400px; padding: 20px;">
+        \${story()}
+      </div>
+    \`,
+  ],
 };
 `;
 
 // Generate test file
-const testTs = `import { describe, it, expect } from 'vitest';
-import { ${componentName} } from './${componentName}';
+const testTs = `import { describe, it, expect, beforeEach } from 'vitest';
+import { fixture, html } from '@open-wc/testing';
+import './${componentName}';
+import type { ${componentName} } from './${componentName}';
 
 describe('${componentName}', () => {
-  it('should render with default props', () => {
-    const result = ${componentName}({});
-    expect(result).toBeDefined();
+  let element: ${componentName};
+
+  beforeEach(async () => {
+    element = await fixture(html\`<ctt-${kebabName}></ctt-${kebabName}>\`);
   });
 
-  it('should render with custom children', () => {
-    const result = ${componentName}({ children: 'Test Content' });
-    expect(result.strings[0]).toContain('Test Content');
+  it('should render with default properties', () => {
+    expect(element).to.exist;
+    expect(element.size).to.equal('medium');
+    expect(element.variant).to.equal('primary');
+    expect(element.disabled).to.be.false;
   });
 
-  it('should apply size classes correctly', () => {
-    const smallResult = ${componentName}({ size: 'small' });
-    expect(smallResult.strings[0]).toContain('ctt-${kebabName}--small');
-
-    const largeResult = ${componentName}({ size: 'large' });
-    expect(largeResult.strings[0]).toContain('ctt-${kebabName}--large');
+  it('should render with custom label', async () => {
+    element.label = 'Test Label';
+    await element.updateComplete;
+    
+    const content = element.shadowRoot?.textContent?.trim();
+    expect(content).to.include('Test Label');
   });
 
-  it('should apply variant classes correctly', () => {
-    const primaryResult = ${componentName}({ variant: 'primary' });
-    expect(primaryResult.strings[0]).toContain('ctt-${kebabName}--primary');
-
-    const secondaryResult = ${componentName}({ variant: 'secondary' });
-    expect(secondaryResult.strings[0]).toContain('ctt-${kebabName}--secondary');
+  it('should apply size classes correctly', async () => {
+    element.size = 'small';
+    await element.updateComplete;
+    
+    const componentDiv = element.shadowRoot?.querySelector('.ctt-${kebabName}');
+    expect(componentDiv?.classList.contains('ctt-${kebabName}--small')).to.be.true;
   });
 
-  it('should handle disabled state', () => {
-    const result = ${componentName}({ disabled: true });
-    expect(result.strings[0]).toContain('ctt-${kebabName}--disabled');
+  it('should apply variant classes correctly', async () => {
+    element.variant = 'secondary';
+    await element.updateComplete;
+    
+    const componentDiv = element.shadowRoot?.querySelector('.ctt-${kebabName}');
+    expect(componentDiv?.classList.contains('ctt-${kebabName}--secondary')).to.be.true;
   });
 
-  it('should apply custom className', () => {
-    const result = ${componentName}({ className: 'custom-class' });
-    expect(result.strings[0]).toContain('custom-class');
+  it('should handle disabled state', async () => {
+    element.disabled = true;
+    await element.updateComplete;
+    
+    const componentDiv = element.shadowRoot?.querySelector('.ctt-${kebabName}');
+    expect(componentDiv?.classList.contains('ctt-${kebabName}--disabled')).to.be.true;
+    expect(componentDiv?.getAttribute('tabindex')).to.equal('-1');
+  });
+
+  it('should dispatch click event when clicked', async () => {
+    let eventFired = false;
+    element.addEventListener('click', () => {
+      eventFired = true;
+    });
+    
+    const componentDiv = element.shadowRoot?.querySelector('.ctt-${kebabName}');
+    componentDiv?.dispatchEvent(new Event('click'));
+    
+    expect(eventFired).to.be.true;
+  });
+
+  it('should not dispatch events when disabled', async () => {
+    element.disabled = true;
+    await element.updateComplete;
+    
+    let eventFired = false;
+    element.addEventListener('click', () => {
+      eventFired = true;
+    });
+    
+    const componentDiv = element.shadowRoot?.querySelector('.ctt-${kebabName}');
+    componentDiv?.dispatchEvent(new Event('click'));
+    
+    expect(eventFired).to.be.false;
+  });
+
+  it('should handle keyboard events', async () => {
+    let eventFired = false;
+    element.addEventListener('click', () => {
+      eventFired = true;
+    });
+    
+    const componentDiv = element.shadowRoot?.querySelector('.ctt-${kebabName}');
+    const enterEvent = new KeyboardEvent('keydown', { key: 'Enter' });
+    componentDiv?.dispatchEvent(enterEvent);
+    
+    expect(eventFired).to.be.true;
   });
 });
 `;
@@ -443,110 +638,172 @@ describe('${componentName}', () => {
 // Generate README file
 const readmeMd = `# ${componentName}
 
-A ${componentName.toLowerCase()} component for the CTT Design System.
+A ${componentName.toLowerCase()} web component for the CTT Design System.
 
 ## Usage
 
-\`\`\`typescript
-import { ${componentName} } from '@ctt/design-system';
+\`\`\`html
+<!-- Basic usage -->
+<ctt-${kebabName} label="Click me"></ctt-${kebabName}>
 
-// Basic usage
-${componentName}({ children: 'Hello World' });
+<!-- With variants -->
+<ctt-${kebabName} 
+  label="Submit" 
+  variant="primary" 
+  size="large">
+</ctt-${kebabName}>
 
-// With variants
-${componentName}({ 
-  children: 'Click me',
-  variant: 'primary',
-  size: 'large'
-});
+<!-- Disabled state -->
+<ctt-${kebabName} 
+  label="Disabled" 
+  disabled>
+</ctt-${kebabName}>
 \`\`\`
 
-## Props
+## Properties
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| \`children\` | \`string\` | \`''\` | The content to display inside the component |
+| Property | Type | Default | Description |
+|---------|------|---------|-------------|
 | \`size\` | \`'small' \\| 'medium' \\| 'large'\` | \`'medium'\` | Size variant of the component |
 | \`variant\` | \`'primary' \\| 'secondary' \\| 'tertiary'\` | \`'primary'\` | Color variant of the component |
 | \`disabled\` | \`boolean\` | \`false\` | Whether the component is disabled |
-| \`onClick\` | \`() => void\` | \`undefined\` | Click handler |
-| \`className\` | \`string\` | \`''\` | Custom CSS class |
+| \`label\` | \`string\` | \`''\` | The text content to display |
+| \`name\` | \`string\` | \`''\` | Name attribute for form elements |
+| \`value\` | \`string\` | \`''\` | Value attribute for form elements |
 | \`ariaLabel\` | \`string\` | \`''\` | Accessible label for screen readers |
+
+## Events
+
+| Event | Description | Detail |
+|-------|-------------|--------|
+| \`click\` | Dispatched when the component is clicked | \`{ value: string }\` |
+| \`change\` | Dispatched when the component value changes | \`{ value: string }\` |
+
+## Slots
+
+| Slot | Description |
+|------|-------------|
+| Default | Main content slot |
+
+## CSS Custom Properties
+
+| Property | Description | Default |
+|----------|-------------|---------|
+| \`--ctt-${kebabName}-background\` | Background color | Theme dependent |
+| \`--ctt-${kebabName}-color\` | Text color | Theme dependent |
+| \`--ctt-${kebabName}-border\` | Border style | Theme dependent |
+
+## CSS Parts
+
+| Part | Description |
+|------|-------------|
+| \`component\` | The main component wrapper |
 
 ## Variants
 
 ### Size
 - \`small\` - Compact size for tight spaces
-- \`medium\` - Default size for most use cases
+- \`medium\` - Default size for most use cases  
 - \`large\` - Prominent size for emphasis
 
 ### Color
-- \`primary\` - Primary brand color
-- \`secondary\` - Secondary styling with border
-- \`tertiary\` - Minimal styling, text-only appearance
+- \`primary\` - Main brand color, used for primary actions
+- \`secondary\` - Outlined style, used for secondary actions
+- \`tertiary\` - Minimal style, used for tertiary actions
 
 ## Accessibility
 
-- Supports keyboard navigation
-- Includes proper ARIA labels
-- Respects user preferences for reduced motion
+- Supports keyboard navigation (Enter and Space keys)
+- Proper ARIA labeling
+- Focus management
+- Screen reader support
 - High contrast mode support
+- Respects reduced motion preferences
 
-## Design Tokens
+## Examples
 
-This component uses the following CTT Design System tokens:
+### Basic Examples
 
-- Colors: \`--ctt-core-color-*\`
-- Typography: \`--ctt-core-font-*\`
-- Spacing: \`--ctt-core-dimension-*\`
-- Border radius: \`--ctt-base-border-radius-*\`
+\`\`\`html
+<!-- Different sizes -->
+<ctt-${kebabName} size="small" label="Small"></ctt-${kebabName}>
+<ctt-${kebabName} size="medium" label="Medium"></ctt-${kebabName}>
+<ctt-${kebabName} size="large" label="Large"></ctt-${kebabName}>
 
-## Development
-
-Run Storybook to see the component in action:
-
-\`\`\`bash
-npm run storybook
+<!-- Different variants -->
+<ctt-${kebabName} variant="primary" label="Primary"></ctt-${kebabName}>
+<ctt-${kebabName} variant="secondary" label="Secondary"></ctt-${kebabName}>
+<ctt-${kebabName} variant="tertiary" label="Tertiary"></ctt-${kebabName}>
 \`\`\`
 
-Run tests:
+### With Event Handling
 
-\`\`\`bash
-npm test
+\`\`\`html
+<ctt-${kebabName} 
+  label="Click me" 
+  @click="\${handleClick}">
+</ctt-${kebabName}>
+\`\`\`
+
+\`\`\`typescript
+function handleClick(event: CustomEvent) {
+  console.log('Component clicked:', event.detail);
+}
+\`\`\`
+
+### Form Integration
+
+\`\`\`html
+<ctt-${kebabName} 
+  name="${camelName}" 
+  value="submit"
+  label="Submit Form">
+</ctt-${kebabName}>
 \`\`\`
 `;
 
 // Write all files
-const files = [
-  { path: path.join(componentDir, `${componentName}.ts`), content: componentTs },
-  { path: path.join(componentDir, `${kebabName}.css`), content: componentCss },
-  { path: path.join(componentDir, `${componentName}.stories.ts`), content: storiesTs },
-  { path: path.join(componentDir, `${componentName}.test.ts`), content: testTs },
-  { path: path.join(componentDir, 'README.md'), content: readmeMd },
-];
-
 try {
-  files.forEach(({ path: filePath, content }) => {
-    fs.writeFileSync(filePath, content);
-    console.log(`✅ Created ${path.relative(projectRoot, filePath)}`);
-  });
+  // Component TypeScript file
+  fs.writeFileSync(path.join(componentDir, `${componentName}.ts`), componentTs);
+  console.log(`✅ Created ${componentName}.ts`);
 
-  console.log(`\n🎉 Successfully created ${componentName} component!`);
-  console.log(`\nFiles created:`);
-  console.log(`  📁 src/stories/${componentName}/`);
-  console.log(`  ├── ${componentName}.ts`);
-  console.log(`  ├── ${kebabName}.css`);
-  console.log(`  ├── ${componentName}.stories.ts`);
-  console.log(`  ├── ${componentName}.test.ts`);
-  console.log(`  └── README.md`);
-  
-  console.log(`\nNext steps:`);
-  console.log(`  1. Review and customize the generated files`);
-  console.log(`  2. Run 'npm run storybook' to see your component`);
-  console.log(`  3. Run 'npm test' to verify tests pass`);
-  console.log(`  4. Add your component to the main export index if needed`);
-  
+  // Component CSS file
+  fs.writeFileSync(path.join(componentDir, `${componentName}.css`), componentCss);
+  console.log(`✅ Created ${componentName}.css`);
+
+  // Stories file
+  fs.writeFileSync(path.join(componentDir, `${componentName}.stories.ts`), storiesTs);
+  console.log(`✅ Created ${componentName}.stories.ts`);
+
+  // Test file
+  fs.writeFileSync(path.join(componentDir, `${componentName}.test.ts`), testTs);
+  console.log(`✅ Created ${componentName}.test.ts`);
+
+  // README file
+  fs.writeFileSync(path.join(componentDir, 'README.md'), readmeMd);
+  console.log(`✅ Created README.md`);
+
+  console.log('');
+  console.log(`🎉 Successfully created ${componentName} component!`);
+  console.log('');
+  console.log('📁 Files created:');
+  console.log(`   src/stories/${componentName}/${componentName}.ts`);
+  console.log(`   src/stories/${componentName}/${componentName}.css`);
+  console.log(`   src/stories/${componentName}/${componentName}.stories.ts`);
+  console.log(`   src/stories/${componentName}/${componentName}.test.ts`);
+  console.log(`   src/stories/${componentName}/README.md`);
+  console.log('');
+  console.log('🚀 Next steps:');
+  console.log('   1. Import your component in the main stories directory');
+  console.log('   2. Add component-specific styling and behavior');
+  console.log('   3. Run Storybook to see your component: npm run storybook');
+  console.log('   4. Run tests: npm test');
+  console.log('');
+  console.log('💡 Usage in HTML:');
+  console.log(`   <ctt-${kebabName} label="Hello World" size="medium" variant="primary"></ctt-${kebabName}>`);
+
 } catch (error) {
-  console.error('❌ Error creating component:', error.message);
+  console.error('❌ Error creating component files:', error);
   process.exit(1);
 }

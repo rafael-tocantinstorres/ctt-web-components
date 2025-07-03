@@ -1,0 +1,103 @@
+/**
+ * CTT Breadcrumbs Component - Styles for Production Use
+ * Using CTT Design System tokens
+ * 
+ * Usage:
+ * <ctt-breadcrumbs items="[{label: 'Home', state: 'default', navigate: () => {}}, {label: 'Page', state: 'active'}]"></ctt-breadcrumbs>
+ */
+
+/* Breadcrumbs-specific CSS Custom Properties */
+
+/* Base Breadcrumbs Styles */
+.ctt-breadcrumbs {
+  /* Layout */
+  display: inline-block;
+  
+  /* Typography */
+  font-family: var(--ctt-core-font-family-body);
+  font-weight: var(--ctt-core-font-weight-regular);
+  line-height: var(--ctt-core-line-height-base);
+  font-size: var(--ctt-core-font-size-base);
+}
+
+/* Breadcrumbs List */
+.ctt-breadcrumbs__list {
+  display: flex;
+  align-items: center;
+  gap: var(--ctt-breadcrumbs-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Breadcrumbs Item */
+.ctt-breadcrumbs__item {
+  display: flex;
+  align-items: center;
+  gap: var(--ctt-breadcrumbs-gap);
+}
+
+/* Breadcrumbs Link */
+.ctt-breadcrumbs__link {
+  color: var(--ctt-breadcrumbs-color-default);
+  text-decoration: underline;
+  transition: var(--ctt-breadcrumbs-transition);
+  cursor: pointer;
+  
+  /* Remove default button/link styles */
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  
+  /* Ensure proper focus styles */
+  outline: none;
+}
+
+/* Breadcrumbs Link Hover State */
+.ctt-breadcrumbs__link:hover {
+  color: var(--ctt-breadcrumbs-color-hover);
+}
+
+/* Breadcrumbs Link Active State */
+.ctt-breadcrumbs__link--active {
+  color: var(--ctt-breadcrumbs-color-active);
+  text-decoration: none;;
+  cursor: default;
+}
+
+/* Breadcrumbs Separator */
+.ctt-breadcrumbs__separator {
+  color: var(--ctt-breadcrumbs-color-default);
+  font-weight: var(--ctt-core-font-weight-regular);
+  user-select: none;
+}
+
+/* Focus State */
+.ctt-breadcrumbs__link:focus {
+  outline: 2px solid var(--ctt-core-color-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Accessibility - High Contrast Mode */
+@media (prefers-contrast: high) {
+  .ctt-breadcrumbs__link {
+    border-bottom: 1px solid transparent;
+  }
+  
+  .ctt-breadcrumbs__link:hover {
+    border-bottom-color: var(--ctt-breadcrumbs-color-hover);
+  }
+  
+  .ctt-breadcrumbs__link--active {
+    border-bottom-color: var(--ctt-breadcrumbs-color-active);
+  }
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .ctt-breadcrumbs__link {
+    transition: none;
+  }
+}

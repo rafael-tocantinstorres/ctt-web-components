@@ -20,7 +20,6 @@ const meta = {
       size=${args.size}
       position=${args.position}
       arrowPosition=${args.arrowPosition}
-      ?disabled=${args.disabled}
       ariaLabel=${args.ariaLabel || ''}
     >
       <ctt-button label="Hover me" size="medium" variant="primary" borderRadius="extraSmall"></ctt-button>
@@ -66,10 +65,6 @@ const meta = {
       control: { type: 'select' },
       options: ['start', 'middle', 'end'],
       description: 'Position of the tooltip arrow within the tooltip'
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Whether the tooltip is disabled'
     },
     ariaLabel: {
       control: 'text',
@@ -207,15 +202,6 @@ export const ArrowEnd: Story = {
     text: 'Arrow at end position',
     position: 'top',
     arrowPosition: 'end',
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    text: 'This tooltip is disabled',
-    position: 'top',
-    arrowPosition: 'middle',
-    disabled: true,
   },
 };
 
