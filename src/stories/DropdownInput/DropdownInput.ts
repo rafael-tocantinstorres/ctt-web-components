@@ -188,7 +188,7 @@ export class DropdownInput<T = DropdownOption> extends LitElement {
   }
 
   private _getDisplayText(): string {
-    if (!this._value) return this.placeholder;
+    if (!this._value || !this.options) return this.placeholder;
     
     if (this.multiple && Array.isArray(this._value)) {
       if (this._value.length === 0) return this.placeholder;
@@ -222,6 +222,7 @@ export class DropdownInput<T = DropdownOption> extends LitElement {
 
   private _handleTriggerClick(e: Event) {
     e.preventDefault();
+    e.stopPropagation();
     if (this.disabled) return;
     
     this._isOpen = !this._isOpen;
@@ -456,12 +457,14 @@ export class DropdownInput<T = DropdownOption> extends LitElement {
           </button>
 
           <div 
-            class="ctt-dropdown__list"
+            class=${classMap({
+              'ctt-dropdown__list': true,
+              'ctt-dropdown__list--open': this._isOpen
+            })}
             role="listbox"
             aria-multiselectable=${this.multiple ? 'true' : 'false'}
-            style=${this._isOpen ? 'display: block' : 'display: none'}
           >
-            ${repeat(this.options, (option) => this._getOptionValue(option), (option) => this._renderOption(option))}
+            ${repeat(this.options || [], (option) => this._getOptionValue(option), (option) => this._renderOption(option))}
           </div>
         </div>
 

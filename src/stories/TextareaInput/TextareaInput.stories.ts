@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
-import { fn } from 'storybook/test';
 import { html } from 'lit';
 
 import './TextareaInput';
@@ -8,25 +7,7 @@ import './TextareaInput';
 const meta = {
   title: 'Components/TextareaInput',
   tags: ['autodocs'],
-  render: (args) => html`
-    <textarea-input
-      label=${args.label}
-      value=${args.value}
-      name=${args.name}
-      placeholder=${args.placeholder}
-      errorText=${args.errorText}
-      ?disabled=${args.disabled}
-      ?required=${args.required}
-      rows=${args.rows}
-      cols=${args.cols}
-      resize=${args.resize}
-      ariaDescribedBy=${args.ariaDescribedBy}
-      @textarea-input=${fn()}
-      @textarea-change=${fn()}
-      @textarea-focus=${fn()}
-      @textarea-blur=${fn()}
-    ></textarea-input>
-  `,
+ component: 'ctt-textarea-input',
   parameters: {
     layout: 'padded',
     docs: {

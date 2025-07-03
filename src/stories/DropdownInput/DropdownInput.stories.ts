@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
-import { fn } from 'storybook/test';
 import { html } from 'lit';
 
 import './DropdownInput';
@@ -54,26 +53,7 @@ const countries = [
 const meta = {
   title: 'Components/DropdownInput',
   tags: ['autodocs'],
-  render: (args) => html`<ctt-dropdown-input
-    label=${args.label}
-    name=${args.name}
-    placeholder=${args.placeholder}
-    .options=${args.options}
-    .value=${args.value}
-    ?multiple=${args.multiple}
-    ?disabled=${args.disabled}
-    ?required=${args.required}
-    error-text=${args.errorText}
-    size=${args.size}
-    ?has-description=${args.hasDescription}
-    label-key=${args.labelKey}
-    value-key=${args.valueKey}
-    description-key=${args.descriptionKey}
-    disabled-key=${args.disabledKey}
-    @change=${fn()}
-    @focus=${fn()}
-    @blur=${fn()}
-  ></ctt-dropdown-input>`,
+  component: 'ctt-dropdown-input',
   parameters: {
     layout: 'padded',
     docs: {

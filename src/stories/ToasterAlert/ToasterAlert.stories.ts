@@ -8,17 +8,7 @@ import type { CttToasterAlert } from './ToasterAlert';
 const meta = {
   title: 'Components/ToasterAlert',
   tags: ['autodocs'],
-  render: (args) => html`<ctt-toaster-alert
-    type=${args.type}
-    variant=${args.variant}
-    position=${args.position}
-    headline=${args.headline}
-    message=${args.message}
-    ?dismissable=${args.dismissable}
-    duration=${args.duration}
-    ?visible=${args.visible}
-    @close=${fn()}
-  ></ctt-toaster-alert>`,
+  component: 'ctt-toaster-alert',
   parameters: {
     layout: 'padded',
     docs: {

@@ -2,6 +2,12 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import styles from './button.css?inline';
 
+declare global {
+  interface HTMLElementTagNameMap {
+    'ctt-button': CttButton;
+  }
+}
+
 @customElement('ctt-button')
 export class CttButton extends LitElement {
   static styles = css([styles] as any);

@@ -9,23 +9,7 @@ import '../Button/Button';
 const meta = {
   title: 'Components/InputField',
   tags: ['autodocs'],
-  render: (args) => html`<ctt-input-field
-    label=${args.label || ''}
-    value=${args.value || ''}
-    name=${args.name || ''}
-    type=${args.type || 'text'}
-    placeholder=${args.placeholder || ''}
-    error=${args.error || nothing}
-    ?disabled=${args.disabled}
-    ?required=${args.required}
-    size=${args.size || 'medium'}
-    id=${args.id || ''}
-    ariaDescribedBy=${args.ariaDescribedBy || nothing}
-    @input=${fn()}
-    @change=${fn()}
-    @focus=${fn()}
-    @blur=${fn()}
-  ></ctt-input-field>`,
+  component: 'ctt-input-field',
   parameters: {
     layout: 'padded',
     docs: {
