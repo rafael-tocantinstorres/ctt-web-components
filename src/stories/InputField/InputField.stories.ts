@@ -5,9 +5,6 @@ import { html, nothing } from 'lit';
 import './InputField';
 import '../Button/Button';
 
-// Sample data for stories
-const inputTypes = ['text', 'email', 'password', 'tel', 'url', 'search', 'number'] as const;
-
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
   title: 'Components/InputField',

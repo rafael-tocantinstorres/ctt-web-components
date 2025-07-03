@@ -5,20 +5,6 @@ import { html } from 'lit';
 import './RadioButton';
 import type { RadioButton } from './RadioButton';
 
-// Sample data for stories
-const colorOptions = [
-  { label: 'Red', value: 'red' },
-  { label: 'Blue', value: 'blue' },
-  { label: 'Green', value: 'green' },
-  { label: 'Yellow', value: 'yellow' },
-];
-
-const sizeOptions = [
-  { label: 'Small', value: 'small' },
-  { label: 'Medium', value: 'medium' },
-  { label: 'Large', value: 'large' },
-];
-
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
   title: 'Components/RadioButton',
