@@ -5,11 +5,6 @@ import { html } from 'lit';
 import './ToasterAlert';
 import type { CttToasterAlert } from './ToasterAlert';
 
-// Sample data for stories
-const alertTypes = ['alert', 'toaster'] as const;
-const alertVariants = ['info', 'warning', 'error', 'success'] as const;
-const alertPositions = ['top', 'bottom'] as const;
-
 const meta = {
   title: 'Components/ToasterAlert',
   tags: ['autodocs'],

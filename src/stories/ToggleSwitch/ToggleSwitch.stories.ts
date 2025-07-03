@@ -5,14 +5,6 @@ import { html } from 'lit';
 import './ToggleSwitch';
 import type { ToggleSwitch } from './ToggleSwitch';
 
-// Sample data for stories
-const toggleFeatures = [
-  { label: 'Enable notifications', key: 'notifications' },
-  { label: 'Dark mode', key: 'darkMode' },
-  { label: 'Auto-save', key: 'autoSave' },
-  { label: 'Two-factor authentication', key: 'twoFA' },
-];
-
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
   title: 'Components/ToggleSwitch',
@@ -206,75 +198,6 @@ export const WithAriaLabelledby: Story = {
   decorators: [
     (story) => html`
       <div style="min-height: 250px; padding: 20px;">
-        ${story()}
-      </div>
-    `,
-  ],
-};
-
-// All states showcase
-export const AllStates: Story = {
-  render: () => html`
-    <div style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;">
-      <h3>Basic Toggle Switches</h3>
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <ctt-toggle-switch
-          label="Unchecked toggle"
-        ></ctt-toggle-switch>
-        <ctt-toggle-switch
-          label="Checked toggle"
-          checked
-        ></ctt-toggle-switch>
-      </div>
-      
-      <h3>Disabled States</h3>
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <ctt-toggle-switch
-          label="Disabled unchecked"
-          disabled
-        ></ctt-toggle-switch>
-        <ctt-toggle-switch
-          label="Disabled checked"
-          disabled
-          checked
-        ></ctt-toggle-switch>
-      </div>
-      
-      <h3>With Accessible Labels (No Visible Text)</h3>
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <ctt-toggle-switch
-          show-label="false"
-          aria-label="Enable feature A"
-        ></ctt-toggle-switch>
-        <ctt-toggle-switch
-          show-label="false"
-          aria-label="Enable feature B"
-          checked
-        ></ctt-toggle-switch>
-      </div>
-      
-      <h3>Long Labels</h3>
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <ctt-toggle-switch
-          label="Enable advanced notifications with detailed settings and custom preferences"
-        ></ctt-toggle-switch>
-        <ctt-toggle-switch
-          label="Allow background data synchronization when the application is not in use"
-          checked
-        ></ctt-toggle-switch>
-      </div>
-    </div>
-  `,
-  parameters: {
-    docs: {
-      description: {
-        story: 'Comprehensive showcase of all toggle switch states and accessibility features.',
-      },
-    },
-  },
-  decorators: [
-    (story) => html`
-      <div style="min-height: 600px; padding: 20px;">
         ${story()}
       </div>
     `,

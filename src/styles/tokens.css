@@ -463,4 +463,20 @@
   /* Tooltip-specific tokens */
   --color-bg-tooltip: var(--color-neutral-900);
   --color-text-tooltip: white;
+
+  /* =======================================================================
+     BREADCRUMBS TOKENS - Component-specific tokens
+     ========================================================================== */
+
+       /* Breadcrumbs Colors - Using your specified colors */
+  --ctt-breadcrumbs-color-default: var(--ctt-brand-primary-500);
+  --ctt-breadcrumbs-color-active: var(--ctt-brand-secondary-400);
+  --ctt-breadcrumbs-color-hover: var(--ctt-brand-primary-600);
+  
+  /* Breadcrumbs Spacing - Using core dimension tokens */
+  --ctt-breadcrumbs-gap: var(--ctt-core-dimension-25);  /* 4px - base/space/selectable/inside/xs */
+  
+  /* Breadcrumbs Transitions */
+  --ctt-breadcrumbs-transition: color 0.2s ease-in-out;
+   
 }

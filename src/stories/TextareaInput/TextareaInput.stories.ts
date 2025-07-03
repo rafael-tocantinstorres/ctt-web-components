@@ -4,9 +4,6 @@ import { html } from 'lit';
 
 import './TextareaInput';
 
-// Sample data for stories
-const resizeOptions = ['none', 'both', 'horizontal', 'vertical'] as const;
-
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
   title: 'Components/TextareaInput',

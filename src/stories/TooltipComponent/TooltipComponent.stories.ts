@@ -1,15 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
-import { fn } from 'storybook/test';
 import { html } from 'lit';
 
 import './TooltipComponent';
 import '../Button/Button';
 import type { CttTooltip } from './TooltipComponent';
-
-// Sample data for stories
-const tooltipPositions = ['top', 'bottom', 'left', 'right'] as const;
-const arrowPositions = ['start', 'middle', 'end'] as const;
-const tooltipSizes = ['small', 'medium', 'large'] as const;
 
 const meta = {
   title: 'Components/Tooltip',
@@ -20,7 +14,6 @@ const meta = {
       size=${args.size}
       position=${args.position}
       arrowPosition=${args.arrowPosition}
-      ?disabled=${args.disabled}
       ariaLabel=${args.ariaLabel || ''}
     >
       <ctt-button label="Hover me" size="medium" variant="primary" borderRadius="extraSmall"></ctt-button>
@@ -66,10 +59,6 @@ const meta = {
       control: { type: 'select' },
       options: ['start', 'middle', 'end'],
       description: 'Position of the tooltip arrow within the tooltip'
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Whether the tooltip is disabled'
     },
     ariaLabel: {
       control: 'text',
@@ -210,15 +199,6 @@ export const ArrowEnd: Story = {
   },
 };
 
-export const Disabled: Story = {
-  args: {
-    text: 'This tooltip is disabled',
-    position: 'top',
-    arrowPosition: 'middle',
-    disabled: true,
-  },
-};
-
 // Comprehensive demonstration stories
 export const AllVariants: Story = {
   render: () => html`
@@ -333,244 +313,6 @@ export const AllVariants: Story = {
     docs: {
       description: {
         story: 'Comprehensive showcase of all tooltip variants, sizes, positions, and arrow alignments.',
-      },
-    },
-  },
-  decorators: [
-    (story) => html`
-      <div style="min-height: 600px; padding: 20px;">
-        ${story()}
-      </div>
-    `,
-  ],
-};
-
-export const PracticalExamples: Story = {
-  render: () => html`
-    <style>
-      .user-avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: linear-gradient(45deg, #3b82f6, #8b5cf6);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-weight: bold;
-      }
-
-      .icon-button {
-        padding: 12px;
-        border: none;
-        border-radius: 8px;
-        background: #f5f5f5;
-        cursor: pointer;
-        font-size: 18px;
-        transition: all 0.2s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .icon-button:hover {
-        background: #e5e5e5;
-        transform: translateY(-1px);
-      }
-
-      .badge {
-        display: inline-block;
-        padding: 6px 12px;
-        background: #ef4444;
-        color: white;
-        border-radius: 16px;
-        font-size: 12px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background-color 0.2s;
-      }
-
-      .badge:hover {
-        background: #dc2626;
-      }
-
-      .status-indicator {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: #10b981;
-        cursor: pointer;
-        transition: transform 0.2s;
-      }
-
-      .status-indicator:hover {
-        transform: scale(1.2);
-      }
-    </style>
-
-    <div class="ctt-flex ctt-flex-col ctt-gap-8 ctt-max-w-5xl ctt-p-10">
-      <div class="ctt-flex ctt-flex-col ctt-gap-4">
-        <h3 class="ctt-title-m">User Interface Elements</h3>
-        <p class="ctt-body-m" style="color: #666; margin-bottom: 16px;">Hover over elements to see tooltips with different arrow positions</p>
-        <div class="ctt-flex ctt-gap-6 ctt-items-center ctt-flex-wrap">
-          <ctt-tooltip text="John is a senior developer with 5+ years of experience in React and TypeScript" position="bottom" arrowPosition="start" size="large">
-            <div class="ctt-flex ctt-items-center ctt-gap-3 ctt-p-4 ctt-relative" style="border: 1px solid #e5e5e5; border-radius: 8px; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: box-shadow 0.2s;">
-              <div class="user-avatar">JD</div>
-              <div>
-                <h4 class="ctt-label-m" style="margin: 0; color: #333;">John Doe</h4>
-                <p class="ctt-label-s" style="margin: 4px 0 0 0; color: #666;">Senior Developer</p>
-              </div>
-            </div>
-          </ctt-tooltip>
-
-          <ctt-tooltip text="Currently online and available" position="top" arrowPosition="middle" size="small">
-            <div class="status-indicator"></div>
-          </ctt-tooltip>
-
-          <ctt-tooltip text="You have 12 unread notifications" position="right" arrowPosition="start" size="medium">
-            <span class="badge">12</span>
-          </ctt-tooltip>
-        </div>
-      </div>
-
-      <div class="ctt-flex ctt-flex-col ctt-gap-4">
-        <h3 class="ctt-title-m">Toolbar Actions</h3>
-        <p class="ctt-body-m" style="color: #666; margin-bottom: 16px;">Common toolbar buttons with contextual tooltips</p>
-        <div class="ctt-flex ctt-gap-2 ctt-p-3" style="background: #f9fafb; border-radius: 8px; border: 1px solid #e5e7eb;">
-          <ctt-tooltip text="Create new document" position="top" arrowPosition="start">
-            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="📄" borderRadius="extraSmall"></ctt-button>
-          </ctt-tooltip>
-
-          <ctt-tooltip text="Save current changes" position="top" arrowPosition="middle">
-            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="💾" borderRadius="extraSmall"></ctt-button>
-          </ctt-tooltip>
-
-          <ctt-tooltip text="Copy to clipboard" position="top" arrowPosition="middle">
-            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="📋" borderRadius="extraSmall"></ctt-button>
-          </ctt-tooltip>
-
-          <ctt-tooltip text="Share with team" position="top" arrowPosition="middle">
-            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="🔗" borderRadius="extraSmall"></ctt-button>
-          </ctt-tooltip>
-
-          <ctt-tooltip text="Delete permanently" position="top" arrowPosition="end">
-            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="🗑️" borderRadius="extraSmall"></ctt-button>
-          </ctt-tooltip>
-        </div>
-      </div>
-
-      <div class="ctt-flex ctt-flex-col ctt-gap-4">
-        <h3 class="ctt-title-m">Mixed Positions & Arrow Alignments</h3>
-        <p class="ctt-body-m" style="color: #666; margin-bottom: 16px;">Demonstrating different tooltip positions with various arrow alignments</p>
-        <div class="ctt-flex ctt-gap-6 ctt-items-center ctt-flex-wrap">
-          <ctt-tooltip text="Left tooltip, arrow at start" position="left" arrowPosition="start">
-            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="⬅️" borderRadius="extraSmall"></ctt-button>
-          </ctt-tooltip>
-
-          <ctt-tooltip text="Top tooltip, arrow at end" position="top" arrowPosition="end">
-            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="⬆️" borderRadius="extraSmall"></ctt-button>
-          </ctt-tooltip>
-
-          <ctt-tooltip text="Right tooltip, arrow at start" position="right" arrowPosition="start">
-            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="➡️" borderRadius="extraSmall"></ctt-button>
-          </ctt-tooltip>
-
-          <ctt-tooltip text="Bottom tooltip, arrow at end" position="bottom" arrowPosition="end">
-            <ctt-button iconOnly="true" variant="primary" label="Hover me" icon="⬇️" borderRadius="extraSmall"></ctt-button>
-          </ctt-tooltip>
-        </div>
-      </div>
-    </div>
-  `,
-  parameters: {
-    docs: {
-      description: {
-        story: 'Practical examples of tooltips in common UI scenarios.',
-      },
-    },
-  },
-  decorators: [
-    (story) => html`
-      <div style="min-height: 600px; padding: 20px;">
-        ${story()}
-      </div>
-    `,
-  ],
-};
-
-// Advanced combinations story
-export const AdvancedCombinations: Story = {
-  render: () => html`
-    <style>
-      .demo-card {
-        padding: 20px;
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
-        background: white;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        text-align: center;
-        transition: all 0.2s;
-      }
-
-      .demo-card:hover {
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        transform: translateY(-2px);
-      }
-    </style>
-
-    <div class="ctt-flex ctt-flex-col ctt-gap-8 ctt-max-w-5xl ctt-p-10">
-      <div class="ctt-flex ctt-flex-col ctt-gap-4">
-        <h3 class="ctt-title-m">Advanced Tooltip Combinations</h3>
-        <div class="ctt-grid ctt-gap-6" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-          <div class="demo-card">
-            <div class="ctt-label-m ctt-mb-3" style="color: #666;">Large Primary Top Start</div>
-            <ctt-tooltip text="This is a large primary tooltip positioned at the top with arrow at start" position="top" arrowPosition="start" size="large">
-              <ctt-button label="Hover Me" size="large" variant="primary" borderRadius="extraSmall"></ctt-button>
-            </ctt-tooltip>
-          </div>
-
-          <div class="demo-card">
-            <div class="ctt-label-m ctt-mb-3" style="color: #666;">Small Secondary Bottom End</div>
-            <ctt-tooltip text="Small secondary bottom end" position="bottom" arrowPosition="end" size="small">
-              <ctt-button label="Hover Me" size="small" variant="secondary" borderRadius="extraSmall"></ctt-button>
-            </ctt-tooltip>
-          </div>
-
-          <div class="demo-card">
-            <div class="ctt-label-m ctt-mb-3" style="color: #666;">Medium Tertiary Left Start</div>
-            <ctt-tooltip text="Medium tertiary left start" position="left" arrowPosition="start" size="medium">
-              <ctt-button label="Hover Me" size="medium" variant="tertiary" borderRadius="extraSmall"></ctt-button>
-            </ctt-tooltip>
-          </div>
-
-          <div class="demo-card">
-            <div class="ctt-label-m ctt-mb-3" style="color: #666;">Large Primary Right End</div>
-            <ctt-tooltip text="Large primary right end tooltip" position="right" arrowPosition="end" size="large">
-              <ctt-button label="Hover Me" size="large" variant="primary" borderRadius="extraSmall"></ctt-button>
-            </ctt-tooltip>
-          </div>
-
-          <div class="demo-card">
-            <div class="ctt-label-m ctt-mb-3" style="color: #666;">Small Tertiary Top Middle</div>
-            <ctt-tooltip text="Small tertiary top middle" position="top" arrowPosition="middle" size="small">
-              <ctt-button label="Hover Me" size="small" variant="tertiary" borderRadius="extraSmall"></ctt-button>
-            </ctt-tooltip>
-          </div>
-
-          <div class="demo-card">
-            <div class="ctt-label-m ctt-mb-3" style="color: #666;">Medium Secondary Left End</div>
-            <ctt-tooltip text="Medium secondary left end" position="left" arrowPosition="end" size="medium">
-              <ctt-button label="Hover Me" size="medium" variant="secondary" borderRadius="extraSmall"></ctt-button>
-            </ctt-tooltip>
-          </div>
-        </div>
-      </div>
-    </div>
-  `,
-  parameters: {
-    docs: {
-      description: {
-        story: 'Advanced tooltip combinations demonstrating various configurations together.',
       },
     },
   },

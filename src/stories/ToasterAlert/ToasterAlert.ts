@@ -34,6 +34,39 @@ export class CttToasterAlert extends LitElement {
   @property({ type: String })
   position: 'top' | 'bottom' = 'top';
 
+  @property({ type: Number })
+  duration?: number;
+
+  private _timeoutId?: number;
+
+  updated(changedProperties: Map<string, any>) {
+    super.updated(changedProperties);
+    
+    // Handle auto-dismiss when visible becomes true and duration is set
+    if (changedProperties.has('visible') && this.visible && this.duration) {
+      this._startAutoDismiss();
+    }
+    
+    // Handle duration changes while visible
+    if (changedProperties.has('duration') && this.visible && this.duration) {
+      this._startAutoDismiss();
+    }
+  }
+
+  private _startAutoDismiss() {
+    // Clear existing timeout
+    if (this._timeoutId) {
+      clearTimeout(this._timeoutId);
+    }
+    
+    // Set new timeout if duration is provided
+    if (this.duration) {
+      this._timeoutId = window.setTimeout(() => {
+        this._handleClose();
+      }, this.duration * 1000);
+    }
+  }
+
   showToaster(params: {
     type?: 'toaster' | 'alert';
     variant?: 'info' | 'warning' | 'error' | 'success';
@@ -62,7 +95,21 @@ export class CttToasterAlert extends LitElement {
 
   private _handleClose(closeFunction?: () => void) {
     this.visible = false;
+    // Clear timeout when manually closed
+    if (this._timeoutId) {
+      clearTimeout(this._timeoutId);
+      this._timeoutId = undefined;
+    }
     closeFunction?.();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    // Clean up timeout when component is removed
+    if (this._timeoutId) {
+      clearTimeout(this._timeoutId);
+      this._timeoutId = undefined;
+    }
   }
 
   private _getIcon() {

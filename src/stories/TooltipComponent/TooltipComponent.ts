@@ -28,9 +28,6 @@ export class CttTooltip extends LitElement {
   @property()
   arrowPosition: 'start' | 'middle' | 'end' = 'middle'
 
-  @property({ type: Boolean })
-  disabled = false
-
   @property()
   ariaLabel = ''
 
@@ -50,7 +47,7 @@ export class CttTooltip extends LitElement {
   render() {
     return html`
       <div 
-        class="ctt-tooltip ${this.disabled ? 'ctt-tooltip--disabled' : ''}"
+        class="ctt-tooltip"
         @mouseenter=${this._handleMouseEnter}
         @mouseleave=${this._handleMouseLeave}
         @focusin=${this._handleFocusIn}
@@ -72,31 +69,22 @@ export class CttTooltip extends LitElement {
   }
 
   private _handleMouseEnter() {
-    if (!this.disabled) {
-      this._visible = true
-      this._dispatchVisibilityChange(true)
-    }
+    this._visible = true
+    this._dispatchVisibilityChange(true)
   }
 
   private _handleMouseLeave() {
-    if (!this.disabled) {
-      this._visible = false
+    this._visible = false
       this._dispatchVisibilityChange(false)
-    }
   }
 
   private _handleFocusIn() {
-    if (!this.disabled) {
       this._visible = true
       this._dispatchVisibilityChange(true)
-    }
   }
 
   private _handleFocusOut() {
-    if (!this.disabled) {
-      this._visible = false
-      this._dispatchVisibilityChange(false)
-    }
+    this._visible = false
   }
 
   private _dispatchVisibilityChange(visible: boolean) {
