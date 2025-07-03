@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
-import { fn } from 'storybook/test';
 import { html } from 'lit';
 
 import './Button';
@@ -9,23 +8,7 @@ import type { CttButton } from './Button';
 const meta = {
   title: 'Components/Button',
   tags: ['autodocs'],
-  render: (args) => html`
-    <ctt-button
-      .variant=${args.variant}
-      .size=${args.size}
-      .label=${args.label}
-      ?iconLeft=${args.iconLeft}
-      .iconLeftElement=${args.iconLeftElement}
-      ?iconRight=${args.iconRight}
-      .iconRightElement=${args.iconRightElement}
-      ?iconOnly=${args.iconOnly}
-      .icon=${args.icon}
-      .borderRadius=${args.borderRadius}
-      ?disabled=${args.disabled}
-      .ariaLabel=${args.ariaLabel}
-      @click=${fn()}
-    ></ctt-button>
-  `,
+  component: 'ctt-button',
   parameters: {
     layout: 'padded',
     docs: {

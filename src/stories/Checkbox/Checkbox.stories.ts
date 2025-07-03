@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
-import { fn } from 'storybook/test';
 import { html } from 'lit';
 
 import './Checkbox';
@@ -7,21 +6,7 @@ import './Checkbox';
 const meta = {
   title: 'Components/Checkbox',
   tags: ['autodocs'],
-  render: (args) => html`
-    <ctt-checkbox
-      .label=${args.label}
-      .name=${args.name}
-      .value=${args.value}
-      ?checked=${args.checked}
-      ?disabled=${args.disabled}
-      .errorText=${args.errorText}
-      .id=${args.id}
-      .className=${args.className}
-      .ariaLabel=${args.ariaLabel}
-      .ariaLabelledby=${args.ariaLabelledby}
-      @change=${fn()}
-    ></ctt-checkbox>
-  `,
+ component: 'ctt-checkbox',
   parameters: {
     layout: 'padded',
     docs: {

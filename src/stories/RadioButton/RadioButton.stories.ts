@@ -9,15 +9,7 @@ import type { RadioButton } from './RadioButton';
 const meta = {
   title: 'Components/RadioButton',
   tags: ['autodocs'],
-  render: (args) => html`<ctt-radio-button
-    label=${args.label}
-    name=${args.name}
-    value=${args.value}
-    ?checked=${args.checked}
-    ?disabled=${args.disabled}
-    error-text=${args.errorText}
-    @change=${fn()}
-  ></ctt-radio-button>`,
+  component: 'ctt-radio-button',
   parameters: {
     layout: 'padded',
     docs: {

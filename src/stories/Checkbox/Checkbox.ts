@@ -2,6 +2,13 @@ import { html, LitElement, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import styles from './checkbox.css?inline';
 
+declare global {
+  interface HTMLElementTagNameMap {
+    'ctt-checkbox': CttCheckbox;
+  }
+}
+
+
 @customElement('ctt-checkbox')
 export class CttCheckbox extends LitElement {
   static styles = css([styles] as any);
@@ -159,11 +166,5 @@ export class CttCheckbox extends LitElement {
         ` : ''}
       </div>
     `;
-  }
-}
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'ctt-checkbox': CttCheckbox;
   }
 }

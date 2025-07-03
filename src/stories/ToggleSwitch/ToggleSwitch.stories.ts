@@ -9,19 +9,7 @@ import type { ToggleSwitch } from './ToggleSwitch';
 const meta = {
   title: 'Components/ToggleSwitch',
   tags: ['autodocs'],
-  render: (args) => html`
-    <ctt-toggle-switch
-      ?checked=${args.checked}
-      ?disabled=${args.disabled}
-      .label=${args.label}
-      ?show-label=${args.showLabel}
-      .aria-label=${args.ariaLabel}
-      .aria-labelledby=${args.ariaLabelledby}
-      .role=${args.role}
-      .name=${args.name}
-      @toggle-change=${fn()}
-    ></ctt-toggle-switch>
-  `,
+  component: 'ctt-toggle-switch',
   parameters: {
     layout: 'padded',
     docs: {

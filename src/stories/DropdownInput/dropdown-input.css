@@ -161,7 +161,7 @@
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 9999;
   margin-top: var(--ctt-core-dimension-25); /* 4px */
   border: var(--ctt-base-border-width-selectable-s) solid var(--ctt-base-color-selectable-border-default);
   border-radius: var(--ctt-base-border-radius-xs);
@@ -170,6 +170,11 @@
   max-height: 200px;
   overflow-y: auto;
   animation: dropdownSlideIn 0.15s ease-out;
+  display: none;
+}
+
+.ctt-dropdown__list--open {
+  display: block;
 }
 
 @keyframes dropdownSlideIn {

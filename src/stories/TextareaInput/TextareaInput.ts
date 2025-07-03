@@ -9,11 +9,11 @@ import styles from './textarea-input.css?inline';
 
 declare global {
   interface HTMLElementTagNameMap {
-    'textarea-input': TextareaInput
+    'ctt-textarea-input': CttTextareaInput
   }
 }
-@customElement('textarea-input')
-export class TextareaInput extends LitElement {
+@customElement('ctt-textarea-input')
+export class CttTextareaInput extends LitElement {
   static styles = css([styles] as any)
   @property()
   label = ''

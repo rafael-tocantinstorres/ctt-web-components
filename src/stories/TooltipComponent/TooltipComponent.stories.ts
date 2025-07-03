@@ -8,17 +8,7 @@ import type { CttTooltip } from './TooltipComponent';
 const meta = {
   title: 'Components/Tooltip',
   tags: ['autodocs'],
-  render: (args) => html`
-    <ctt-tooltip
-      text=${args.text}
-      size=${args.size}
-      position=${args.position}
-      arrowPosition=${args.arrowPosition}
-      ariaLabel=${args.ariaLabel || ''}
-    >
-      <ctt-button label="Hover me" size="medium" variant="primary" borderRadius="extraSmall"></ctt-button>
-    </ctt-tooltip>
-  `,
+  component: 'ctt-tooltip',
   parameters: {
     layout: 'centered',
     docs: {

@@ -3,6 +3,12 @@ import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import styles from './input-field.css?inline';
 
+declare global {
+  interface HTMLElementTagNameMap {
+    'ctt-input-field': CttInputField;
+  }
+}
+
 @customElement('ctt-input-field')
 export class CttInputField extends LitElement {
   static styles = css([styles] as any);
